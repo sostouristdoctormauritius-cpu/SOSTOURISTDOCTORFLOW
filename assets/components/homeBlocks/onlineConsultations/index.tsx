@@ -11,7 +11,7 @@ import {
   relativeHeightToParent,
   relativeWidthToParent,
 } from "app/utils/design"
-import { SCREENS_CONSULTATION_ELIGIBLE_DOCTORS, SCREENS_CONSULTATION_SYMPTOM_SELECTION } from "app/constants/Screens"
+import { SCREENS_CONSULTATION_SYMPTOM_SELECTION } from "app/constants/Screens"
 
 const styles = StyleSheet.create({
   backgroundImage: {

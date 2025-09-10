@@ -10,7 +10,7 @@ import { translate } from "app/i18n"
 import EphemeralStore from "app/manager/EphemeralStore"
 import { useStores } from "app/models"
 import { relativeWidth } from "app/utils/design"
-import dayjs from "dayjs"
+
 import * as ImagePicker from "expo-image-picker"
 import React, { useEffect, useMemo, useState } from "react"
 import { useForm } from "react-hook-form"
@@ -20,7 +20,7 @@ import DateOfBirthField from "./formComponents/dateOfBirthField"
 import FullNameField from "./formComponents/fullNameField"
 import NationalityField from "./formComponents/nationalityField"
 import PhoneNumberField from "./formComponents/phoneNumberField"
-import DatePickerModal from "./modal/dateModal"
+
 import moment from "moment"
 import DatePicker from 'react-native-date-picker'
 import FormInputController from "app/components/formInput"
@@ -52,11 +52,20 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  profilePicContainer: {
+    profilePicContainer: {
     height: 110,
     marginVertical: 25,
     width: 110,
   },
+  errorTextStyle: {
+    width: "80%",
+    top: -20,
+    justifyContent: 'center',
+    color: "red",
+    alignItems: "center",
+    fontSize: 15, 
+    letterSpacing: 1
+  }
 })
 
 type RouteParams = {
@@ -66,7 +75,6 @@ type RouteParams = {
 }
 
 type Gender = "Male" | "Female" | "NA"
-const today = moment(new Date()).format("YYYY-MM-DD")
 const EditPNG = require("app/images/profile/edit.png")
 const ProfilePNG = require("app/images/profile/profile.png")
 
@@ -77,7 +85,7 @@ export default function CompleteProfile() {
     authenticationStore: { user, profilePic, phone, countryCode: cCode },
   } = useStores()
 
-  const maxDate = useMemo(() => {
+  const calculatedMaxDate = useMemo(() => {
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear());
     let mdate = moment(maxDate).format('YYYY-MM-DD')
@@ -87,7 +95,7 @@ export default function CompleteProfile() {
   const [image, setImage] = useState<string | null>(null)
   const [gender, setGender] = useState<Gender>(user?.userProfile?.gender || "Male")
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false)
-  const [dateOfBirth, setDateOfBirth] = useState<string | Date | number>(maxDate)
+  const [dateOfBirth, setDateOfBirth] = useState<string | Date | number>(calculatedMaxDate)
   const [isImageChangeImage, setIsImageChangeImage] = useState(false)
   const [countryPickerVisible, setCountryPickerVisible] = useState(false)
   const [countryCode, setCountryCode] = useState(cCode || '+230')
@@ -110,7 +118,7 @@ export default function CompleteProfile() {
       user?.userProfile?.nationality && setCountry(user.userProfile?.nationality);
       profilePic && setImage(`${API_URL}/${profilePic}`);
     }
-  }, [user])
+  }, [user, API_URL, isProfileUpdate, profilePic])
 
   useEffect(() => {
     navigation.setOptions({
@@ -123,7 +131,7 @@ export default function CompleteProfile() {
       headerTintColor: '#000000', // Change text color
       headerTitle: isProfileUpdate ? translate("profile.headerTitleUpdate") : translate("profile.headerTitle"),
     })
-  }, [navigation])
+  }, [navigation, isProfileUpdate])
 
   const registerUserMtx = useRegisterUser()
   const updateUserProfileMtx = useUpdateUserProfile()
@@ -131,14 +139,14 @@ export default function CompleteProfile() {
 
 
   const onPressSignUp = (data: any) => {
-    const selectedlang = EphemeralStore.getData("language");
+    // const selectedlang = EphemeralStore.getData("language");
 
     // Parsing and checking the selected language
-    let language = 'en'; // Default value
-    if (selectedlang && selectedlang?._j) {
-      const parsedLang = selectedlang?._j;
-      language = parsedLang === "fr" ? "fr" : "en"; // If language is "fr", set it to "fr", otherwise default to "en"
-    }
+    // let language = 'en'; // Default value
+    // if (selectedlang && selectedlang?._j) {
+    //   const parsedLang = selectedlang?._j;
+    //   language = parsedLang === "fr" ? "fr" : "en"; // If language is "fr", set it to "fr", otherwise default to "en"
+    // }
 
     // Preparing the profile data
     const profileData = {
@@ -148,8 +156,9 @@ export default function CompleteProfile() {
         language: EphemeralStore.get("language"),
         nickname: data.fullName,
         dob: dateOfBirth,
-        gender: gender,
-        nationality: country,
+        
+                        gender: selectedGender,
+        nationality: selectedCountry,
       },
       image: isImageChangeImage ? image : null,
       phone: data.phoneNumber,
@@ -160,20 +169,20 @@ export default function CompleteProfile() {
     setIsLoading(true)
     if (!isProfileUpdate) {
       profileData.password = data.password
-      registerUserMtx.mutate(profileData, {
-        onSuccess: (data) => {
+            registerUserMtx.mutate(profileData, {
+        onSuccess: (_data) => {
           setIsLoading(false)
         },
-        onError: (error) => {
+        onError: (_error) => {
           setIsLoading(false)
         },
       })
     } else {
-      updateUserProfileMtx.mutate(profileData, {
-        onSuccess: (data) => {
+            updateUserProfileMtx.mutate(profileData, {
+        onSuccess: (_data) => {
           setIsLoading(false)
         },
-        onError: (error) => {
+        onError: (_error) => {
           setIsLoading(false)
         },
       })
@@ -196,10 +205,9 @@ export default function CompleteProfile() {
   }
 
 
-  const {
+    const {
     control,
     handleSubmit,
-    setValue,  // Ensure setValue is destructured here
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -241,7 +249,7 @@ export default function CompleteProfile() {
         open={isDatePickerVisible}
         date={new Date(dateOfBirth)}
         mode={'date'}
-        maximumDate={maxDate}
+        maximumDate={calculatedMaxDate}
         onConfirm={(date) => {
           handleConfirmDate(moment(date).format('YYYY-MM-DD'))
         }}
@@ -264,24 +272,10 @@ export default function CompleteProfile() {
       </View>
       <View style={styles.content}>
         <FullNameField control={control} errors={errors} />
-        {errors.fullName && <Text style={{
-          width: "80%",
-          top: -20,
-          justifyContent: 'center',
-          color: "red",
-          alignItems: "center",
-          fontSize: 15, letterSpacing: 1
-        }}>Name: {errors.fullName.message}</Text>}
+        {errors.fullName && <Text style={styles.errorTextStyle}>Name: {errors.fullName.message}</Text>}
 
         <PhoneNumberField control={control} errors={errors} disable={!isProfileUpdate} onPress={!isProfileUpdate ? toggleCountryPicker : null} type='phone' countryCode={countryCode} />
-        {errors.phoneNumber && <Text style={{
-          width: "80%",
-          top: -20,
-          justifyContent: 'center',
-          color: "red",
-          alignItems: "center",
-          fontSize: 15, letterSpacing: 1
-        }}>Phone: {errors.phoneNumber.message}</Text>}
+        {errors.phoneNumber && <Text style={styles.errorTextStyle}>Phone: {errors.phoneNumber.message}</Text>}
 
         {!isProfileUpdate && <>
           <FormInputController
@@ -313,14 +307,7 @@ export default function CompleteProfile() {
             }
             name={"password"}
           />
-          {errors.password && <Text style={{
-            width: "80%",
-            top: -20,
-            justifyContent: 'center',
-            color: "red",
-            alignItems: "center",
-            fontSize: 15, letterSpacing: 1
-          }}>{errors.password.message}</Text>}
+          {errors.password && <Text style={styles.errorTextStyle}>{errors.password.message}</Text>}
         </>}
 
         <View style={styles.mb}>
@@ -335,14 +322,7 @@ export default function CompleteProfile() {
               { value: "NA", label: "NA" },
             ]}
           />
-          {errors.gender && <Text style={{
-            width: "80%",
-            top: -20,
-            justifyContent: 'center',
-            color: "red",
-            alignItems: "center",
-            fontSize: 15, letterSpacing: 1
-          }}>Gender: {errors.gender.message}</Text>}
+          {errors.gender && <Text style={styles.errorTextStyle}>Gender: {errors.gender.message}</Text>}
         </View>
 
 
@@ -351,24 +331,10 @@ export default function CompleteProfile() {
           selectedDate={dateOfBirth ? moment(dateOfBirth).format('YYYY-MM-DD') : ''}
           onPress={toggleDatePicker}
         />
-        {errors.dob && <Text style={{
-          width: "80%",
-          top: -20,
-          justifyContent: 'center',
-          color: "red",
-          alignItems: "center",
-          fontSize: 15, letterSpacing: 1
-        }}>Date: {errors.dob.message}</Text>}
+        {errors.dob && <Text style={styles.errorTextStyle}>Date: {errors.dob.message}</Text>}
 
         <NationalityField control={control} onPress={!isProfileUpdate ? toggleCountryPicker : null} country={country} />
-        {errors.nationality && <Text style={{
-          width: "80%",
-          top: -20,
-          justifyContent: 'center',
-          color: "red",
-          alignItems: "center",
-          fontSize: 15, letterSpacing: 1
-        }}>Country: {errors.nationality.message}</Text>}
+        {errors.nationality && <Text style={styles.errorTextStyle}>Country: {errors.nationality.message}</Text>}
       </View>
       <GreenButton
         isLoading={isLoading}

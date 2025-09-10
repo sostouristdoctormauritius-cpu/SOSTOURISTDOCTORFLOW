@@ -115,42 +115,61 @@ export default function SignInWithEmail() {
   return (
     <View style={styles.container}>
       <Image
-        style={styles.logo}
+        style={styles.image}
         source={require("../../assets/images/logo.png")}
       />
       <Text style={styles.textStyle}>Sign In</Text>
       <View style={styles.content}>
         <View style={styles.textInputContainer}>
-          <Image
-            source={require("../../assets/images/envelope.png")}
-            style={styles.envelopeIcon}
+          <Image 
+            source={require("../../assets/images/envelope.png")} 
+            style={styles.envelopeIcon} 
           />
           <TextInput
-            placeholder="Email/Mobile Number"
+            placeholder="Email"
             style={styles.textInput}
             keyboardType="email-address"
           />
         </View>
-        {/* {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>} */}
+        <View style={styles.textInputContainer}>
+          <Image 
+            source={require("../../assets/images/lock.png")} 
+            style={styles.lockIcon} 
+          />
+          <TextInput
+            placeholder="Password"
+            style={styles.textInput}
+            secureTextEntry={true}
+          />
+          <TouchableOpacity>
+            <Image 
+              source={require("../../assets/images/eye.png")} 
+              style={styles.eyeIcon} 
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-
+      
+      <TouchableOpacity
+        style={styles.btnForgot}
+        onPress={() => navigation.navigate('ForgotPassword')}
+      >
+        <Text style={[styles.blackColor, styles.textForgot]}>Forgot Password?</Text>
+      </TouchableOpacity>
+      
       <TouchableOpacity
         style={styles.greenButton}
-        onPress={() => navigation.navigate('SignInWithEmail2')}
+        onPress={() => navigation.navigate('Home')}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>Sign In</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
- 
-
-      <TouchableOpacity
-        style={styles.flexRow}
-        onPress={() => navigation.navigate('RegisterWithEmail')}
-      >
+      
+      <View style={styles.flexRow}>
         <Text style={styles.noAccText}>Don't have an account? </Text>
-        <Text style={[{ color: "blue" }, styles.signUpText]}>
-          Sign Up
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('RegisterWithEmail')}>
+          <Text style={styles.linkText}>Register</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }

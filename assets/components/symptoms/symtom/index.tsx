@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react"
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native"
+import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { useTheme } from "react-native-paper"
 
 import { Text } from "app/components/Text"
@@ -8,15 +8,13 @@ import { TxKeyPath } from "app/i18n"
 
 type SymptomProps = {
   id: number
-  index: number
   title: TxKeyPath
   SymptomIcon: React.FC<React.SVGProps<SVGSVGElement>>
   onSymptomPressed: (symptom: any) => void
-  image?:any
 }
 
 const SIZE = 80
-const Symptom = ({ id, index, title, SymptomIcon, onSymptomPressed,image }: SymptomProps) => {
+const Symptom = ({ id, title, SymptomIcon, onSymptomPressed }: SymptomProps) => {
   const [isSelected, setIsSelected] = useState(false)
 
   const theme = useTheme()
@@ -24,7 +22,7 @@ const Symptom = ({ id, index, title, SymptomIcon, onSymptomPressed,image }: Symp
   const onPress = useCallback(() => {
     setIsSelected((selected) => !selected)
     onSymptomPressed(title)
-  }, [isSelected])
+  }, [onSymptomPressed, title])
 
   return (
     <TouchableOpacity key={id} onPress={onPress} style={styles.$symptomButton}>

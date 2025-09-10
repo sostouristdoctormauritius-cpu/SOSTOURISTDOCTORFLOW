@@ -12,7 +12,7 @@ const DUMMY_SYMPTOMS = [
 ];
 
 const ConsultationSymptomSelectionScreen = () => {
-  const consultationType = "Chat"; // Static for visual recreation
+  
   const navigation = useNavigation();
 
   const openAddSymptomModal = () => {

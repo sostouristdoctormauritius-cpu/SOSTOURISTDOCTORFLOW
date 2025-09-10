@@ -41,7 +41,7 @@ export const useChatClient = () => {
     return () => {
       //  StreamChatInstance.disconnectUser()
     }
-  }, [user?.id, streamToken])
+  }, [user?.id, streamToken, user?.email])
 
   return {
     streamUserId: StreamChatInstance.userID,

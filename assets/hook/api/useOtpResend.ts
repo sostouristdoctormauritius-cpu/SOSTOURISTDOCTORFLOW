@@ -4,10 +4,10 @@ import {
   SCREENS_FORGOT_PASSWORD,
 } from "app/constants/Screens"
 import { translate } from "app/i18n"
-import { apiResendOtp, apiVerifyOtp } from "app/manager/Network"
+import { apiResendOtp } from "app/manager/Network"
 import { captureApiException } from "app/manager/Sentry"
-import { useStores } from "app/models"
-import { saveTokens, showNetworkErrorAlert } from "app/utils/sosUtils"
+
+import { showNetworkErrorAlert } from "app/utils/sosUtils"
 import { Alert } from "react-native"
 
 const MUTATION_KEY = "registerUser"
@@ -44,7 +44,7 @@ const useOtpResend = () => {
         )
       }
     },
-    onSuccess: async (data, variables) => {
+    onSuccess: async (_data, _variables) => {
      
     },
   })

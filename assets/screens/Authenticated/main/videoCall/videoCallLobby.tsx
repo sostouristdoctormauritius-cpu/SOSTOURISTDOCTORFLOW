@@ -8,7 +8,7 @@ import { colors } from "app/theme"
 import { useHeader } from "app/utils/useHeader"
 import dayjs from "dayjs"
 import { observer } from "mobx-react-lite"
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo } from "react"
 import { ActivityIndicator, FlatList, SafeAreaView, TextStyle, View, ViewStyle } from "react-native"
 import { AppointmentListItem } from "../../../../components/appointment"
 import { VideoAppointment } from "./types"
@@ -40,9 +40,9 @@ const VideoCallLobby = observer(function VideoCallLobby() {
 
   // useVideoClient()
   useFocusEffect(
-    useCallback(() => {
+        useCallback(() => {
       refetch()
-    }, [])
+    }, [refetch])
   )
   useEffect(() => {
     if (appointmentsError) {
@@ -74,8 +74,9 @@ const VideoCallLobby = observer(function VideoCallLobby() {
           const dateTimeB = dayjs(`${b.date.split("T")[0]}T${b.startTime}:00.000Z`)
           return dateTimeB.valueOf() - dateTimeA.valueOf()
         }),
-    [appointmentsData?.pendingAppts, appointmentsData?.completedAppts],
+    [appointmentsData?.pendingAppts],
   )
+
 
   const handleAppointmentPress = useCallback(
     (item: VideoAppointment) => {

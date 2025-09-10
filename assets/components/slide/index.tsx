@@ -40,9 +40,8 @@ type SlideProps = {
   centerImage: string
   title: string
   desc: string
-  index: number
 }
-const Slide = ({ centerImage, title, desc,index }: SlideProps) => {
+const Slide = ({ centerImage, title, desc }: SlideProps) => {
   return (
     <View style={[styles.slide]}>
       <AutoImage style={styles.image} source={require("../../images/smallLogo/logo.png")} />

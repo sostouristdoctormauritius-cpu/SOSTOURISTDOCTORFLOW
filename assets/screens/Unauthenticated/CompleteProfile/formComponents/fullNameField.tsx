@@ -9,10 +9,8 @@ type FieldProps = {
   errors: any
 }
 
-const FullNameField = ({ control, errors }: FieldProps) => {
-  const {
-    authenticationStore: { user },
-  } = useStores()
+const FullNameField = ({ control }: FieldProps) => {
+  const {} = useStores()
 
   return (
     <FormInputController

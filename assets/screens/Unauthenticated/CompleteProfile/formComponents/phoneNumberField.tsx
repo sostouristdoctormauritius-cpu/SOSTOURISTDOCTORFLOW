@@ -12,10 +12,8 @@ type FieldProps = {
   disable?:boolean
 }
 
-const PhoneNumberField = ({ control, errors,onPress,countryCode ,disable=true}: FieldProps) => {
-  const {
-    authenticationStore: { user },
-  } = useStores()
+const PhoneNumberField = ({ control,onPress,countryCode ,disable=true}: FieldProps) => {
+  const {} = useStores()
 
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>

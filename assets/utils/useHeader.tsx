@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native"
-import React, { useLayoutEffect } from "react"
+import React from "react"
 import { Header, HeaderProps } from "../components"
 
 /**
@@ -10,7 +10,6 @@ import { Header, HeaderProps } from "../components"
  */
 export function useHeader(
   headerProps: HeaderProps,
-  deps: Parameters<typeof useLayoutEffect>[1] = [],
 ) {
   const navigation = useNavigation()
 
@@ -19,5 +18,5 @@ export function useHeader(
       headerShown: true,
       header: () => <Header {...headerProps} />,
     })
-  }, [...deps, navigation])
+  }, [navigation, headerProps])
 }

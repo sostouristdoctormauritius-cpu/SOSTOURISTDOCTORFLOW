@@ -23,7 +23,7 @@ export const useLogout = () => {
     return () => {
       listener.remove()
     }
-  }, [])
+  }, [logout])
 }
 
 export const emitLogout = () => {

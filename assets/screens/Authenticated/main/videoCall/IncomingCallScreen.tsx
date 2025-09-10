@@ -38,7 +38,7 @@ const IncomingCallScreen = () => {
     requestStreamPermissions()
   }, [])
 
-  useEffect(() => {
+    useEffect(() => {
     const initCall = async () => {
       try {
         const callCid = incomingCall?.call_cid
@@ -60,7 +60,7 @@ const IncomingCallScreen = () => {
     if (incomingCall?.call_cid) {
       initCall()
     }
-  }, [incomingCall?.call_cid])
+  }, [incomingCall?.call_cid, setIncomingCall])
 
   useEffect(() => {
     return () => {
@@ -114,12 +114,12 @@ const IncomingCallScreen = () => {
     Vibration.cancel()
     setIncomingCall(undefined)
     setCall(null)
-  }, [call, incomingCall])
+  }, [call, incomingCall, setIncomingCall])
 
   const onHandleDeclineCall = useCallback(() => {
     setIncomingCall(undefined)
     setCall(null)
-  }, [call])
+  }, [setIncomingCall])
 
   const renderIncomingCall = useCallback(() => {
     return (
@@ -151,7 +151,7 @@ const IncomingCallScreen = () => {
         </View>
       </View>
     )
-  }, [incomingCall])
+  }, [incomingCall, onHandleAcceptCall, onHandleDeclineCall])
 
   if (!call) {
     return null

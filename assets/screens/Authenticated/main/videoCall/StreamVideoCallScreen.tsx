@@ -25,9 +25,7 @@ export const StreamVideoCallScreen: FC<CallScreenProps> = observer(function Call
     callData?: { call_cid: string; created_by_display_name?: string }
   }
   const navigation = useNavigation()
-  const {
-    authenticationStore: { user },
-  } = useStores()
+  const {} = useStores()
 
   // Extract channel ID from either direct param or notification data
   const channelId = React.useMemo(() => {

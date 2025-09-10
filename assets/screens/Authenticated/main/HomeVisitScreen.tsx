@@ -16,7 +16,7 @@ import ModalChooseLocation from "app/components/modalChooseLocation"
 import Colors from "app/constants/Colors"
 import { ConsultationType } from "app/constants/GlobalTypes"
 import { GoogleSOS } from "app/constants/Google"
-import { SCREENS_CONSULTATION_CHAT_ONBOARDING, SCREENS_CONSULTATION_ELIGIBLE_DOCTORS, SCREENS_CONSULTATION_SYMPTOM_SELECTION } from "app/constants/Screens"
+import { SCREENS_CONSULTATION_SYMPTOM_SELECTION } from "app/constants/Screens"
 import { useLocationRequest } from "app/hook/useLocationRequest"
 import { translate } from "app/i18n"
 import { relativeHeightToParent, relativeWidthToParent } from "app/utils/design"
@@ -71,19 +71,19 @@ export default function HomeVisitScreen() {
     fetchInitialMapAccess()
   }, [])
 
-  useEffect(() => {
+    useEffect(() => {
     // gets the current location of the user right when the screen is loaded
     if (currentLocation) {
       setLocation(currentLocation)
       updateAddressDetails(currentLocation)
     }
-  }, [currentLocation])
+  }, [currentLocation, updateAddressDetails])
 
   const updateMapAccess = async () => {
     await saveInitialMapAccess(true)
   }
 
-  const updateMarkerCoordinate = useCallback(
+    const updateMarkerCoordinate = useCallback(
     (lat: number, lon: number) => {
       const newLocation = {
         ...location,
@@ -94,7 +94,7 @@ export default function HomeVisitScreen() {
       updateAddressDetails(newLocation)
       return newLocation
     },
-    [location],
+    [location, updateAddressDetails],
   )
 
   const updateAddressDetails = useCallback(async (addresses: any) => {
@@ -117,7 +117,7 @@ export default function HomeVisitScreen() {
     const { latitude, longitude } = mapPressEvent.nativeEvent.coordinate
     const newLocation = updateMarkerCoordinate(latitude, longitude)
     await updateAddressDetails(newLocation)
-  }, [])
+  }, [updateAddressDetails, updateMarkerCoordinate])
 
   const onChooseLocation = useCallback(() => {
         navigation.navigate(SCREENS_CONSULTATION_SYMPTOM_SELECTION, {
@@ -131,7 +131,7 @@ export default function HomeVisitScreen() {
   const onDragEnd = useCallback((e: MarkerDragStartEndEvent) => {
     const { latitude, longitude } = e.nativeEvent.coordinate
     updateMarkerCoordinate(latitude, longitude)
-  }, [])
+  }, [updateMarkerCoordinate])
 
   const onPressPlaceSuggestion = useCallback(
     (data: GooglePlaceData, details: GooglePlaceDetail | null) => {
@@ -150,7 +150,7 @@ export default function HomeVisitScreen() {
         updateAddressDetails(newLocation)
       } 
     },
-    [],
+    [updateAddressDetails],
   )
 
   return (

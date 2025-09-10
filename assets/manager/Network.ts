@@ -136,7 +136,7 @@ export const apiRegisterUser = async ({
 // }
 export const apiLoginUser = ({ username, password, isPasswordOrOtp }: { username: string; password?: any, isPasswordOrOtp?: any }) => {
 
-  let data = isPasswordOrOtp == 'password' ? { username, password, "isPasswordOrOtp": "password" } : { username, "isPasswordOrOtp": "otp" };
+  let data = isPasswordOrOtp === 'password' ? { username, password, "isPasswordOrOtp": "password" } : { username, "isPasswordOrOtp": "otp" };
 
   return new Promise((resolve, reject) => {
     fetch(API_URL + LOGIN_URL, {

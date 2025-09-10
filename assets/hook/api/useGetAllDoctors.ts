@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native"
 import { useMutation } from "@tanstack/react-query"
-import { SCREENS_CONSULTATION_ELIGIBLE_DOCTORS } from "app/constants/Screens"
+
 import { apiGetAllDoctors } from "app/manager/Network"
 import { captureApiException } from "app/manager/Sentry"
 import { showTempNetworkErrorAlert } from "app/utils/sosUtils"
@@ -24,7 +24,7 @@ const useGetAllDoctors = () => {
         },
       )
     },
-    onSuccess: async (data, variables) => {
+    onSuccess: async (_data, _variables) => {
       // @ts-ignore
       // const { consultationType, location } = variables
       // console.log('doctors--', JSON.stringify(data));

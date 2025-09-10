@@ -4,7 +4,6 @@ import { Button, useTheme } from "react-native-paper"
 
 import { NavigationProp } from "@react-navigation/native"
 import { Screen } from "app/components/Screen"
-import { Text } from "app/components/Text"
 import GreenButton from "app/components/greenButton"
 import Slide from "app/components/slide"
 import { SCREENS_REGISTER_WITH_EMAIL, SCREENS_SIGNIN_WITH_EMAIL } from "app/constants/Screens"

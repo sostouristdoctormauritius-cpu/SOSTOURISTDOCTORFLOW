@@ -18,7 +18,7 @@ const useUpdatePassword = () => {
       const errorMsg = errorResponse?.message || "An unexpected error occurred"
       showNetworkErrorAlert("Network Error", errorMsg ? errorMsg : "An error occurred while registering your account. Please try again later.", () => { })
     },
-    onSuccess: async (data:any, variables) => {
+    onSuccess: async (data:any, _variables) => {
       console.log('update data successfully',data);
       if (data?.code) {
         let error = data?.message

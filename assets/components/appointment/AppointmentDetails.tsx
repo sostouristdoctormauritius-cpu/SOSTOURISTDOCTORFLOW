@@ -27,23 +27,20 @@ import {
 
 export interface AppointmentDetailsProps {
   appointment: Appointment | null
-  isUpcomingAppts: boolean
   isVisible: boolean
   onClose: () => void
-  onPressCancel: () => void
-  onPressReschedule: () => void
   style?: StyleProp<ViewStyle>
 }
 
 const AppointmentDetails = observer(function AppointmentDetails(props: AppointmentDetailsProps) {
-  const { appointment, isVisible, onClose, onPressCancel, onPressReschedule, isUpcomingAppts } =
+  const { appointment, isVisible, onClose } =
     props
+
+  const [isModalVisible, setIsModalVisible] = useState(isVisible)
 
   if (!appointment) {
     return null
   }
-
-  const [isModalVisible, setIsModalVisible] = useState(isVisible)
   const handleClose = () => {
     console.log("Modal closing...")
     setIsModalVisible(false)
@@ -119,15 +116,7 @@ const modalContentTopContainer: ViewStyle = {
   borderBottomWidth: 1,
 }
 
-const cancelButtonContainer: TextStyle = {
-  color: colors.headerCancelButtonText,
-  fontFamily: typography.primary.bold,
-}
 
-const cancelTouchable: ViewStyle = {
-  position: "absolute",
-  right: 8,
-}
 
 const modalSwipeIndicator: ViewStyle = {
   width: 64,

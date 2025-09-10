@@ -48,11 +48,15 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   greenButton: {
-    backgroundColor: "lightgreen", // Placeholder color
+    backgroundColor: "lightgreen",
     padding: 15,
     alignItems: "center",
     borderRadius: 5,
     width: "80%",
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
   },
   selectGroupContainer: {
     width: "80%",
@@ -101,27 +105,13 @@ export default function CompleteProfile() {
           </View>
         )}
 
-        {/* Gender Selection */}
-        <View style={[styles.mb, styles.selectGroupContainer]}>
-          <Text>Gender: Male / Female / NA</Text>
-        </View>
-
-        {/* DateOfBirthField */}
-        <View style={styles.textInputContainer}>
-          <TextInput placeholder="Date of Birth" style={styles.textInput} />
-        </View>
-
-        {/* NationalityField */}
-        <View style={styles.textInputContainer}>
-          <TextInput placeholder="Nationality" style={styles.textInput} />
-        </View>
+        <TouchableOpacity
+          style={styles.greenButton}
+          onPress={() => navigation.navigate('Home')}
+        >
+          <Text style={styles.buttonText}>Continue</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={styles.greenButton}
-        onPress={() => navigation.navigate('AuthenticatedStack')}
-      >
-        <Text style={{ color: "white", fontWeight: "bold" }}>Continue</Text>
-      </TouchableOpacity>
     </View>
   )
 }

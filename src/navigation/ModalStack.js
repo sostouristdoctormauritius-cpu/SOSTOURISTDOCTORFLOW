@@ -1,13 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 // Import screens
 import AuthenticatedStack from './AuthenticatedStack';
 import DoctorProfileModal from '../screens/DoctorProfileModal';
 import AddSymptomModal from '../screens/AddSymptomModal';
 
-const Stack = createStackNavigator();
 const ModalStack = createStackNavigator();
 
 // Modal screen options
@@ -26,14 +24,7 @@ const modalOptions = {
   cardStyle: { backgroundColor: 'transparent' },
 };
 
-function ModalScreen({ navigation, route }) {
-  const { component: Component, ...props } = route.params;
-  return (
-    <View style={styles.modalContainer}>
-      <Component {...props} />
-    </View>
-  );
-}
+
 
 function ModalStackScreen() {
   return (
@@ -53,13 +44,6 @@ function ModalStackScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-});
+
 
 export default ModalStackScreen;

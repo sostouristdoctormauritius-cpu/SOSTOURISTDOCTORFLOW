@@ -27,7 +27,7 @@ export function ErrorDetails() {
         style={styles.resetButton}
         disabled={true}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>Reset App</Text>
+        <Text style={styles.resetButtonText}>Reset App</Text>
       </TouchableOpacity>
     </View>
   )
@@ -78,4 +78,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
   },
+  resetButtonText: {
+    color: "white", 
+    fontWeight: "bold",
+  },
 })
+
+export default ErrorDetails;

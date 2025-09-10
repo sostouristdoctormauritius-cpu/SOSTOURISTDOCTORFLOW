@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, Alert } from "react-native";
+import React from "react";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
@@ -118,13 +118,28 @@ const styles = StyleSheet.create({
     height: 20,
     resizeMode: "contain",
   },
+  radioContainerView: {
+    width: '78%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  radioContainerViewWithMargin: {
+    width: '78%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 15
+  },
   greenButton: {
-    backgroundColor: "lightgreen", // Placeholder color
+    backgroundColor: "lightgreen",
     padding: 15,
     alignItems: "center",
     borderRadius: 5,
     width: "80%",
     marginTop: 50,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
   },
   otpInputContainer: {
     flexDirection: "row",
@@ -140,11 +155,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
   },
+  envelopeIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: "contain",
+  },
 })
 
 export default function SignInWithEmail2() {
-  const isPasswordOrOtp = "password" // Static for visual recreation
-  const username = "example@example.com" // Static for visual recreation
   const navigation = useNavigation()
 
   return (
@@ -156,71 +174,43 @@ export default function SignInWithEmail2() {
       <Text style={styles.textStyle}>Sign In</Text>
       <View style={styles.content}>
         <View style={styles.textInputContainer}>
-          <Image source={require("../../assets/images/envelope.png")} style={{ width: 20, height: 20 }} />
+          <Image source={require("../../assets/images/envelope.png")} style={styles.envelopeIcon} />
           <TextInput
             placeholder="Email"
             style={styles.textInput}
             keyboardType="email-address"
-            value={email}
-            onChangeText={setEmail}
           />
         </View>
-
-        {isPasswordOrOtp === 'password' ? (
-          <View style={styles.textInputContainer}>
-            <Image source={require("../../assets/images/lock.png")} style={styles.lockIcon} />
-            <TextInput
-              placeholder="Password"
-              style={styles.textInput}
-              secureTextEntry={true}
-              value={password}
-              onChangeText={setPassword}
-            />
-            <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => { /* No action */ }}>
-              <Image source={require("../../assets/images/eye_close.png")} style={{ width: 20, height: 20 }} />
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <View style={styles.otpInputContainer}>
-            <TextInput style={styles.otpInput} keyboardType="numeric" maxLength={1} />
-            <TextInput style={styles.otpInput} keyboardType="numeric" maxLength={1} />
-            <TextInput style={styles.otpInput} keyboardType="numeric" maxLength={1} />
-            <TextInput style={styles.otpInput} keyboardType="numeric" maxLength={1} />
-          </View>
-        )}
-      </View>
-      <View style={{ width: '78%', flexDirection: "row", justifyContent: "space-between",marginTop:isPasswordOrOtp !== 'password'?15:0 }}>
-        <View style={styles.radioContainer}>
-          <TouchableOpacity style={styles.radioOption} disabled={true}>
-            <Image source={require('../../assets/images/radio_check.png')} style={styles.radioImage} />
-            <Text style={styles.radioText}>{"Password"}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.radioOption} disabled={true}>
-            <Image source={require('../../assets/images/radio_uncheck.png')} style={styles.radioImage} />
-            <Text style={styles.radioText}>{"OTP"}</Text>
+        <View style={styles.textInputContainer}>
+          <Image source={require("../../assets/images/lock.png")} style={styles.lockIcon} />
+          <TextInput
+            placeholder="Password"
+            style={styles.textInput}
+            secureTextEntry={true}
+          />
+          <TouchableOpacity>
+            <Image source={require("../../assets/images/eye.png")} style={styles.eyeIcon} />
           </TouchableOpacity>
         </View>
-        {
-          isPasswordOrOtp === 'password' ?
-            <Text
-              style={styles.resendButtonText}
-              onPress={() => navigation.navigate('OtpVerify')}>              Forgot Password?
-            </Text>
-            :
-            <Text
-              style={styles.resendButtonText}
-              onPress={() => navigation.navigate('OtpVerify')}>              Resend OTP
-            </Text>
-        }
       </View>
       <TouchableOpacity
-        style={styles.greenButton}
-        onPress={() => navigation.navigate('AuthenticatedStack')}
+        style={styles.btnForgot}
+        onPress={() => navigation.navigate('ForgotPassword')}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>Sign In</Text>
+        <Text style={[styles.blackColor, styles.textForgot]}>Forgot Password?</Text>
       </TouchableOpacity>
- 
+      <TouchableOpacity
+        style={styles.greenButton}
+        onPress={() => navigation.navigate('Home')}
+      >
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+      <View style={styles.flexRow}>
+        <Text style={styles.noAccText}>Don't have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('RegisterWithEmail')}>
+          <Text style={styles.signUpText}>Register</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }

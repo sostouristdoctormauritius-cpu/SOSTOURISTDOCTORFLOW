@@ -82,8 +82,9 @@ const AppointmentScreen = () => {
           </View>
         )}
       />
-
-      
+    </View>
+  );
+}
 
 export default AppointmentScreen
 

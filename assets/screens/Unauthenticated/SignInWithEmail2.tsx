@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from "@react-navigation/native"
+import { useRoute } from "@react-navigation/native"
 import { AutoImage } from "app/components"
 import { Screen } from "app/components/Screen"
 import { Text } from "app/components/Text"
@@ -281,7 +281,7 @@ export default function SignInWithEmail() {
       />
       <Text tx="signInWithEmailScreen.title" preset="heading" size="xl" style={styles.textStyle} />
       <View style={styles.content}>
-        {route?.params?.type == 'mobile' ? <Text style={{ textAlign: 'center', marginBottom: 15 }}>{translate("signInWithEmailScreen.phoneNumber")} {'\n'} {route?.params?.username}</Text> :
+        {route?.params?.type === 'mobile' ? <Text style={{ textAlign: 'center', marginBottom: 15 }}>{translate("signInWithEmailScreen.phoneNumber")} {'\n'} {route?.params?.username}</Text> :
           <Text style={{ textAlign: 'center', marginBottom: 15 }}>{translate("signInWithEmailScreen.emailAddress")} {'\n'} {route?.params?.username}</Text>}
 
         {
@@ -345,7 +345,7 @@ export default function SignInWithEmail() {
       <GreenButton
         isSecondary
         buttonStyle={{width:'80%',marginTop:50}}
-        onPress={() => { isPasswordOrOtp == 'password' ? onPressSignIn() : onPressVerfyOtp() }}
+        onPress={() => { isPasswordOrOtp === 'password' ? onPressSignIn() : onPressVerfyOtp() }}
         buttonTitle={translate("signInWithEmailScreen.login", { defaultValue: "Sign up" })}
       />
  

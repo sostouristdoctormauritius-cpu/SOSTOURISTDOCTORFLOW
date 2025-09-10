@@ -30,14 +30,9 @@ interface TimeSlot {
   isAvailable: boolean
 }
 
-interface DaySlots {
-  morning: string[]
-  afternoon: string[]
-}
 
-interface AvailableSlots {
-  [date: string]: DaySlots
-}
+
+
 
 const now = dayjs()
 const today = dayjs().format("YYYY-MM-DD")
@@ -58,8 +53,8 @@ function generateTimeSlots(slots: string[], selectedDate: string): TimeSlot[] {
     })
     .map((time) => {
       const slotTime = dayjs(selectedDate)
-        .hour(parseInt(time.split(":")[0]))
-        .minute(parseInt(time.split(":")[1]))
+        .hour(parseInt(time.split(":")[0], 10))
+        .minute(parseInt(time.split(":")[1], 10))
 
       return {
         time,
@@ -123,7 +118,7 @@ export default function ConsultationBookAppointmentScreen() {
         type: "get_all_available_slots",
       })
     }
-  }, [isGetSlotsError])
+  }, [isGetSlotsError, navigation])
 
   const { width } = useWindowDimensions()
 

@@ -14,14 +14,13 @@ const useEmailVerify = () => {
   return useMutation({
     mutationKey: [MUTATION_KEY],
     mutationFn: apiVerifyEmail,
-    onError: (error, variables) => {
+    onError: (error, _variables) => {
       captureApiException(error, {
         type: "register_user",
       })
       // @ts-ignore
       const errorResponse = error?.response?.data
       const errorMsg = errorResponse?.message || "An error occurred while registering your account. Please try again later."
-      const errorCode = errorResponse?.code || "XXX"
       Toast.show(errorMsg, Toast.LONG,);
     },
     onSuccess: async (data, variables) => {

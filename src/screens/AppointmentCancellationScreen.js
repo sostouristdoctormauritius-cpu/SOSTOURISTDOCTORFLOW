@@ -24,7 +24,7 @@ const AppointmentCancellationScreen = () => {
           <Text style={styles.optionRefundText}>Refund Policy details here.</Text>
         </View>
         <TouchableOpacity style={styles.marginTop48} onPress={() => navigation.navigate('ViewPdf')}>
-          <Text style={[styles.linkText, { fontSize: 16 }]}>Cancellation Policies</Text>
+          <Text style={styles.linkTextLarge}>Cancellation Policies</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -57,6 +57,13 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontSize: 14,
+    lineHeight: 16,
+    fontWeight: "bold", // Placeholder for typography.primary.bold
+    textDecorationLine: "underline",
+    color: "#616161", // Placeholder for colors.descriptionText
+  },
+  linkTextLarge: {
+    fontSize: 16,
     lineHeight: 16,
     fontWeight: "bold", // Placeholder for typography.primary.bold
     textDecorationLine: "underline",

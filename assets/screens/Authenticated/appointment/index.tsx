@@ -34,9 +34,9 @@ const AppointmentsScreen = observer(function AppointmentsScreen() {
   const { data: appointmentsData, error: appointmentsError,refetch, isFetching } = useGetAllAppointments()
 
     useFocusEffect(
-      useCallback(() => {
+            useCallback(() => {
         refetch()
-      }, [])
+      }, [refetch])
     )
 
   useEffect(() => {

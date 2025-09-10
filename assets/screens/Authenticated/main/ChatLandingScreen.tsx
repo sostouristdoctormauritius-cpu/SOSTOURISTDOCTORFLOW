@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native"
-import { Screen } from "app/components"
+
 import HeaderBackButton from "app/components/headerBackButton"
 import { SCREENS_CHAT_THREAD } from "app/constants/Screens"
 import { useSOSChatContext } from "app/manager/Stream/ChatContext"

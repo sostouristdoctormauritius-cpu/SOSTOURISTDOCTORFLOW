@@ -1,10 +1,10 @@
-import { useNavigation } from "@react-navigation/native"
+
 import { AutoImage } from "app/components"
 import { Screen } from "app/components/Screen"
 import { Text } from "app/components/Text"
 import GreenButton from "app/components/greenButton"
 import RoundedTextInput from "app/components/roundedTextInput"
-import { OTP_VERIFY } from "app/constants/Screens"
+
 import useForgotPassword from "app/hook/api/useForgotPassword"
 import { translate } from "app/i18n"
 import { relativeWidth } from "app/utils/design"
@@ -48,7 +48,6 @@ export default function ForgotPassword() {
     forgotPwdMutation.mutate({ email })
   }
  
-  const navigation = useNavigation<any>()
   return (
     <Screen
       preset="auto"

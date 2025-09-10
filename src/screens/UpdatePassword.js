@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   greenButton: {
-    backgroundColor: "lightgreen", // Placeholder color
+    backgroundColor: "lightgreen",
     padding: 15,
     alignItems: "center",
     borderRadius: 5,
@@ -88,73 +88,62 @@ export default function UpdatePassword() {
   const [securePassword, setSecurePassword] = useState(true);
   const [securePassword1, setSecurePassword1] = useState(true);
 
-  const handleUpdatePassword = () => {
-    if (password !== confirmPassword) {
-      Alert.alert('Error', 'Passwords do not match');
-      return;
-    }
-    // Here you would typically send the password to your backend for updating
-    Alert.alert('Success', 'Password updated successfully');
-    navigation.navigate('SignInWithEmail');
-  };
-
   return (
-    <View
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <Image
         style={styles.image}
         source={require("../../assets/images/logo.png")}
       />
       <Text style={styles.textStyle}>Update Password</Text>
       <View style={styles.content}>
-         
         <View style={styles.inputContainer}>
           <Image source={require("../../assets/images/lock.png")} style={styles.lockIcon} />
           <TextInput
-            style={styles.textInput}
             placeholder="New Password"
+            style={styles.textInput}
+            secureTextEntry={securePassword}
             value={password}
             onChangeText={setPassword}
-            secureTextEntry={securePassword}
           />
           <TouchableOpacity
             style={styles.eyeIconContainer}
             onPress={() => setSecurePassword(!securePassword)}
           >
-            <Image 
-              source={!securePassword ? require("../../assets/images/eye_open.png") : require("../../assets/images/eye_close.png")} 
-              style={styles.eyeIcon} 
-            />
+            <Image source={require("../../assets/images/eye.png")} style={styles.eyeIcon} />
           </TouchableOpacity>
         </View>
 
         <View style={styles.inputContainer}>
           <Image source={require("../../assets/images/lock.png")} style={styles.lockIcon} />
           <TextInput
+            placeholder="Confirm Password"
             style={styles.textInput}
-            placeholder="Confirm New Password"
+            secureTextEntry={securePassword1}
             value={confirmPassword}
             onChangeText={setConfirmPassword}
-            secureTextEntry={securePassword1}
           />
           <TouchableOpacity
             style={styles.eyeIconContainer}
             onPress={() => setSecurePassword1(!securePassword1)}
           >
-            <Image 
-              source={!securePassword1 ? require("../../assets/images/eye_open.png") : require("../../assets/images/eye_close.png")} 
-              style={styles.eyeIcon} 
-            />
+            <Image source={require("../../assets/images/eye.png")} style={styles.eyeIcon} />
           </TouchableOpacity>
         </View>
       </View>
+
       <TouchableOpacity
         style={styles.greenButton}
-        onPress={handleUpdatePassword}
+        onPress={() => {
+          if (password === confirmPassword) {
+            Alert.alert("Success", "Password updated successfully");
+            navigation.navigate('SignInWithEmail');
+          } else {
+            Alert.alert("Error", "Passwords do not match");
+          }
+        }}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>Update Password</Text>
+        <Text style={styles.buttonText}>Update Password</Text>
       </TouchableOpacity>
     </View>
-  )
+  );
 }

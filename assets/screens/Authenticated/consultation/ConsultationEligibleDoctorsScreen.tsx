@@ -11,10 +11,10 @@ import EligibleDoctorRow from "app/components/consultation/EligibleDoctorRow"
 import PrivacyWarningModal from "app/components/consultation/PrivacyWarningModal"
 import Colors from "app/constants/Colors"
 import { ConsultationType } from "app/constants/GlobalTypes"
-import { SCREENS_CONSULTATION_SYMPTOM_SELECTION } from "app/constants/Screens"
+
 import { spacing } from "app/constants/spacing"
 import { TxKeyPath } from "app/i18n"
-import { useMutation } from "@tanstack/react-query"
+
 import useGetAllDoctors from "app/hook/api/useGetAllDoctors"
 
 type RouteParams = {
@@ -55,7 +55,7 @@ export default function ConsultationEligibleDoctorsScreen() {
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, [])
+  }, [getAllDocsMtx])
 
   const onContinuePressed = () => {
     // @ts-ignore
@@ -70,6 +70,8 @@ export default function ConsultationEligibleDoctorsScreen() {
       location,
     })
   }
+
+  const renderSeparator = () => <View style={styles.$doctorsRowSeparator} />
 
   // const onDoctorRowPressed = (doctor: Doctor) => {
   //   // @ts-ignore
@@ -149,7 +151,7 @@ export default function ConsultationEligibleDoctorsScreen() {
                     </TouchableOpacity>
                   )
                 }}
-                ItemSeparatorComponent={() => <View style={styles.$doctorsRowSeparator} />}
+                ItemSeparatorComponent={renderSeparator}
                 estimatedItemSize={10}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}

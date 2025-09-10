@@ -6,7 +6,7 @@ import { translate } from "app/i18n"
 import { relativeWidth } from "app/utils/design"
 import React, { useEffect, useRef, useState } from "react"
 import OTPTextView from 'react-native-otp-textinput'
-import { ImageStyle, StyleProp, StyleSheet, View, ActivityIndicator, Keyboard, Alert } from "react-native"
+import { ImageStyle, StyleProp, StyleSheet, View, ActivityIndicator, Keyboard } from "react-native"
 import useCountdown from "app/hook/useCountdown"
 import { useNavigation, useRoute } from "@react-navigation/native"
 import useOtpVerify from "app/hook/api/useOtpVerify"
@@ -64,7 +64,7 @@ export default function OtpVerify() {
     const { time, startCountdown, resetCountdown, status, formatTime } = useCountdown();
     useEffect(() => {
         startCountdown(60);
-    }, []);
+    }, [startCountdown]);
     const navigation = useNavigation<any>()
     const route = useRoute<any>()
     const otpInputRef = useRef<any>(null);

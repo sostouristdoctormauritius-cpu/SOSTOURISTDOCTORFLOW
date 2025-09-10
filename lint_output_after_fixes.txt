@@ -1,0 +1,277 @@
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\AutoImage.tsx
+  66:35  warning  'ImageProps' is already declared in the upper scope on line 2 column 17  @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\EmptyState.tsx
+  147:5  warning  'ButtonProps' is already declared in the upper scope on line 5 column 18  @typescript-eslint/no-shadow
+  150:5  warning  'ImageProps' is already declared in the upper scope on line 2 column 17   @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\ListItem.tsx
+  118:5  warning  'TextProps' is already declared in the upper scope on line 12 column 16            @typescript-eslint/no-shadow
+  124:8  warning  'TouchableOpacityProps' is already declared in the upper scope on line 6 column 3  @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\NoInternetModal.tsx
+  28:20  warning  Inline style: { fontSize: 18, color: 'red' }                        react-native/no-inline-styles
+  36:20  warning  Inline style: { fontSize: 10, color: 'gray', textAlign: 'center' }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\ProfileSummary.tsx
+  26:18  warning  Inline style: { fontSize: 16 }          react-native/no-inline-styles
+  31:22  warning  Inline style: { flexDirection: 'row' }  react-native/no-inline-styles
+  32:24  warning  Inline style: { marginRight: 12 }       react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\SVG\SumaServicesIcon.tsx
+  17:16  warning  Inline style: { maskType: 'alpha' }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\Screen.tsx
+  193:5  warning  'ScrollViewProps' is already declared in the upper scope on line 10 column 3           @typescript-eslint/no-shadow
+  240:5  warning  'KeyboardAvoidingViewProps' is already declared in the upper scope on line 6 column 3  @typescript-eslint/no-shadow
+  243:5  warning  'StatusBarProps' is already declared in the upper scope on line 2 column 21            @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\TextField.tsx
+  125:8  warning  'TextInputProps' is already declared in the upper scope on line 5 column 3  @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\appointment\AppointmentListItem.tsx
+  57:33  warning  'consultationType' is already declared in the upper scope on line 45 column 5  @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\appointment\AppointmentStatus.tsx
+  42:34  warning  'appointmentStatus' is already declared in the upper scope on line 40 column 18  @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\appointment\appointmentDoctorDetails.tsx
+  16:16  warning  Inline style: { fontSize: 14 }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\appointment\appointmentFollowUpDetails.tsx
+  27:18  warning  Inline style: { marginBottom: 0 }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\appointment\appointmentStatusIndicator.tsx
+  20:7  warning  Inline style: {
+  borderWidth: 'hasBorder ? 1 : 0',
+  borderColor: 'hasBorder ? "#F98A8A" : ""'
+}  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\consultation\PricingFooter.tsx
+  76:24  warning  Inline style: { color: 'white', fontSize: 14, fontWeight: 'bold' }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\consultation\PrivacyWarningModal.tsx
+  50:38  warning  Inline style: { marginRight: 8 }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\discounts\carousel.tsx
+  58:30  warning  'index' is already declared in the upper scope on line 46 column 10  @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\gender\index.tsx
+  16:13  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “GenderSelect” and pass data as props. If you want to allow component creation in props, set allowAsProps option to true  react/no-unstable-nested-components
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\greenButton\index.tsx
+  50:22  warning  Inline style: { alignItems: 'center', justifyContent: 'center' }  react-native/no-inline-styles
+  59:22  warning  Inline style: { opacity: 0.5 }                                    react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\homeBlocks\mailbox\index.tsx
+  32:20  warning  'channels' is already declared in the upper scope on line 27 column 11  @typescript-eslint/no-shadow
+  68:48  warning  Inline style: { color: '#2FB645' }                                      react-native/no-inline-styles
+  74:48  warning  Inline style: { color: '#2FB645' }                                      react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\homeBlocks\onlineConsultations\index.tsx
+  103:20  warning  Inline style: { display: 'none' }  react-native/no-inline-styles
+  118:26  warning  Inline style: { display: 'none' }  react-native/no-inline-styles
+  118:76  warning  Inline style: { top: 2 }           react-native/no-inline-styles
+  140:26  warning  Inline style: { display: 'none' }  react-native/no-inline-styles
+  142:35  warning  Inline style: { bottom: -15 }      react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\homeBlocks\separator\index.tsx
+  13:9  warning  Inline style: {
+  width: '100%',
+  height: 'thin ? 1 : 4',
+  backgroundColor: '#f4f4f4',
+  marginVertical: 16
+}  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\roundedTextInput\index.tsx
+  48:60   warning  Expected '===' and instead saw '=='                           eqeqeq
+  51:12   warning  Expected '===' and instead saw '=='                           eqeqeq
+  51:79   warning  Inline style: { flexDirection: 'row', alignItems: 'center' }  react-native/no-inline-styles
+  56:22   warning  Inline style: { color: '#8C8C8C', fontSize: 16 }              react-native/no-inline-styles
+  57:80   warning  Inline style: { height: 16, width: 16 }                       react-native/no-inline-styles
+  61:35   warning  Inline style: { paddingRight: 'rightImageSource ? 50 : 20' }  react-native/no-inline-styles
+  61:86   warning  Expected '===' and instead saw '=='                           eqeqeq
+  61:100  warning  Inline style: { width: '82%', paddingLeft: 10 }               react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\symptoms\svgs\allergySVG.tsx
+  24:16  warning  Inline style: { maskType: 'alpha' }  react-native/no-inline-styles
+  40:18  warning  Inline style: { maskType: 'alpha' }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\symptoms\svgs\urineSVG.tsx
+  100:16  warning  Inline style: { maskType: 'luminance' }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\components\symptoms\symtom\index.tsx
+  33:27  warning  Inline style: { borderWidth: 3, padding: 0, zIndex: 9999999 }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\hook\api\useLoginUser.ts
+  36:36  warning  Expected '===' and instead saw '=='  eqeqeq
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\hook\api\useOtpVerify.ts
+  60:33  warning  Expected '===' and instead saw '=='  eqeqeq
+  66:39  warning  Expected '===' and instead saw '=='  eqeqeq
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\hook\useLocationRequest.ts
+  38:15  warning  'location' is already declared in the upper scope on line 13 column 10  @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\manager\Network.ts
+  139:30  warning  Expected '===' and instead saw '=='                                 eqeqeq
+  152:13  warning  'data' is already declared in the upper scope on line 139 column 7  @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\navigators\AuthenticatedTabs.tsx
+  36:23  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “AuthenticatedTabs” and pass data as props. If you want to allow component creation in props, set allowAsProps option to true  react/no-unstable-nested-components
+  50:23  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “AuthenticatedTabs” and pass data as props. If you want to allow component creation in props, set allowAsProps option to true  react/no-unstable-nested-components
+  64:23  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “AuthenticatedTabs” and pass data as props. If you want to allow component creation in props, set allowAsProps option to true  react/no-unstable-nested-components
+  78:23  warning  Do not define components during render. React will see a new component type on every render and destroy the entire subtree’s DOM nodes and state (https://reactjs.org/docs/reconciliation.html#elements-of-different-types). Instead, move this component definition out of the parent component “AuthenticatedTabs” and pass data as props. If you want to allow component creation in props, set allowAsProps option to true  react/no-unstable-nested-components
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\navigators\navigationUtilities.ts
+  119:42  warning  'storage' is already declared in the upper scope on line 13 column 13  @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Authenticated\appointment\AppointmentCancellationScreen.tsx
+  46:35  warning  Inline style: { fontSize: 16 }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Authenticated\appointment\index.tsx
+  69:20  warning  Inline style: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: '#ffffff'
+}  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Authenticated\consultation\ConsultationBookAppointmentScreen.tsx
+  231:19  warning  Inline style: {
+  backgroundColor: 'appointmentTime === slot.time ? theme.colors.secondary : "#FFF"'
+}  react-native/no-inline-styles
+  240:21  warning  Inline style: {
+  color: 'appointmentTime === slot.time ? "#FFF" : theme.colors.secondary'
+}            react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Authenticated\consultation\ConsultationEligibleDoctorsScreen.tsx
+  134:40  error  Parsing error: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Authenticated\consultation\ConsultationSymptomSelectionScreen.tsx
+  86:50  warning  Inline style: { zIndex: 99999 }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\CompleteProfile\formComponents\dateOfBirthField.tsx
+  18:14  warning  Inline style: { height: 64, width: '100%', marginBottom: 20 }  react-native/no-inline-styles
+  26:16  warning  Inline style: { width: '100%' }                                react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\CompleteProfile\formComponents\nationalityField.tsx
+  18:14  warning  Inline style: { height: 64, width: '100%', marginBottom: 20 }  react-native/no-inline-styles
+  26:16  warning  Inline style: { width: '100%' }                                react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\CompleteProfile\formComponents\phoneNumberField.tsx
+  19:18  warning  Inline style: { flexDirection: 'row', alignItems: 'center' }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\CompleteProfile\index.tsx
+  232:26  warning  'country' is already declared in the upper scope on line 102 column 10  @typescript-eslint/no-shadow
+  316:23  warning  'gender' is already declared in the upper scope on line 96 column 10    @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\CompleteProfile\modal\dateModal.tsx
+  23:11  warning  'today' is already declared in the upper scope on line 6 column 7  @typescript-eslint/no-shadow
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\ForgotPassword.tsx
+  84:39  warning  Inline style: {
+  width: '80%',
+  top: -20,
+  justifyContent: 'center',
+  color: 'red',
+  alignItems: 'center',
+  fontSize: 15,
+  letterSpacing: 1
+}  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\OtpVerify.tsx
+  213:65  warning  Inline style: { marginTop: 8 }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\RegisterWithEmail.tsx
+   69:19  warning  'data' is already declared in the upper scope on line 64 column 26                                                                                    @typescript-eslint/no-shadow
+  113:39  warning  Inline style: {
+  width: '80%',
+  top: -20,
+  justifyContent: 'center',
+  color: 'red',
+  alignItems: 'center',
+  fontSize: 15,
+  letterSpacing: 1
+}  react-native/no-inline-styles
+  154:22  warning  Inline style: { height: 50, padding: 0, width: '80%', marginTop: 20 }                                                                                 react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\SignInWithEmail.tsx
+  162:22  warning  Inline style: { width: '80%' }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\SignInWithEmail2.tsx
+  284:30  warning  Expected '===' and instead saw '=='                                                                                                              eqeqeq
+  284:57  warning  Inline style: { textAlign: 'center', marginBottom: 15 }                                                                                          react-native/no-inline-styles
+  285:24  warning  Inline style: { textAlign: 'center', marginBottom: 15 }                                                                                          react-native/no-inline-styles
+  321:20  warning  Inline style: {
+  width: '78%',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginTop: "isPasswordOrOtp !== 'password'?15:0"
+}  react-native/no-inline-styles
+  347:22  warning  Inline style: { width: '80%', marginTop: 50 }                                                                                                    react-native/no-inline-styles
+  348:42  warning  Expected '===' and instead saw '=='                                                                                                              eqeqeq
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\assets\screens\Unauthenticated\UpdatePassword.tsx
+  117:42  warning  Inline style: {
+  width: '80%',
+  top: -20,
+  justifyContent: 'center',
+  color: 'red',
+  alignItems: 'center',
+  fontSize: 15,
+  letterSpacing: 1
+}  react-native/no-inline-styles
+  146:43  warning  Inline style: {
+  width: '80%',
+  top: -20,
+  justifyContent: 'center',
+  color: 'red',
+  alignItems: 'center',
+  fontSize: 15,
+  letterSpacing: 1
+}  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\src\screens\AppointmentCancellationScreen.js
+  27:42  warning  Inline style: { fontSize: 16 }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\src\screens\ConsultationBookAppointmentScreen.js
+  71:19  warning  Inline style: {
+  backgroundColor: 'appointmentTime === slot ? "lightgreen" : "#FFF"',
+  borderColor: 'lightgreen'
+}  react-native/no-inline-styles
+  81:21  warning  Inline style: { color: 'appointmentTime === slot ? "#FFF" : "lightgreen"' }                                           react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\src\screens\ConsultationEligibleDoctorsScreen.js
+  60:24  warning  Inline style: { flex: 1, justifyContent: 'center', alignItems: 'center' }                     react-native/no-inline-styles
+  66:24  warning  Inline style: { flex: 1, width: '100%' }                                                      react-native/no-inline-styles
+  67:26  warning  Inline style: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  width: '100%'
+}  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\src\screens\ErrorDetails.js
+  30:22  warning  Inline style: { color: 'white', fontWeight: 'bold' }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\src\screens\HomeScreen.js
+  7:3  warning  'TouchableOpacity' is defined but never used  no-unused-vars
+  8:3  warning  'Image' is defined but never used             no-unused-vars
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\src\screens\SignInWithEmail2.js
+  166:10  warning  'isPasswordOrOtp' is assigned a value but never used     no-unused-vars
+  166:27  warning  'setIsPasswordOrOtp' is assigned a value but never used  no-unused-vars
+  166:49  error    'useState' is not defined                                no-undef
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\src\screens\Unauthenticated\CompleteProfile\index.js
+  123:22  warning  Inline style: { color: 'white', fontWeight: 'bold' }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\src\screens\UpdatePassword.js
+  156:22  warning  Inline style: { color: 'white', fontWeight: 'bold' }  react-native/no-inline-styles
+
+C:\Users\deven\Desktop\SOSDOCMOBILEAPP\src\screens\ViewPdf.js
+  36:18  warning  Inline style: { flex: 1 }  react-native/no-inline-styles
+
+✖ 101 problems (2 errors, 99 warnings)
+

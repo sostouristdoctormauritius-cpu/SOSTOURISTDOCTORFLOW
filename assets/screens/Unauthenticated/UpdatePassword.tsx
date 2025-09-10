@@ -100,7 +100,7 @@ export default function UpdatePassword() {
               return true
             },
           }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({ field: { onChange, onBlur, _value } }) => (
             <RoundedTextInput
               placeholder="Password"
               value={value}
@@ -130,7 +130,7 @@ export default function UpdatePassword() {
             validate: value =>
               value === password || translate("formValidations.passwordMismatch"),
           }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({ field: { onChange, onBlur, _value } }) => (
             <RoundedTextInput
               placeholder="Confirm Password"
               onBlur={onBlur}

@@ -6,7 +6,7 @@ import {
 import { useEffect, useRef, useState } from "react"
 import { BackHandler, Platform } from "react-native"
 import Config from "../config"
-import type { PersistNavigationConfig } from "../config/config.base"
+
 import { useIsMounted } from "../utils/useIsMounted"
 import type { AppStackParamList, NavigationProps } from "./AppNavigator"
 
@@ -51,13 +51,6 @@ export function getActiveRouteName(state: NavigationState | PartialState<Navigat
  * @returns {void}
  */
 export function useBackButtonHandler(canExit: (routeName: string) => boolean) {
-  // ignore unless android... no back button!
-  if (Platform.OS !== "android") {
-    return
-  }
-
-  // The reason we're using a ref here is because we need to be able
-  // to update the canExit function without re-setting up all the listeners
   const canExitRef = useRef(canExit)
 
   useEffect(() => {
@@ -65,6 +58,10 @@ export function useBackButtonHandler(canExit: (routeName: string) => boolean) {
   }, [canExit])
 
   useEffect(() => {
+    if (Platform.OS !== "android") {
+      return
+    }
+
     // We'll fire this when the back button is pressed on Android.
     const onBackPress = () => {
       if (!navigationRef.isReady()) {
@@ -104,7 +101,7 @@ export function useBackButtonHandler(canExit: (routeName: string) => boolean) {
  * @param {PersistNavigationConfig} persistNavigation - The config setting for navigation persistence.
  * @returns {boolean} - Whether to restore navigation state by default.
  */
-function navigationRestoredDefaultState(persistNavigation: PersistNavigationConfig) {
+function navigationRestoredDefaultState() {
   // if (persistNavigation === "always") return false
   // if (persistNavigation === "dev" && __DEV__) return false
   // if (persistNavigation === "prod" && !__DEV__) return false
@@ -130,7 +127,6 @@ export function useNavigationPersistence(storage: Storage, persistenceKey: strin
   const routeNameRef = useRef<keyof AppStackParamList | undefined>()
 
   const onNavigationStateChange = (state: NavigationState | undefined) => {
-    const previousRouteName = routeNameRef.current
     if (state !== undefined) {
       const currentRouteName = getActiveRouteName(state)
 
@@ -142,7 +138,7 @@ export function useNavigationPersistence(storage: Storage, persistenceKey: strin
     }
   }
 
-  const restoreState = async () => {
+  const restoreState = useCallback(async () => {
     try {
       const state = (await storage.load(persistenceKey)) as NavigationProps["initialState"] | null
       if (state) {
@@ -153,13 +149,13 @@ export function useNavigationPersistence(storage: Storage, persistenceKey: strin
         setIsRestored(true)
       }
     }
-  }
+  }, [isMounted, persistenceKey, storage])
 
   useEffect(() => {
     if (!isRestored) {
       restoreState()
     }
-  }, [isRestored])
+  }, [isRestored, restoreState])
 
   return { onNavigationStateChange, restoreState, isRestored, initialNavigationState }
 }

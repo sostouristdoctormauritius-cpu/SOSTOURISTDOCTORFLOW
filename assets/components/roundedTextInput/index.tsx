@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-color-literals */
+ 
 import React, { useCallback } from "react"
 import {
   Image,
@@ -45,10 +45,10 @@ const RoundedTextInput = ({
   }, [rightImageSource, onRightIconPress])
 
   return (
-    <View style={[styles.button, (leftImageSource ||  type == 'phone') && styles.pdl]}>
+    <View style={[styles.button, (leftImageSource ||  type === 'phone') && styles.pdl]}>
       {leftImageSource && <AutoImage style={styles.iconTextInput} source={leftImageSource} />}
       {
-      type == 'phone' && <TouchableOpacity  onPress={onPhoneIconPress} style={{
+      type === 'phone' && <TouchableOpacity  onPress={onPhoneIconPress} style={{
         flexDirection: "row",
         alignItems: 'center',
         
@@ -58,7 +58,7 @@ const RoundedTextInput = ({
       </TouchableOpacity>
       }
       <TextInput
-        style={[styles.textInput, { paddingRight: rightImageSource ? 50 : 20 }, type == 'phone' && {width:'82%',paddingLeft:10}]}
+        style={[styles.textInput, { paddingRight: rightImageSource ? 50 : 20 }, type === 'phone' && {width:'82%',paddingLeft:10}]}
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}

@@ -57,13 +57,13 @@ const useOtpVerify = () => {
         })
         return false;
       }
-      if (variables?.fromScreen == 'forgotPass') {
+      if (variables?.fromScreen === 'forgotPass') {
         showTempNetworkErrorAlert(
           "Success",
           data?.message ? data?.message : 'OTP verified successfully', () => { }
         )
         navigation.navigate(SCREEN_UPDATE_PASS, { token: variables.token })
-      }else if (variables?.fromScreen == 'email-verify') {
+      }else if (variables?.fromScreen === 'email-verify') {
         navigation.navigate(SCREENS_COMPLETE_PROFILE, { token: variables.token,email:variables.username })
       } else {
         saveTokens(data)

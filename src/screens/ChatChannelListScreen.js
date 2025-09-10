@@ -1,35 +1,11 @@
 import React from "react"
 import {
-  ActivityIndicator,
   Text,
   StyleSheet,
   View,
 } from "react-native"
 
 const ChatChannelListScreen = () => {
-  const EmptyStateComponent = () => (
-    <View style={styles.emptyStateContainer}>
-      <Text style={styles.emptyStateTitle}>No Active Chats</Text>
-      <Text style={styles.emptyStateDescription}>
-        You don't have any active chat consultations at the moment.
-      </Text>
-    </View>
-  )
-
-  const LoadingIndicator = () => (
-    <View style={styles.loadingContainer}>
-      <ActivityIndicator size="large" color="#0000ff" />
-      <Text style={styles.loadingText}>Loading chats...</Text>
-    </View>
-  )
-
-  const ErrorIndicator = () => (
-    <View style={styles.errorContainer}>
-      <Text style={styles.errorText}>Unable to load chats</Text>
-      <Text style={styles.errorDescription}>Please check your connection and try again</Text>
-    </View>
-  )
-
   // For static representation, we can choose to render one of these states
   // For example, let's render the EmptyStateComponent by default
   return (
@@ -43,6 +19,17 @@ const ChatChannelListScreen = () => {
 }
 
 export default ChatChannelListScreen
+
+const EmptyStateComponent = () => (
+  <View style={styles.emptyStateContainer}>
+    <Text style={styles.emptyStateTitle}>No Active Chats</Text>
+    <Text style={styles.emptyStateDescription}>
+      You don't have any active chat consultations at the moment.
+    </Text>
+  </View>
+)
+
+
 
 const styles = StyleSheet.create({
   root: {

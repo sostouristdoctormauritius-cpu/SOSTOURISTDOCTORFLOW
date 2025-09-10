@@ -3,10 +3,11 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native"
 import { useNavigation } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   pdf: {
     flex: 1,
-    height: "100%", // Placeholder for Dimensions.get("window").height
-    width: "100%", // Placeholder for Dimensions.get("window").width
     backgroundColor: "#f0f0f0",
     justifyContent: "center",
     alignItems: "center",
@@ -33,7 +34,7 @@ const ViewPdf = () => {
   const navigation = useNavigation()
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>{'<'}</Text>

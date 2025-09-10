@@ -1,19 +1,16 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity, Modal } from "react-native";
 
-import { useNavigation } from '@react-navigation/native'
-
 export default function DoctorProfileModalScreen({ visible, onClose, doctorName, specialty, experience, rating, fee }) {
   const profilePicture = "" // Placeholder for image URL
   const name = "Dr. John Doe" // Static for visual recreation
   const specialisation = "General Practitioner" // Static for visual recreation
-  const rating = 4.5 // Static for visual recreation
+  const doctorRating = 4.5 // Static for visual recreation
   const ratingCount = 120 // Static for visual recreation
   const address = "123 Main St, Anytown, USA" // Static for visual recreation
   const workingHours = "Mon-Fri, 9 AM - 5 PM" // Static for visual recreation
   const bio = "Dr. John Doe is a highly experienced general practitioner with a passion for patient care." // Static for visual recreation
-  const navigation = useNavigation()
-
+  
   return (
     <Modal
       animationType="slide"
@@ -33,12 +30,12 @@ export default function DoctorProfileModalScreen({ visible, onClose, doctorName,
           <View style={styles.profileContainer}>
             <View style={styles.avatarContainer}>
               {!profilePicture && <Image style={styles.avatar} source={require("../../assets/images/profile.png")} />}
-              <Text style={styles.doctorName}>{doctorName}</Text>
-              <Text style={styles.specialty}>{specialty}</Text>
+              <Text style={styles.doctorName}>{doctorName || name}</Text>
+              <Text style={styles.specialty}>{specialty || specialisation}</Text>
             </View>
+            
             <View style={styles.ratingContainer}>
-              {/* RatingStars Placeholder */}
-              <Text>Rating: {rating} ({ratingCount} reviews)</Text>
+              <Text>Rating: {doctorRating} ({ratingCount} reviews)</Text>
             </View>
             <View style={styles.addressContainer}>
               <Text style={styles.blockSectionTitle}>Address</Text>
@@ -68,97 +65,95 @@ export default function DoctorProfileModalScreen({ visible, onClose, doctorName,
 }
 
 const styles = StyleSheet.create({
-  aboutTitle: {
-    marginTop: 18,
-    fontSize: 16,
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 20,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: "90%",
+    maxHeight: "80%",
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 15,
+  },
+  title: {
+    fontSize: 20,
     fontWeight: "bold",
   },
-  addressContainer: {
-    alignItems: "center",
-    backgroundColor: "#EDF7F2", // Placeholder for Colors.blockSectionBackground
-    borderRadius: 20,
-    marginTop: 6.7,
-    paddingBottom: 17,
-    paddingHorizontal: 17,
-    paddingTop: 15,
-    width: "100%",
-  },
-  addressLabel: {
-    marginTop: 9,
-    fontSize: 14,
-    color: "#616161",
-  },
-  avatar: {
-    borderRadius: 70,
-    height: 140,
-    marginTop: 32,
-    width: 140,
-  },
-  bioContainer: {
-    backgroundColor: "#FAFAFA", // Placeholder for Colors.aboutContainerBackground
-    borderRadius: 20,
-    marginTop: 18,
-    paddingBottom: 41,
-    paddingHorizontal: 17,
-    paddingTop: 17,
-    width: "100%",
-  },
-  container: {
-    alignItems: "center",
-    flex: 1,
-    paddingHorizontal: 29,
-    backgroundColor: "white",
-  },
-  name: {
-    marginTop: 28,
+  closeButton: {
     fontSize: 24,
     fontWeight: "bold",
   },
-  ratingContainer: {
-    marginTop: 22.1,
+  profileContainer: {
+    width: "100%",
   },
-  specialisation: {
+  avatarContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
+  },
+  doctorName: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  specialty: {
     fontSize: 16,
     color: "#666",
   },
-  topHeaderSeparatorStyle: {
-    backgroundColor: "#D9D9D9", // Placeholder for Colors.modalHeaderSwipeIndicator
-    borderRadius: 8,
-    height: 4,
-    marginTop: 16,
-    opacity: 0.7,
-    width: 64,
+  ratingContainer: {
+    marginBottom: 15,
   },
-  workingHoursContainer: {
-    alignSelf: "flex-start",
-    marginTop: 10,
-    paddingBottom: 21,
-    paddingHorizontal: 15,
-    paddingTop: 20,
-  },
-  workingHoursLabel: {
-    marginTop: 9,
-    fontSize: 14,
-    color: "#666",
-  },
-  headerBackButtonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    justifyContent: "flex-start",
-    paddingTop: 20,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginLeft: 10,
+  addressContainer: {
+    marginBottom: 15,
   },
   blockSectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
+    marginBottom: 5,
+  },
+  addressLabel: {
+    fontSize: 14,
+  },
+  workingHoursContainer: {
+    marginBottom: 15,
   },
   subSectionTitle: {
     fontSize: 16,
     fontWeight: "bold",
+    marginBottom: 5,
   },
-})
+  workingHoursLabel: {
+    fontSize: 14,
+  },
+  aboutTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  bioContainer: {
+    marginBottom: 15,
+  },
+});

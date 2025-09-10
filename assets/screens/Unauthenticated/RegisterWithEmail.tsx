@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { Alert, StyleSheet, View, StatusBar } from "react-native"
+import { StyleSheet, View, StatusBar } from "react-native"
 
 import { useNavigation } from "@react-navigation/native"
 import { AutoImage } from "app/components"
@@ -10,12 +10,12 @@ import FormInputController from "app/components/formInput"
 import renderField from "app/components/formInput/renderField"
 import GreenButton from "app/components/greenButton"
 import TermsAndConditions from "app/components/termsAndConditions"
-import { SCREENS_COMPLETE_PROFILE, SCREENS_SIGNIN_WITH_EMAIL } from "app/constants/Screens"
+import { SCREENS_SIGNIN_WITH_EMAIL } from "app/constants/Screens"
 import { translate } from "app/i18n"
 import { relativeWidth } from "app/utils/design"
 import { emailRegex } from "app/utils/sosUtils"
 import React from "react"
-import useRegisterUser from "app/hook/api/useRegisterUser"
+
 import useEmailVerify from "app/hook/api/useEmailVerify"
 
 const styles = StyleSheet.create({
@@ -47,19 +47,7 @@ const styles = StyleSheet.create({
 
 const LogoPNG = require("app/images/logo/logo.png")
 
-const minLengthRule = {
-  required: translate("formValidations.required"),
-  minLength: {
-    value: 8,
-    message: translate("formValidations.minLengthPassword"),
-  },
-  validate: (value: any) => {
-    if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-      return translate("formValidations.passwordLetterNumber")
-    }
-    return true
-  },
-}
+
 
 export default function RegisterWithEmail() {
   const navigation = useNavigation<any>()

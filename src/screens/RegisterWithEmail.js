@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
   content: {
     alignItems: "center",
-    width: "100%", // Adjusted from relativeWidth
+    width: "100%",
   },
   image: {
     height: 40,
@@ -50,12 +50,16 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   greenButton: {
-    backgroundColor: "lightgreen", // Placeholder color
+    backgroundColor: "lightgreen",
     padding: 15,
     alignItems: "center",
     borderRadius: 5,
     width: "80%",
     marginTop: 20,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
   },
   termsAndConditionsContainer: {
     marginTop: 20,
@@ -88,7 +92,7 @@ export default function RegisterWithEmail() {
         style={styles.greenButton}
         onPress={useCallback(() => navigation.navigate('CompleteProfile'), [navigation])}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>Next</Text>
+        <Text style={styles.buttonText}>Next</Text>
       </TouchableOpacity>
       <View style={styles.termsAndConditionsContainer}>
         <Text>By signing up, you agree to our</Text>

@@ -13,7 +13,7 @@ import Separator from "../separator"
 const Mailbox = () => {
   const [unreadCount, setUnreadCount] = useState(0)
   const navigation = useNavigation()
-  const [incomingCall, setIncomingCall] = useMMKVObject(MEMORY_INCOMING_CALL)
+  const [incomingCall] = useMMKVObject(MEMORY_INCOMING_CALL)
 
   useChatClient()
   useVideoClient()
@@ -49,7 +49,7 @@ const Mailbox = () => {
 
     StreamChatInstance.on(handleEvent)
     return () => StreamChatInstance.off(handleEvent)
-  }, [StreamChatInstance, StreamChatInstance?.userID])
+  }, [])
 
   const onChatPressed = () => {
     navigation.navigate("Chat")

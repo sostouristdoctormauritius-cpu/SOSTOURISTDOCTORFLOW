@@ -43,11 +43,15 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   greenButton: {
-    backgroundColor: "lightgreen", // Placeholder color
+    backgroundColor: "lightgreen",
     padding: 15,
     alignItems: "center",
     borderRadius: 5,
     width: "80%",
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
   },
 })
 
@@ -76,7 +80,7 @@ export default function ForgotPassword() {
         style={styles.greenButton}
         onPress={() => navigation.navigate('OtpVerify')}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>Reset</Text>
+        <Text style={styles.buttonText}>Reset</Text>
       </TouchableOpacity>
     </View>
   )

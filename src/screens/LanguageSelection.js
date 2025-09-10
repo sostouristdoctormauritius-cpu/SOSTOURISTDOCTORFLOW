@@ -4,6 +4,53 @@ import { useNavigation } from '@react-navigation/native';
 
 const logo = require("../../assets/images/smallLogo.png");
 
+export default function LanguageSelection() {
+  const navigation = useNavigation()
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
+
+  const handleContinue = () => {
+    if (selectedLanguage) {
+      navigation.navigate('Welcome');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Image style={styles.image} source={logo} />
+      <Text style={styles.title}>Language Selection</Text>
+      <Text style={styles.subtitle}>Please select your preferred language to continue</Text>
+      
+      <View style={styles.languageOptions}>
+        <TouchableOpacity 
+          style={[styles.languageButton, selectedLanguage === 'en' && styles.selectedLanguageButton]}
+          onPress={() => setSelectedLanguage('en')}
+        >
+          <Text style={[styles.languageText, selectedLanguage === 'en' && styles.selectedLanguageText]}>
+            English
+          </Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={[styles.languageButton, selectedLanguage === 'hi' && styles.selectedLanguageButton]}
+          onPress={() => setSelectedLanguage('hi')}
+        >
+          <Text style={[styles.languageText, selectedLanguage === 'hi' && styles.selectedLanguageText]}>
+            हिंदी (Hindi)
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity 
+        style={[styles.continueButton, !selectedLanguage && styles.disabledContinueButton]}
+        onPress={handleContinue}
+        disabled={!selectedLanguage}
+      >
+        <Text style={styles.continueButtonText}>Continue</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
+
 const styles = StyleSheet.create({
   button: {
     borderRadius: 30,
@@ -48,42 +95,3 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 })
-export default function LanguageSelection() {
-  const navigation = useNavigation()
-
-  return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={logo} />
-      <Text style={styles.title}>Language Selection</Text>
-      <Text style={styles.subtitle}>Please select your preferred language to continue</Text>
-      
-      <View style={styles.languageOptions}>
-        <TouchableOpacity 
-          style={[styles.languageButton, selectedLanguage === 'en' && styles.selectedLanguageButton]}
-          onPress={() => setSelectedLanguage('en')}
-        >
-          <Text style={[styles.languageText, selectedLanguage === 'en' && styles.selectedLanguageText]}>
-            English
-          </Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={[styles.languageButton, selectedLanguage === 'hi' && styles.selectedLanguageButton]}
-          onPress={() => setSelectedLanguage('hi')}
-        >
-          <Text style={[styles.languageText, selectedLanguage === 'hi' && styles.selectedLanguageText]}>
-            हिंदी (Hindi)
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity 
-        style={[styles.continueButton, !selectedLanguage && styles.disabledContinueButton]}
-        onPress={handleContinue}
-        disabled={!selectedLanguage}
-      >
-        <Text style={styles.continueButtonText}>Continue</Text>
-      </TouchableOpacity>
-    </View>
-  )
-}

@@ -1,10 +1,8 @@
 import React, { useState } from "react"
-import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from "react-native"
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native"
 import { useNavigation } from '@react-navigation/native'
 
 const ConsultationBookAppointmentScreen = () => {
-  const isLoading = false // Static for visual recreation
-  const emptySlots = false // Static for visual recreation
   const [isSlotMorning, setIsSlotMorning] = useState(true) // Static for visual recreation
   const [appointmentTime, setAppointmentTime] = useState("") // Static for visual recreation
   const navigation = useNavigation()
@@ -29,72 +27,53 @@ const ConsultationBookAppointmentScreen = () => {
         <Text>Date Picker Placeholder</Text>
       </View>
 
-      <Text style={styles.subTitleStyle}>Choose Slot</Text>
+      <View style={styles.timeSlotContainer}>
+        <View style={styles.timeSlotHeader}>
+          <TouchableOpacity
+            style={[styles.timeSlotButton, isSlotMorning ? styles.activeTimeSlotButton : null]}
+            onPress={() => setIsSlotMorning(true)}
+          >
+            <Text style={[styles.timeSlotText, isSlotMorning ? styles.activeTimeSlotText : null]}>
+              Morning
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.timeSlotButton, !isSlotMorning ? styles.activeTimeSlotButton : null]}
+            onPress={() => setIsSlotMorning(false)}
+          >
+            <Text style={[styles.timeSlotText, !isSlotMorning ? styles.activeTimeSlotText : null]}>
+              Evening
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.slotPartOfDayContainer}>
-        <TouchableOpacity
-          style={[
-            styles.slotPartOfDayButton,
-            styles.marginRight,
-            isSlotMorning ? styles.selectedButton : styles.unselectedButton,
-          ]}
-          onPress={() => setIsSlotMorning(true)}
-        >
-          <Text style={isSlotMorning ? styles.selectedButtonText : styles.unselectedButtonText}>Morning</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.slotPartOfDayButton,
-            styles.marginLeft,
-            !isSlotMorning ? styles.selectedButton : styles.unselectedButton,
-          ]}
-          onPress={() => setIsSlotMorning(false)}
-        >
-          <Text style={!isSlotMorning ? styles.selectedButtonText : styles.unselectedButtonText}>Evening</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.slotTimeContainer}>
-        {isLoading && <ActivityIndicator size="large" color="blue" />}
-        {emptySlots && !isLoading && (
-          <View style={styles.disabledBox}>
-            <Text style={styles.disabledText}>N/A</Text>
-          </View>
-        )}
-        {!isLoading && !emptySlots && DUMMY_TIME_SLOTS.map((row, rowIndex) => (
-          <View key={`timeslot-row-${rowIndex}`} style={styles.slotTimeRow}>
-            {row.map((slot) => (
-              <TouchableOpacity
-                key={`slot-${slot}`}
+        <View style={styles.timeSlotsGrid}>
+          {DUMMY_TIME_SLOTS[isSlotMorning ? 0 : 1].map((slot, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.timeSlotItem,
+                appointmentTime === slot ? styles.selectedTimeSlotItem : styles.unselectedTimeSlotItem
+              ]}
+              onPress={() => setAppointmentTime(slot)}
+            >
+              <Text
                 style={[
-                  styles.slotButton,
-                  {
-                    backgroundColor: appointmentTime === slot ? "lightgreen" : "#FFF",
-                    borderColor: "lightgreen",
-                  },
+                  styles.timeSlotItemText,
+                  appointmentTime === slot ? styles.selectedTimeSlotItemText : styles.unselectedTimeSlotItemText
                 ]}
-                onPress={() => setAppointmentTime(slot)}
               >
-                <Text
-                  style={[
-                    styles.slotButtonText,
-                    {
-                      color: appointmentTime === slot ? "#FFF" : "lightgreen",
-                    },
-                  ]}
-                >
-                  {slot}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        ))}
-      </View>
+                {slot}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
-      {/* PricingFooter Placeholder */}
-      <View style={styles.pricingFooter}>
-        <Text>Pricing details here.</Text>
-        <TouchableOpacity style={styles.continueButton} onPress={() => navigation.navigate('ConsultationOrderConfirmation')}>
+        <TouchableOpacity
+          style={styles.continueButton}
+          onPress={() => navigation.navigate('ConsultationOrderConfirmation')}
+          disabled={!appointmentTime}
+        >
           <Text style={styles.continueButtonText}>Continue</Text>
         </TouchableOpacity>
       </View>
@@ -105,112 +84,83 @@ const ConsultationBookAppointmentScreen = () => {
 export default ConsultationBookAppointmentScreen
 
 const styles = StyleSheet.create({
+  screenContentContainerStyle: {
+    flex: 1,
+    backgroundColor: "white",
+    padding: 16,
+  },
   backButtonStyle: {
     alignSelf: "flex-start",
-    zIndex: 9999,
   },
   titleStyle: {
-    marginTop: -28,
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 16,
   },
   datePickerContainer: {
-    marginTop: 24,
-    height: 100,
     backgroundColor: "#f0f0f0",
-    justifyContent: "center",
+    padding: 20,
+    borderRadius: 10,
     alignItems: "center",
+    marginVertical: 16,
   },
-  subTitleStyle: {
-    alignSelf: "flex-start",
-    color: "#212121", // Placeholder for Colors.screenTitleText
-    marginTop: 10,
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  slotPartOfDayContainer: {
-    flexDirection: "row",
-    marginTop: 20,
-    width: "100%",
-  },
-  slotPartOfDayButton: {
+  timeSlotContainer: {
     flex: 1,
-    paddingVertical: 10,
-    borderRadius: 22,
+  },
+  timeSlotHeader: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginVertical: 16,
+  },
+  timeSlotButton: {
+    padding: 10,
+    borderRadius: 20,
     borderWidth: 1,
-    borderColor: "lightgray",
-    alignItems: "center",
-    justifyContent: "center",
+    borderColor: "lightgreen",
   },
-  marginRight: {
-    marginRight: 9,
-  },
-  marginLeft: {
-    marginLeft: 9,
-  },
-  selectedButton: {
+  activeTimeSlotButton: {
     backgroundColor: "lightgreen",
   },
-  unselectedButton: {
-    backgroundColor: "white",
+  timeSlotText: {
+    color: "lightgreen",
   },
-  selectedButtonText: {
+  activeTimeSlotText: {
     color: "white",
-    fontWeight: "bold",
   },
-  unselectedButtonText: {
-    color: "black",
-  },
-  slotTimeContainer: {
-    flexDirection: "column",
-    marginTop: 16,
-  },
-  slotTimeRow: {
+  timeSlotsGrid: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 8,
+    justifyContent: "space-around",
+    marginVertical: 20,
   },
-  slotButton: {
-    paddingVertical: 9,
-    paddingHorizontal: 15,
-    borderRadius: 22,
+  timeSlotItem: {
+    padding: 10,
+    borderRadius: 10,
     borderWidth: 1,
   },
-  slotButtonText: {
-    fontSize: 14,
-    fontWeight: "700",
+  selectedTimeSlotItem: {
+    backgroundColor: "lightgreen",
+    borderColor: "lightgreen",
   },
-  disabledBox: {
-    alignItems: "center",
-    alignSelf: "center",
-    backgroundColor: "#191015",
-    height: 100,
-    justifyContent: "center",
-    width: "100%",
+  unselectedTimeSlotItem: {
+    backgroundColor: "#FFF",
+    borderColor: "lightgreen",
   },
-  disabledText: {
-    alignSelf: "center",
+  timeSlotItemText: {
+    fontWeight: "bold",
+  },
+  selectedTimeSlotItemText: {
     color: "#FFF",
-    marginTop: 24,
   },
-  screenContentContainerStyle: {
-    paddingHorizontal: 16, // Placeholder for spacing.lg
-    paddingVertical: 16, // Placeholder for spacing.lg
-    flex: 1,
-  },
-  pricingFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: "#eee",
-    marginTop: 20,
+  unselectedTimeSlotItemText: {
+    color: "lightgreen",
   },
   continueButton: {
     backgroundColor: "lightgreen",
     padding: 15,
-    borderRadius: 5,
+    borderRadius: 10,
+    alignItems: "center",
+    marginVertical: 20,
   },
   continueButtonText: {
     color: "white",

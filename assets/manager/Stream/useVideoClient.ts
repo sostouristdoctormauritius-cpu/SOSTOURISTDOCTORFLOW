@@ -39,7 +39,7 @@ export const useVideoClient = () => {
     return () => {
       // StreamVideoInstance.disconnectUser()
     }
-  }, [user?.id, streamToken])
+  }, [user?.id, streamToken, user?.email])
 
   return {
     clientIsReady,

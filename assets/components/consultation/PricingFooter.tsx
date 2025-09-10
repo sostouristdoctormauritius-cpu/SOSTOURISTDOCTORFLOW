@@ -1,13 +1,11 @@
 import React from "react"
 import { TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
 import { Text } from "../Text"
-
-import GreenButton from "app/components/greenButton"
 import Colors from "app/constants/Colors"
 import { ConsultationType } from "app/constants/GlobalTypes"
 import { TxKeyPath, translate } from "app/i18n"
 import { useStores } from "app/models"
-import { useTheme } from "react-native-paper"
+
 
 const config = {
   [ConsultationType.Chat]: {
@@ -41,10 +39,8 @@ const PricingFooter: React.FC<PricingFooterProps> = ({
   onContinuePressed,
   continueLabelTx,
   disabled = false,
-  isLoading = false,
 }) => {
   const title = consultationType ? config[consultationType]?.titleTx : titleTx
-  const theme = useTheme()
   const {
     appConfigStore: { fees },
   } = useStores()

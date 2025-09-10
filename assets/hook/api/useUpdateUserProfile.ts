@@ -54,7 +54,7 @@ const useUpdateUserProfile = () => {
         )
       }
     },
-    onSuccess: async (data, variables) => {
+    onSuccess: async (data, _variables) => {
       if (data) setUserProfile(data);
       if (data && data?.profilePicture) setProfilePic(data?.profilePicture);
       navigation.reset({

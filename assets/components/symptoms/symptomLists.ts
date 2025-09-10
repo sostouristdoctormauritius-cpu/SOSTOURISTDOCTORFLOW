@@ -5,7 +5,7 @@ import EyeSVG from "app/components/symptoms/svgs/eyeSVG"
 import FeverSVG from "app/components/symptoms/svgs/feverSVG"
 import InjurySVG from "app/components/symptoms/svgs/injurySVG"
 import PainSVG from "app/components/symptoms/svgs/painSVG"
-import TummySVG from "app/components/symptoms/svgs/tummySVG"
+
 import UrineSVG from "app/components/symptoms/svgs/urineSVG"
 import AllergicSVG from "app/components/symptoms/svgs/allergySVG"
 import MentalSVG from "app/components/symptoms/svgs/mentalSVG"

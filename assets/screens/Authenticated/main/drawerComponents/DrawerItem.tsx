@@ -1,5 +1,5 @@
-import { AutoImage, ListItem, Text } from "app/components"
-import { ChevronRightSVG } from "app/components/SVG"
+import { AutoImage, ListItem } from "app/components"
+
 import { typography } from "app/theme"
 import React, { ReactElement } from "react"
 import { StyleSheet, View } from "react-native"

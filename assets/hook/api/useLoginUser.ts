@@ -33,7 +33,7 @@ const useLoginUser = () => {
         return false
       } 
 
-      if(variables?.isPasswordOrOtp=='otp'){
+      if(variables?.isPasswordOrOtp==='otp'){
         let msg = data.msg||'otp send';
         showTempNetworkErrorAlert("Success",msg, () => {
         })

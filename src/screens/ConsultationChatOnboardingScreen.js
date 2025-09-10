@@ -8,24 +8,24 @@ const ConsultationChatOnboardingScreen = () => {
 
   return (
     <View
-      style={styles.$screenContentContainerStyle}
+      style={styles.screenContentContainerStyle}
     >
-      <TouchableOpacity style={styles.$backButtonStyle} onPress={() => navigation.goBack()}>
+      <TouchableOpacity style={styles.backButtonStyle} onPress={() => navigation.goBack()}>
         <Text>{'<'}</Text>
       </TouchableOpacity>
-      <View style={styles.$svgContainer}>
+      <View style={styles.svgContainer}>
         {/* Placeholder for SVG based on consultationType */}
         <Text>SVG Placeholder for {consultationType} Visit</Text>
       </View>
       <Text
-        style={styles.$titleStyle}
+        style={styles.titleStyle}
       >
         {consultationType === "Chat" && "Chat Consultation"}
         {consultationType === "Video" && "Video Consultation"}
         {consultationType === "Home" && "Home Visit Consultation"}
       </Text>
       <Text
-        style={styles.$descriptionStyle}
+        style={styles.descriptionStyle}
       >
         {consultationType === "Chat" && "Connect with doctors instantly through secure chat."}
         {consultationType === "Video" && "Have a face-to-face consultation with a doctor via video call."}
@@ -33,10 +33,10 @@ const ConsultationChatOnboardingScreen = () => {
       </Text>
 
       <TouchableOpacity
-        style={styles.$buttonStyle}
+        style={styles.buttonStyle}
         onPress={() => navigation.navigate('ConsultationSymptomSelection')}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>Book Now</Text>
+        <Text style={styles.buttonText}>Book Now</Text>
       </TouchableOpacity>
     </View>
   )
@@ -45,29 +45,33 @@ const ConsultationChatOnboardingScreen = () => {
 export default ConsultationChatOnboardingScreen
 
 const styles = StyleSheet.create({
-  $backButtonStyle: {
+  backButtonStyle: {
     alignSelf: "flex-start",
   },
-  $buttonStyle: {
+  buttonStyle: {
     marginTop: 57,
     width: "100%",
-    backgroundColor: "lightgreen", // Placeholder color
+    backgroundColor: "lightgreen",
     padding: 15,
     alignItems: "center",
     borderRadius: 5,
   },
-  $descriptionStyle: {
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  descriptionStyle: {
     marginTop: 8,
     textAlign: "center",
   },
-  $screenContentContainerStyle: {
+  screenContentContainerStyle: {
     alignItems: "center",
     flex: 1,
-    paddingHorizontal: 16, // Placeholder for spacing.lg
-    paddingVertical: 16, // Placeholder for spacing.lg
+    paddingHorizontal: 16,
+    paddingVertical: 16,
     backgroundColor: "white",
   },
-  $svgContainer: {
+  svgContainer: {
     marginTop: 114,
     height: 100,
     width: 100,
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 50,
   },
-  $titleStyle: {
+  titleStyle: {
     marginTop: 26,
     fontSize: 24,
     fontWeight: "bold",

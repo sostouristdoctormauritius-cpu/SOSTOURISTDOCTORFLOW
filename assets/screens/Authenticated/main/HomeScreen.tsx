@@ -25,7 +25,7 @@ import { useGetCurrentUserProfile } from "app/hook/api/useGetCurrentUserProfile"
 import { translate } from "app/i18n"
 import { registerWithStream } from "app/manager/PushNotification/registerWithStream"
 import { captureApiException } from "app/manager/Sentry"
-import { StreamChatInstance } from "app/manager/Stream/streamClients"
+
 import { useChatClient } from "app/manager/Stream/useChatClient"
 import { useVideoClient } from "app/manager/Stream/useVideoClient"
 import { useStores } from "app/models"
@@ -49,7 +49,7 @@ export default function HomeScreen() {
   useEffect(() => {
     console.log("registering devices with getStream.io")
     registerWithStream()
-  }, [StreamChatInstance.userID])
+  }, [])
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -147,7 +147,7 @@ export default function HomeScreen() {
         },
       })
       console.log('---profilePic---',profilePic);
-    }, [navigation, profilePic])
+    }, [navigation, profilePic, openModal])
   )
 
   useEffect(() => {
