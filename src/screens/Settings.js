@@ -37,6 +37,9 @@ const SettingsScreen = () => {
       <Header 
         title="Settings" 
         onBackPress={() => navigation.goBack()} 
+        containerStyle={styles.headerContainer}
+        titleStyle={styles.headerTitle}
+        backIconStyle={styles.backButton}
       />
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -48,6 +51,11 @@ const SettingsScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F9F9F9' },
+  headerContainer: { 
+    backgroundColor: '#F9F9F9',
+    elevation: 0, // 去除Android上的阴影
+    borderBottomWidth: 0, // 去除底部边框
+  },
   backButton: { fontSize: 24, color: '#333' },
   headerTitle: { fontSize: 20, fontWeight: 'bold', color: '#333' },
   contentContainer: { padding: 20 },

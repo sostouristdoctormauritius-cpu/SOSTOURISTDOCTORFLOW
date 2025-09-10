@@ -3,10 +3,9 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  Image,
-  TouchableOpacity,
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { Header } from '../components';
 import { Greeting, QuickActions, Services, UpcomingAppointment } from '../components';
 
 export default function HomeScreen() {
@@ -28,17 +27,10 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Image source={require('../assets/images/logo.png')} style={styles.logo} />
-        <View style={styles.headerIcons}>
-          <TouchableOpacity style={styles.iconButton}>
-            <Image source={require('../assets/images/watch.png')} style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconButton} onPress={() => navigation.navigate('Profile')}>
-            <Image source={require('../assets/images/profile.png')} style={styles.icon} />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <Header 
+        showLogo={true}
+        onRightPress={() => navigation.navigate('Profile')}
+      />
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <Greeting name="John Doe" />
@@ -54,33 +46,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9F9F9',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 40,
-    paddingBottom: 10,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-  },
-  logo: {
-    width: 120,
-    height: 40,
-    resizeMode: 'contain',
-  },
-  headerIcons: {
-    flexDirection: 'row',
-  },
-  iconButton: {
-    marginLeft: 20,
-  },
-  icon: {
-    width: 24,
-    height: 24,
-    resizeMode: 'contain',
   },
   scrollViewContent: {
     paddingBottom: 20,

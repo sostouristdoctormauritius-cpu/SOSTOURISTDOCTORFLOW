@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Button } from '../../components';
+import { Button, Header } from '../../components';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -33,18 +33,11 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>My Profile</Text>
-        <TouchableOpacity 
-          style={styles.settingsButton}
-          onPress={() => navigation.navigate('Settings')}
-        >
-          <Image 
-            source={require('../../assets/images/profile.png')} 
-            style={styles.settingsIcon} 
-          />
-        </TouchableOpacity>
-      </View>
+      <Header 
+        title="My Profile" 
+        onBackPress={() => navigation.goBack()}
+        onRightPress={() => navigation.navigate('Settings')}
+      />
 
       <ScrollView style={styles.content}>
         {/* Profile Header */}

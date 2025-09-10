@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { Button } from '../../components';
-import ErrorModal from '../../components/ErrorModal';
+import { Button, ErrorModal } from '../components';
 
 // Mock data for available time slots
 const availableTimes = {

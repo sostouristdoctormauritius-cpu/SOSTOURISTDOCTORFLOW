@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const Header = ({ 
   title, 
@@ -8,7 +8,8 @@ const Header = ({
   rightComponent,
   showBackButton = true,
   backButtonTitle = '',
-  onRightPress
+  onRightPress,
+  showLogo = false
 }) => {
   return (
     <View style={[styles.header, style]}>
@@ -19,7 +20,15 @@ const Header = ({
         </TouchableOpacity>
       )}
       
-      <Text style={styles.title}>{title}</Text>
+      {showLogo ? (
+        <Image 
+          source={require('../assets/images/logo.png')} 
+          style={styles.logo}
+          resizeMode="contain"
+        />
+      ) : (
+        <Text style={styles.title}>{title}</Text>
+      )}
       
       {rightComponent ? (
         rightComponent
@@ -66,6 +75,10 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     marginHorizontal: 16,
+  },
+  logo: {
+    flex: 1,
+    height: 40,
   },
   rightButton: {
     width: 24,
