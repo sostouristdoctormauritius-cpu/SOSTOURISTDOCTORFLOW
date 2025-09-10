@@ -2,11 +2,11 @@ import React, { useState } from "react"
 import { ActivityIndicator, FlatList, StyleSheet, View, Text, TouchableOpacity } from "react-native"
 import { useNavigation } from '@react-navigation/native'
 
-export enum AppointmentStatus {
-  PENDING = "pending",
-  COMPLETE = "complete",
-  CANCELLED = "cancelled",
-}
+const AppointmentStatus = {
+  PENDING: "pending",
+  COMPLETE: "complete",
+  CANCELLED: "cancelled",
+};
 
 const DUMMY_APPOINTMENTS = [
   {

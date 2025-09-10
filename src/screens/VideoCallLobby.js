@@ -2,12 +2,12 @@ import React from "react"
 import { ActivityIndicator, FlatList, SafeAreaView, StyleSheet, Text, View, TouchableOpacity } from "react-native"
 import { useNavigation } from '@react-navigation/native'
 
-export enum AppointmentStatus {
-  PENDING = "pending",
-  COMPLETE = "complete",
-  CANCELLED = "cancelled",
-  PAYMENT_COMPLETED = "payment_completed",
-}
+const AppointmentStatus = {
+  PENDING: "pending",
+  COMPLETE: "complete",
+  CANCELLED: "cancelled",
+  PAYMENT_COMPLETED: "payment_completed",
+};
 
 const DUMMY_VIDEO_APPOINTMENTS = [
   {
