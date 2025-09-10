@@ -229,10 +229,10 @@ export default function CompleteProfile() {
     setIsDatePickerVisible(false)
   }
 
-  const handleCountry = (country: any) => {
+  const handleCountry = (selectedCountry: any) => {
     setCountryPickerVisible(false)
-    setCountry(country.name)
-    setCountryCode("+" + country.callingCode)
+    setCountry(selectedCountry.name)
+    setCountryCode("+" + selectedCountry.callingCode)
   }
 
   const [toggle, setToggle] = useState(false)
@@ -313,8 +313,8 @@ export default function CompleteProfile() {
         <View style={styles.mb}>
           <SelectGroup
             value={gender}
-            onPress={(gender: string) => {
-              setGender(gender as Gender)
+            onPress={(selectedGender: string) => {
+              setGender(selectedGender as Gender)
             }}
             buttons={[
               { value: "Male", label: "Male" },

@@ -37,7 +37,7 @@ const Config = {
 }
 
 const AppointmentStatus = observer(function AppointmentStatus(props: AppointmentStatusProps) {
-  const { style, appointmentStatus } = props
+  const { style, appointmentStatus: appointmentStatusProp } = props
 
   const renderStatusIndicator = (appointmentStatus: string) => {
     const config = Config[appointmentStatus as Status]
@@ -47,7 +47,7 @@ const AppointmentStatus = observer(function AppointmentStatus(props: Appointment
     return null
   }
 
-  return <View style={style}>{renderStatusIndicator(appointmentStatus)}</View>
+  return <View style={style}>{renderStatusIndicator(appointmentStatusProp)}</View>
 })
 
 export default AppointmentStatus

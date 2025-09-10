@@ -190,7 +190,7 @@ function ScreenWithScrolling(props: ScreenProps) {
     children,
     keyboardShouldPersistTaps = "handled",
     contentContainerStyle,
-    ScrollViewProps,
+    ScrollViewProps: scrollViewProps,
     style,
   } = props as ScrollScreenProps
 
@@ -205,19 +205,19 @@ function ScreenWithScrolling(props: ScreenProps) {
   return (
     <ScrollView
       {...{ keyboardShouldPersistTaps, scrollEnabled, ref }}
-      {...ScrollViewProps}
+      {...scrollViewProps}
       onLayout={(e) => {
         onLayout(e)
-        ScrollViewProps?.onLayout?.(e)
+        scrollViewProps?.onLayout?.(e)
       }}
       onContentSizeChange={(w: number, h: number) => {
         onContentSizeChange(w, h)
-        ScrollViewProps?.onContentSizeChange?.(w, h)
+        scrollViewProps?.onContentSizeChange?.(w, h)
       }}
-      style={[$outerStyle, ScrollViewProps?.style, style]}
+      style={[$outerStyle, scrollViewProps?.style, style]}
       contentContainerStyle={[
         $innerStyle,
-        ScrollViewProps?.contentContainerStyle,
+        scrollViewProps?.contentContainerStyle,
         contentContainerStyle,
       ]}
     >
@@ -237,10 +237,10 @@ function ScreenWithScrolling(props: ScreenProps) {
 export function Screen(props: ScreenProps) {
   const {
     backgroundColor = colors.background,
-    KeyboardAvoidingViewProps,
+    KeyboardAvoidingViewProps: keyboardAvoidingViewProps,
     keyboardOffset = 0,
     safeAreaEdges,
-    StatusBarProps,
+    StatusBarProps: statusBarProps,
     statusBarStyle = "dark",
   } = props
 
@@ -248,13 +248,13 @@ export function Screen(props: ScreenProps) {
 
   return (
     <View style={[$containerStyle, { backgroundColor }, $containerInsets]}>
-      <StatusBar style={statusBarStyle} {...StatusBarProps} />
+      <StatusBar style={statusBarStyle} {...statusBarProps} />
 
       <KeyboardAvoidingView
         behavior={isIos ? "padding" : "height"}
         keyboardVerticalOffset={keyboardOffset}
-        {...KeyboardAvoidingViewProps}
-        style={[$keyboardAvoidingViewStyle, KeyboardAvoidingViewProps?.style]}
+        {...keyboardAvoidingViewProps}
+        style={[$keyboardAvoidingViewStyle, keyboardAvoidingViewProps?.style]}
       >
         {isNonScrolling(props.preset) ? (
           <ScreenWithoutScrolling {...props} />

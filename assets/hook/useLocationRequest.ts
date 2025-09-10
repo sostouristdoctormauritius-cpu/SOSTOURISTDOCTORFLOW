@@ -35,8 +35,8 @@ export function useLocationRequest() {
       }
 
       try {
-        const location = await Location.getCurrentPositionAsync({})
-        const { latitude, longitude } = location.coords
+        const locationResult = await Location.getCurrentPositionAsync({})
+        const { latitude, longitude } = locationResult.coords
 
         setLocation({
           latitude,

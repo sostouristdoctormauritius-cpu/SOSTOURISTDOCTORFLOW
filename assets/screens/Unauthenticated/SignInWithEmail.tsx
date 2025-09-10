@@ -13,7 +13,6 @@ import React from "react"
 import { Controller, useForm } from "react-hook-form"
 import { ImageStyle, StyleProp, StyleSheet, View } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
-import { useTheme } from "react-native-paper"
 
 const styles = StyleSheet.create({
   blackColor: {
@@ -32,9 +31,21 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     width: relativeWidth(384),
   },
+  errorText: {
+    width: "80%",
+    top: -20,
+    justifyContent: "center",
+    color: "red",
+    alignItems: "center",
+    fontSize: 15,
+    letterSpacing: 1,
+  },
   flexRow: {
     flexDirection: "row",
     marginTop: 20
+  },
+  greenButton: {
+    width: '80%',
   },
   image: {
     height: 40,
@@ -45,12 +56,21 @@ const styles = StyleSheet.create({
   noAccText: {
     fontSize: 18,
   },
-  textForgot: {
-    fontSize: 16,
-    fontWeight: FontWeight.semibold,
+  radioContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "55%",
+    marginTop: 20,
   },
-  textStyle: {
-    marginBottom: 35,
+  radioImage: {
+    height: 20,
+    width: 20,
+  },
+  radioOption: {
+    flexDirection: "row",
+  },
+  radioText: {
+    marginLeft: 5,
   },
   roundedView: {
     borderColor: "#c8c8c8",
@@ -58,33 +78,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     overflow: "hidden",
   },
-  errorText: {
-    width: "80%",
-    top: -20,
-    justifyContent: "center",
-    color: "red",
-    alignItems: "center",
-    fontSize: 15,
-    letterSpacing: 1,
-  },
-  radioContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "55%",
-    marginTop: 20,
-  },
-  radioOption: {
-    flexDirection: "row",
-  },
-  radioImage: {
-    height: 20,
-    width: 20,
-  },
-  radioText: {
-    marginLeft: 5,
+  secondaryColor: {
+    color: "#30B549", // theme.colors.secondary
   },
   signUpText: {
     fontWeight: FontWeight.bold,
+  },
+  textForgot: {
+    fontSize: 16,
+    fontWeight: FontWeight.semibold,
+  },
+  textStyle: {
+    marginBottom: 35,
   },
 })
 
@@ -93,7 +98,6 @@ const emailRegex1 = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const mobileRegex = /^[0-9]{8,16}$/
 
 export default function SignInWithEmail() {
-  const theme = useTheme()
   const navigation = useNavigation<any>()
 
   const {
@@ -159,7 +163,7 @@ export default function SignInWithEmail() {
       <GreenButton
         isSecondary
         onPress={handleSubmit(onPressSignIn)}
-        buttonStyle={{width:'80%'}}
+        buttonStyle={styles.greenButton}
         buttonTitle={translate("signInWithEmailScreen.login", { defaultValue: "Sign up" })}
         isLoading={loginMutation.isPending}
       />
@@ -170,7 +174,7 @@ export default function SignInWithEmail() {
         style={styles.flexRow}
       >
         <Text style={styles.noAccText}>{translate("signInWithEmailScreen.noAccount")} </Text>
-        <Text style={[{ color: theme.colors.secondary }, styles.signUpText]}>
+        <Text style={[styles.signUpText, styles.secondaryColor]}>
           {translate("signInWithEmailScreen.noAccount2")}
         </Text>
       </TouchableOpacity>

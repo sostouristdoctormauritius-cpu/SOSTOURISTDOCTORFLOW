@@ -116,7 +116,7 @@ function navigationRestoredDefaultState() {
  * @param {string} persistenceKey - The key to use for storing the navigation state.
  * @returns {object} - The navigation state and persistence functions.
  */
-export function useNavigationPersistence(storage: Storage, persistenceKey: string) {
+export function useNavigationPersistence(storageUtil: Storage, persistenceKey: string) {
   const [initialNavigationState, setInitialNavigationState] =
     useState<NavigationProps["initialState"]>()
   const isMounted = useIsMounted()
@@ -134,13 +134,13 @@ export function useNavigationPersistence(storage: Storage, persistenceKey: strin
       routeNameRef.current = currentRouteName as keyof AppStackParamList
 
       // Persist state to storage
-      storage.save(persistenceKey, state)
+      storageUtil.save(persistenceKey, state)
     }
   }
 
   const restoreState = useCallback(async () => {
     try {
-      const state = (await storage.load(persistenceKey)) as NavigationProps["initialState"] | null
+      const state = (await storageUtil.load(persistenceKey)) as NavigationProps["initialState"] | null
       if (state) {
         setInitialNavigationState(state)
       }
@@ -149,7 +149,7 @@ export function useNavigationPersistence(storage: Storage, persistenceKey: strin
         setIsRestored(true)
       }
     }
-  }, [isMounted, persistenceKey, storage])
+  }, [isMounted, persistenceKey, storageUtil])
 
   useEffect(() => {
     if (!isRestored) {

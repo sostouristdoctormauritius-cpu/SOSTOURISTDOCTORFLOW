@@ -48,17 +48,17 @@ const RoundedTextInput = ({
     <View style={[styles.button, (leftImageSource ||  type === 'phone') && styles.pdl]}>
       {leftImageSource && <AutoImage style={styles.iconTextInput} source={leftImageSource} />}
       {
-      type === 'phone' && <TouchableOpacity  onPress={onPhoneIconPress} style={{
-        flexDirection: "row",
-        alignItems: 'center',
-        
-      }}>
-        <Text style={{ color: "#8C8C8C",fontSize: 16, }}>{countryCode}</Text>
-        <Image source={require('../../images/register/down_arrow.png')} style={{height:16,width:16}}/>
+      type === 'phone' && <TouchableOpacity  onPress={onPhoneIconPress} style={styles.phoneContainer}>
+        <Text style={styles.phoneText}>{countryCode}</Text>
+        <Image source={require('../../images/register/down_arrow.png')} style={styles.downArrow} />
       </TouchableOpacity>
       }
       <TextInput
-        style={[styles.textInput, { paddingRight: rightImageSource ? 50 : 20 }, type === 'phone' && {width:'82%',paddingLeft:10}]}
+        style={[
+          styles.textInput, 
+          rightImageSource ? styles.textInputWithRightIcon : styles.textInputWithoutRightIcon,
+          type === 'phone' && styles.phoneTextInput
+        ]}
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
@@ -109,8 +109,29 @@ const styles = StyleSheet.create({
     fontSize: 16,
     height: 64,
     paddingLeft: 20,
-    paddingRight: 20,
     width: "95%",
+  },
+  textInputWithRightIcon: {
+    paddingRight: 50,
+  },
+  textInputWithoutRightIcon: {
+    paddingRight: 20,
+  },
+  phoneTextInput: {
+    width: '82%',
+    paddingLeft: 10,
+  },
+  phoneContainer: {
+    flexDirection: "row",
+    alignItems: 'center',
+  },
+  phoneText: {
+    color: "#8C8C8C",
+    fontSize: 16,
+  },
+  downArrow: {
+    height: 16,
+    width: 16,
   },
 })
 

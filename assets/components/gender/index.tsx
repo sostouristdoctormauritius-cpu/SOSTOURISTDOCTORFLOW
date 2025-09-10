@@ -4,6 +4,9 @@ import { List } from "react-native-paper"
 type GenderSelectProps = {
   onGenderSelect: (gender: string) => void
 }
+
+const LeftIcon = (props: any) => <List.Icon {...props} icon="folder" />
+
 const GenderSelect = ({ onGenderSelect }: GenderSelectProps) => {
   const [expanded, setExpanded] = React.useState(true)
 
@@ -13,7 +16,7 @@ const GenderSelect = ({ onGenderSelect }: GenderSelectProps) => {
     // <List.Section title="Accordions">
     <List.Accordion
       title="Please select your gender"
-      left={(props) => <List.Icon {...props} icon="folder" />}
+      left={LeftIcon}
       expanded={expanded}
       onPress={handlePress}
     >

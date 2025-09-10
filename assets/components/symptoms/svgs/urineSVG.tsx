@@ -1,5 +1,12 @@
 import * as React from "react"
+import { StyleSheet } from "react-native"
 import Svg, { G, Mask, Path } from "react-native-svg"
+
+const styles = StyleSheet.create({
+  mask: {
+    maskType: "luminance",
+  },
+})
 
 function UrineSVG(props) {
   return (
@@ -97,9 +104,7 @@ function UrineSVG(props) {
       />
       <Mask
         id="a"
-        style={{
-          maskType: "luminance",
-        }}
+        style={styles.mask}
         maskUnits="userSpaceOnUse"
         x={50}
         y={17}

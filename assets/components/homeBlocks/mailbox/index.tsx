@@ -24,12 +24,12 @@ const Mailbox = () => {
     }
 
     // Get all channels user is part of
-    const channels = StreamChatInstance.queryChannels({
+    const channelsQuery = StreamChatInstance.queryChannels({
       members: { $in: [StreamChatInstance.userID] },
     })
 
     // Sum unread counts across all channels
-    channels.then((channels) => {
+    channelsQuery.then((channels) => {
       const totalUnread = channels.reduce(
         (acc, channel) => acc + (channel.state.unreadCount || 0),
         0,
@@ -65,13 +65,13 @@ const Mailbox = () => {
       <View>
         <View style={styles.iconContainer}>
           <TouchableOpacity style={styles.btnView} onPress={onChatPressed}>
-            <Text preset="screenHeader" style={{ color: "#2FB645" }}>
+            <Text preset="screenHeader" style={styles.countText}>
               {unreadCount}
             </Text>
             <MessageCircleMore size={50} color="#000" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.btnView} onPress={onVideoPressed}>
-            <Text preset="screenHeader" style={{ color: "#2FB645" }}>
+            <Text preset="screenHeader" style={styles.countText}>
               {incomingCall ? 1 : 0}
             </Text>
             <Video size={50} color="#000" />
@@ -104,6 +104,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     width: "40%",
+  },
+  countText: {
+    color: "#2FB645",
   },
   iconContainer: {
     alignItems: "center",

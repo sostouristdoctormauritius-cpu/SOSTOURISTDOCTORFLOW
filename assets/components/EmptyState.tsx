@@ -144,10 +144,10 @@ export function EmptyState(props: EmptyStateProps) {
     contentStyle: $contentStyleOverride,
     headingStyle: $headingStyleOverride,
     imageStyle: $imageStyleOverride,
-    ButtonProps,
-    ContentTextProps,
-    HeadingTextProps,
-    ImageProps,
+    ButtonProps: buttonProps,
+    ContentTextProps: contentTextProps,
+    HeadingTextProps: headingTextProps,
+    ImageProps: imageProps,
   } = props
 
   const isImagePresent = !!imageSource
@@ -160,31 +160,31 @@ export function EmptyState(props: EmptyStateProps) {
     $image,
     (isHeadingPresent || isContentPresent || isButtonPresent) && { marginBottom: spacing.xxxs },
     $imageStyleOverride,
-    ImageProps?.style,
+    imageProps?.style,
   ]
   const $headingStyles = [
     $heading,
     isImagePresent && { marginTop: spacing.xxxs },
     (isContentPresent || isButtonPresent) && { marginBottom: spacing.xxxs },
     $headingStyleOverride,
-    HeadingTextProps?.style,
+    headingTextProps?.style,
   ]
   const $contentStyles = [
     $content,
     (isImagePresent || isHeadingPresent) && { marginTop: spacing.xxxs },
     isButtonPresent && { marginBottom: spacing.xxxs },
     $contentStyleOverride,
-    ContentTextProps?.style,
+    contentTextProps?.style,
   ]
   const $buttonStyles = [
     (isImagePresent || isHeadingPresent || isContentPresent) && { marginTop: spacing.xl },
     $buttonStyleOverride,
-    ButtonProps?.style,
+    buttonProps?.style,
   ]
 
   return (
     <View style={$containerStyles}>
-      {isImagePresent && <Image source={imageSource} {...ImageProps} style={$imageStyles} />}
+      {isImagePresent && <Image source={imageSource} {...imageProps} style={$imageStyles} />}
 
       {isHeadingPresent && (
         <Text
@@ -192,7 +192,7 @@ export function EmptyState(props: EmptyStateProps) {
           text={heading}
           tx={headingTx}
           txOptions={headingTxOptions}
-          {...HeadingTextProps}
+          {...headingTextProps}
           style={$headingStyles}
         />
       )}
@@ -202,7 +202,7 @@ export function EmptyState(props: EmptyStateProps) {
           text={content}
           tx={contentTx}
           txOptions={contentTxOptions}
-          {...ContentTextProps}
+          {...contentTextProps}
           style={$contentStyles}
         />
       )}
@@ -214,7 +214,7 @@ export function EmptyState(props: EmptyStateProps) {
           tx={buttonTx}
           txOptions={buttonTxOptions}
           textStyle={$buttonTextStyleOverride}
-          {...ButtonProps}
+          {...buttonProps}
           style={$buttonStyles}
         />
       )}

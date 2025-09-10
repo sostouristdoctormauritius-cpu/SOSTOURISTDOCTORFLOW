@@ -47,12 +47,12 @@ const PrivacyWarningModal: React.FC<PrivacyWarningModalProps> = ({ showModal, on
 
           <View style={styles.buttonContainer}>
             <Button
-              style={[styles.button, { marginRight: 8 }]}
+              style={styles.learnMoreButton}
               preset="grey"
               tx="common.learnMore"
               onPress={onLearnMorePressed}
             />
-            <Button style={styles.button} preset="primary" tx="common.ok" onPress={onClose} />
+            <Button style={styles.okButton} preset="primary" tx="common.ok" onPress={onClose} />
           </View>
         </View>
       </View>
@@ -82,12 +82,19 @@ const styles = StyleSheet.create({
   icon: {
     marginTop: 8,
   },
+  learnMoreButton: {
+    flex: 1,
+    marginRight: 8,
+  },
   modalView: {
     alignItems: "center",
     backgroundColor: "white",
     borderRadius: 48,
     padding: 32,
     width: "100%",
+  },
+  okButton: {
+    flex: 1,
   },
   title: {
     marginTop: 32,

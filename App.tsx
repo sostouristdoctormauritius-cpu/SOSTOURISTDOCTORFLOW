@@ -1,9 +1,9 @@
 import React from 'react';
-import ShowcaseNavigator from './src/navigation/ShowcaseNavigator';
+import AppNavigator from './src/navigation/SimplifiedAppNavigator';
 
 function App() {
   return (
-    <ShowcaseNavigator />
+    <AppNavigator />
   );
 }
 

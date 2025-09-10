@@ -16,29 +16,15 @@ const NoInternetModal = ({ shouldShow = false }) => {
         <View style={styles.modalView}>
           <LottieView
             source={animation.noInternet}
-            style={{
-              height: HEIGHT / 4,
-              width: HEIGHT / 4,
-            }}
+            style={styles.lottieView}
             autoPlay
             loop
           />
 
-          <Text
-            style={{
-              fontSize: 18,
-              color: "red",
-            }}
-          >
+          <Text style={styles.titleText}>
             No Internet Connection!
           </Text>
-          <Text
-            style={{
-              fontSize: 10,
-              color: "gray",
-              textAlign: "center",
-            }}
-          >
+          <Text style={styles.subtitleText}>
             Please check your connection and try again.
           </Text>
 
@@ -72,6 +58,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  lottieView: {
+    height: HEIGHT / 4,
+    width: HEIGHT / 4,
+  },
+  titleText: {
+    fontSize: 18,
+    color: "red",
+  },
+  subtitleText: {
+    fontSize: 10,
+    color: "gray",
+    textAlign: "center",
   },
   openSettingsButton: {
     alignItems: "center",

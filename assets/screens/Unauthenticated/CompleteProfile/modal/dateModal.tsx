@@ -20,8 +20,8 @@ const DatePickerModal = ({ isVisible, onConfirm }) => {
     }
 
     // Age validation: Ensure age is at least 18
-    const today = dayjs()
-    const age = today.diff(selectedDateObj, "years")
+    const todayDate = dayjs()
+    const age = todayDate.diff(selectedDateObj, "years")
 
     if (age < 18) {
       return "You must be at least 18 years old."

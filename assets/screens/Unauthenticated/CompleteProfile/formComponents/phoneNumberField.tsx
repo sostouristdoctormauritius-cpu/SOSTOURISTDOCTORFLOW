@@ -3,7 +3,7 @@ import renderField from "app/components/formInput/renderField"
 import { translate } from "app/i18n"
 import { useStores } from "app/models"
 import React from "react"
-import { View } from "react-native"
+import { StyleSheet, View } from "react-native"
 type FieldProps = {
   control: any
   errors: any
@@ -16,7 +16,7 @@ const PhoneNumberField = ({ control,onPress,countryCode ,disable=true}: FieldPro
   const {} = useStores()
 
   return (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
+    <View style={styles.container}>
       <FormInputController
         control={control}
         rules={{
@@ -61,5 +61,12 @@ const PhoneNumberField = ({ control,onPress,countryCode ,disable=true}: FieldPro
 
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+})
 
 export default PhoneNumberField

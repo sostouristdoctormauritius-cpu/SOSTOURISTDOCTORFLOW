@@ -22,6 +22,15 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     width: relativeWidth(384),
   },
+  errorText: {
+    width: "80%",
+    top: -20,
+    justifyContent: 'center',
+    color: "red",
+    alignItems: "center",
+    fontSize: 15,
+    letterSpacing: 1,
+  },
   image: {
     height: 40,
     marginBottom: 70,
@@ -81,14 +90,7 @@ export default function ForgotPassword() {
           )}
           name="email"
         />
-        {errors.email && <Text style={{
-          width: "80%",
-          top: -20,
-          justifyContent: 'center',
-          color: "red",
-          alignItems: "center",
-          fontSize: 15, letterSpacing: 1
-        }}>{errors.email.message}</Text>}
+        {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
       </View>
       <GreenButton
         isSecondary

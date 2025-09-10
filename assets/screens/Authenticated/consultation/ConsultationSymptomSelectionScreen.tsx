@@ -83,7 +83,7 @@ export default function ConsultationSymtomSelection() {
       KeyboardAvoidingViewProps={{ enabled: false }}
       contentContainerStyle={$screenContentContainerStyle}
     >
-      <TouchableOpacity style={[$backButtonStyle,{zIndex:99999}]} onPress={onBackPressed}>
+      <TouchableOpacity style={[$backButtonStyle, $backButtonZIndex]} onPress={onBackPressed}>
         <BackButtonIcon width="28" height="28" />
       </TouchableOpacity>
       <Text
@@ -122,6 +122,10 @@ const $screenContentContainerStyle: ViewStyle = {
 
 const $backButtonStyle: ViewStyle = {
   alignSelf: "flex-start",
+}
+
+const $backButtonZIndex: ViewStyle = {
+  zIndex: 99999,
 }
 
 const $titleStyle: TextStyle = {

@@ -28,6 +28,15 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     width: relativeWidth(384),
   },
+  errorText: {
+    width: "80%",
+    top: -20,
+    justifyContent: 'center',
+    color: "red",
+    alignItems: "center",
+    fontSize: 15,
+    letterSpacing: 1
+  },
   flexRow: {
     flexDirection: "row",
   },
@@ -114,14 +123,7 @@ export default function UpdatePassword() {
           )}
           name="password"
         />
-        {errors.password && <Text style={{
-          width: "80%",
-          top: -20,
-          justifyContent: 'center',
-          color: "red",
-          alignItems: "center",
-          fontSize: 15, letterSpacing: 1
-        }}>{errors.password.message}</Text>}
+        {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
 
        <Controller
           control={control}
@@ -143,14 +145,7 @@ export default function UpdatePassword() {
           )}
           name="cpassword"
         />
-        {errors.cpassword && <Text style={{
-          width: "80%",
-          top: -20,
-          justifyContent: 'center',
-          color: "red",
-          alignItems: "center",
-          fontSize: 15, letterSpacing: 1
-        }}>{errors.cpassword.message}</Text>}
+        {errors.cpassword && <Text style={styles.errorText}>{errors.cpassword.message}</Text>}
       </View>
       <GreenButton
         isSecondary

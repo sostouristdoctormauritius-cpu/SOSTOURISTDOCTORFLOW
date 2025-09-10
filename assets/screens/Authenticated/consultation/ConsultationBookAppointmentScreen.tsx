@@ -11,7 +11,6 @@ import { SCREENS_CONSULTATION_CONFIRM_ORDER } from "app/constants/Screens"
 import { spacing } from "app/constants/spacing"
 import useGetAllAvailableSlots from "app/hook/api/useGetAllAvailableSlots"
 import { captureApiException } from "app/manager/Sentry"
-import { typography } from "app/theme"
 import { showTempNetworkErrorAlert } from "app/utils/sosUtils"
 import dayjs from "dayjs"
 import React, { useEffect, useState } from "react"
@@ -228,19 +227,15 @@ export default function ConsultationBookAppointmentScreen() {
                 onPress={() => setAppointmentTime(slot.time)}
                 style={[
                   styles.slotButton,
-                  {
-                    backgroundColor: appointmentTime === slot.time ? theme.colors.secondary : "#FFF",
-                    borderColor: theme.colors.secondary,
-                  },
+                  appointmentTime === slot.time ? styles.selectedSlotButton : styles.unselectedSlotButton,
+                  appointmentTime === slot.time ? styles.selectedSlotBackgroundColor : styles.unselectedSlotBackgroundColor,
                 ]}
               >
                 <Text
                   style={[
                     styles.slotButtonText,
-                    {
-                      color: appointmentTime === slot.time ? "#FFF" : theme.colors.secondary,
-                      fontFamily: typography.fonts.spaceGrotesk.bold,
-                    },
+                    appointmentTime === slot.time ? styles.selectedSlotButtonText : styles.unselectedSlotButtonText,
+                    appointmentTime === slot.time ? styles.selectedSlotTextColor : styles.unselectedSlotTextColor,
                   ]}
                 >
                   {slot.time}
@@ -308,9 +303,37 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     borderWidth: 1,
   },
+  selectedSlotButton: {
+    backgroundColor: "#FFF",
+  },
+  unselectedSlotButton: {
+    backgroundColor: "#FFF",
+  },
+  selectedSlotBackgroundColor: {
+    backgroundColor: "#30B549", // theme.colors.secondary
+    borderColor: "#30B549",
+  },
+  unselectedSlotBackgroundColor: {
+    backgroundColor: "#FFF",
+    borderColor: "#30B549",
+  },
   slotButtonText: {
     fontSize: 14,
     fontWeight: "700",
+  },
+  selectedSlotButtonText: {
+    color: "#FFF",
+  },
+  unselectedSlotButtonText: {
+    color: "#FFF", // This will be overridden in the component
+  },
+  selectedSlotTextColor: {
+    color: "#FFF",
+    fontFamily: "SpaceGrotesk-Bold",
+  },
+  unselectedSlotTextColor: {
+    color: "#30B549", // theme.colors.secondary
+    fontFamily: "SpaceGrotesk-Bold",
   },
   disabledBox: {
     alignItems: "center",

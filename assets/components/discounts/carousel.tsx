@@ -55,9 +55,9 @@ export const DiscountedOffersCarousel: FC<DiscountedOffersCarouselProps> = () =>
       <HeadingRow />
       <Carousel
         data={data}
-        renderItem={({ item, index }) => (
+        renderItem={({ item, index: itemIndex }) => (
           <DiscountCard
-            spa={index === 1}
+            spa={itemIndex === 1}
             description={item.description}
             heading={item.heading}
             discount={item.discount}

@@ -115,16 +115,16 @@ export function ListItem(props: ListItemProps) {
     rightIconColor,
     style,
     text,
-    TextProps,
+    TextProps: textProps,
     topSeparator,
     tx,
     txOptions,
     textStyle: $textStyleOverride,
     containerStyle: $containerStyleOverride,
-    ...TouchableOpacityProps
+    ...touchableProps
   } = props
 
-  const $textStyles = [$textStyle, $textStyleOverride, TextProps?.style]
+  const $textStyles = [$textStyle, $textStyleOverride, textProps?.style]
 
   const $containerStyles = [
     topSeparator && $separatorTop,
@@ -136,7 +136,7 @@ export function ListItem(props: ListItemProps) {
 
   return (
     <View style={$containerStyles}>
-      <TouchableOpacity {...TouchableOpacityProps} style={$touchableStyles}>
+      <TouchableOpacity {...touchableProps} style={$touchableStyles}>
         <ListItemAction
           side="left"
           size={height}
@@ -145,7 +145,7 @@ export function ListItem(props: ListItemProps) {
           Component={LeftComponent}
         />
 
-        <Text {...TextProps} tx={tx} text={text} txOptions={txOptions} style={$textStyles}>
+        <Text {...textProps} tx={tx} text={text} txOptions={txOptions} style={$textStyles}>
           {children}
         </Text>
 

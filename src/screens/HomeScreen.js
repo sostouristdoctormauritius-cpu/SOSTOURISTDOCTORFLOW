@@ -7,6 +7,7 @@ import {
 } from "react-native"
 import { useNavigation } from '@react-navigation/native';
 import { Button, Header } from '../components';
+import { navigation } from '../utils';
 
 const { width } = Dimensions.get("screen")
 
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
 })
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
+  const nav = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -90,7 +91,8 @@ export default function HomeScreen() {
       </View>
       
       <View style={styles.buttonContainer}>
-        <Button title="Logout" onPress={() => navigation.navigate('Welcome')} />
+        <Button title="Start Consultation" onPress={() => navigation.navigateToConsultation(nav)} />
+        <Button title="Logout" onPress={() => navigation.navigateToAuth(nav)} />
       </View>
     </View>
   );

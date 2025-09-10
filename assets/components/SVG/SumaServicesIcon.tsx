@@ -1,5 +1,12 @@
 import * as React from "react"
+import { StyleSheet } from "react-native"
 import Svg, { Defs, G, Image, Mask, Pattern, Rect, Use } from "react-native-svg"
+
+const styles = StyleSheet.create({
+  mask: {
+    maskType: "alpha",
+  },
+})
 
 function SumaServicesIcon(props) {
   return (
@@ -14,9 +21,7 @@ function SumaServicesIcon(props) {
     >
       <Mask
         id="a"
-        style={{
-          maskType: "alpha",
-        }}
+        style={styles.mask}
         maskUnits="userSpaceOnUse"
         x={0}
         y={0}

@@ -1,5 +1,12 @@
 import * as React from "react"
+import { StyleSheet } from "react-native"
 import Svg, { ClipPath, Defs, G, Mask, Path } from "react-native-svg"
+
+const styles = StyleSheet.create({
+  mask: {
+    maskType: "alpha",
+  },
+})
 
 function AllergySVG(props) {
   return (
@@ -21,9 +28,7 @@ function AllergySVG(props) {
       />
       <Mask
         id="a"
-        style={{
-          maskType: "alpha",
-        }}
+        style={styles.mask}
         maskUnits="userSpaceOnUse"
         x={9}
         y={9}
@@ -37,9 +42,7 @@ function AllergySVG(props) {
       </Mask>
       <G mask="url(#a)">
         <Mask
-          style={{
-            maskType: "alpha",
-          }}
+          style={styles.mask}
           maskUnits="userSpaceOnUse"
           x={12}
           y={17}

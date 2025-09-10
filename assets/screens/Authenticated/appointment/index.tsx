@@ -66,7 +66,7 @@ const AppointmentsScreen = observer(function AppointmentsScreen() {
   }
   if (isFetching) {
     return (
-      <View style={{flex:1, justifyContent: "center", alignItems: "center",backgroundColor:'#ffffff'}}>
+      <View style={$loadingContainer}>
         <ActivityIndicator size="large" color={colors.upcomingBackground} />
       </View>
     )
@@ -135,4 +135,11 @@ const $root: ViewStyle = {
   flex: 1,
   paddingTop: 30,
   backgroundColor: colors.background,
+}
+
+const $loadingContainer: ViewStyle = {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: '#ffffff',
 }

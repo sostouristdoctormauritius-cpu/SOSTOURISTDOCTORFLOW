@@ -1,7 +1,7 @@
 import { Text } from "app/components"
 import { typography } from "app/theme"
 import React from "react"
-import { TextStyle, View, ViewStyle } from "react-native"
+import { StyleSheet, View } from "react-native"
 
 const AppointmentStatusIndicator = ({
   status,
@@ -16,21 +16,16 @@ const AppointmentStatusIndicator = ({
 }) => (
   <View
     style={[
-      container,
-      {
-        backgroundColor,
-        borderWidth: hasBorder ? 1 : 0,
-        borderColor: hasBorder ? "#F98A8A" : "",
-      },
+      styles.container,
+      { backgroundColor },
+      hasBorder ? styles.border : styles.noBorder,
     ]}
   >
     <Text
       text={status}
       style={[
-        statusText,
-        {
-          color: textColor,
-        },
+        styles.statusText,
+        { color: textColor },
       ]}
     />
   </View>
@@ -38,15 +33,23 @@ const AppointmentStatusIndicator = ({
 
 export default AppointmentStatusIndicator
 
-const container: ViewStyle = {
-  width: 71,
-  height: 24,
-  borderRadius: 6,
-}
-
-const statusText: TextStyle = {
-  fontFamily: typography.primary.bold,
-  alignSelf: "center",
-  fontSize: 10,
-  letterSpacing: 0.2,
-}
+const styles = StyleSheet.create({
+  container: {
+    width: 71,
+    height: 24,
+    borderRadius: 6,
+  },
+  border: {
+    borderWidth: 1,
+    borderColor: "#F98A8A",
+  },
+  noBorder: {
+    borderWidth: 0,
+  },
+  statusText: {
+    fontFamily: typography.primary.bold,
+    alignSelf: "center",
+    fontSize: 10,
+    letterSpacing: 0.2,
+  },
+})

@@ -1,6 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+// Import page components
+import DashboardPage from '../pages/DashboardPage';
+import ConsultationFlowPage from '../pages/ConsultationFlowPage';
+
+// Import individual screens
 import HomeScreen from '../screens/HomeScreen';
 import BillingScreen from '../screens/BillingScreen';
 import ChatChannelListScreen from '../screens/ChatChannelListScreen';
@@ -14,12 +19,12 @@ import ThreadScreen from '../screens/ThreadScreen';
 import AppointmentCancellationScreen from '../screens/AppointmentCancellationScreen';
 import AppointmentScreen from '../screens/AppointmentScreen';
 import AddSymptomModal from '../screens/AddSymptomModal';
-import ConsultationBookAppointmentScreen from '../screens/ConsultationBookAppointmentScreen';
-import ConsultationChatOnboardingScreen from '../screens/ConsultationChatOnboardingScreen';
-import ConsultationEligibleDoctorsScreen from '../screens/ConsultationEligibleDoctorsScreen';
-import ConsultationOrderConfirmationScreen from '../screens/ConsultationOrderConfirmationScreen';
-import ConsultationPayAppointmentScreen from '../screens/ConsultationPayAppointmentScreen';
-import ConsultationSymptomSelectionScreen from '../screens/ConsultationSymptomSelectionScreen';
+import ConsultationBookAppointmentScreen from '../screens/consultation/ConsultationBookAppointmentScreen';
+import ConsultationChatOnboardingScreen from '../screens/consultation/ConsultationChatOnboardingScreen';
+import ConsultationEligibleDoctorsScreen from '../screens/consultation/ConsultationEligibleDoctorsScreen';
+import ConsultationOrderConfirmationScreen from '../screens/consultation/ConsultationOrderConfirmationScreen';
+import ConsultationPayAppointmentScreen from '../screens/consultation/ConsultationPayAppointmentScreen';
+import ConsultationSymptomSelectionScreen from '../screens/consultation/ConsultationSymptomSelectionScreen';
 import DoctorProfileModal from '../screens/DoctorProfileModal';
 import ErrorBoundary from '../screens/ErrorBoundary';
 import ErrorDetails from '../screens/ErrorDetails';
@@ -31,7 +36,9 @@ const Stack = createStackNavigator();
 
 function AuthenticatedStack() {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="DashboardPage">
+      <Stack.Screen name="DashboardPage" component={DashboardPage} options={{ headerShown: false }} />
+      <Stack.Screen name="ConsultationFlowPage" component={ConsultationFlowPage} options={{ headerShown: false }} />
       <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Billing" component={BillingScreen} options={{ headerShown: false }} />
       <Stack.Screen name="ChatChannelList" component={ChatChannelListScreen} options={{ headerShown: false }} />

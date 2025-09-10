@@ -12,9 +12,46 @@ import TabIconWithBadge from "../components/TabIconWithBadge"
 
 const Tab = createBottomTabNavigator()
 
+// Separate components for tabBarIcon to avoid unstable nested components
+const HomeTabIcon = ({ focused }: { focused: boolean }) => (
+  <TabBarIcon focused={focused} iconName="home" />
+)
+
+const AppointmentTabIcon = ({ focused }: { focused: boolean }) => {
+  const { appointmentStore } = useStores()
+  return (
+    <TabIconWithBadge
+      focused={focused}
+      iconName="appointment"
+      showBadge={appointmentStore?.hasNewAppointment || false}
+    />
+  )
+}
+
+const ChatTabIcon = ({ focused }: { focused: boolean }) => {
+  const { chatStore } = useStores()
+  return (
+    <TabIconWithBadge
+      focused={focused}
+      iconName="chat"
+      showBadge={(chatStore?.unreadCount || 0) > 0}
+    />
+  )
+}
+
+const VideoTabIcon = ({ focused }: { focused: boolean }) => {
+  const { videoStore } = useStores()
+  return (
+    <TabIconWithBadge
+      focused={focused}
+      iconName="view"
+      showBadge={videoStore?.hasUpcomingCall || false}
+    />
+  )
+}
+
 function AuthenticatedTabs() {
   const { bottom } = useSafeAreaInsets()
-  const { appointmentStore, chatStore, videoStore } = useStores()
 
   return (
     <Tab.Navigator
@@ -33,7 +70,7 @@ function AuthenticatedTabs() {
         component={Screens.HomeScreen}
         options={{
           tabBarLabel: "Home",
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} iconName="home" />,
+          tabBarIcon: HomeTabIcon,
         }}
       />
       <Tab.Screen
@@ -47,13 +84,7 @@ function AuthenticatedTabs() {
           tabBarLabel: "Appointment",
           headerStyle: { backgroundColor: '#ffffff' },
           headerTintColor: '#000000', // Change text color
-          tabBarIcon: ({ focused }) => (
-            <TabIconWithBadge
-              focused={focused}
-              iconName="appointment"
-              showBadge={appointmentStore?.hasNewAppointment || false}
-            />
-          ),
+          tabBarIcon: AppointmentTabIcon,
         }}
       />
       <Tab.Screen
@@ -61,13 +92,7 @@ function AuthenticatedTabs() {
         component={Screens.ChatChannelListScreen}
         options={{
           tabBarLabel: "Chat",
-          tabBarIcon: ({ focused }) => (
-            <TabIconWithBadge
-              focused={focused}
-              iconName="chat"
-              showBadge={(chatStore?.unreadCount || 0) > 0}
-            />
-          ),
+          tabBarIcon: ChatTabIcon,
         }}
       />
       <Tab.Screen
@@ -75,13 +100,7 @@ function AuthenticatedTabs() {
         component={Screens.VideoCallLobby}
         options={{
           tabBarLabel: "Video",
-          tabBarIcon: ({ focused }) => (
-            <TabIconWithBadge
-              focused={focused}
-              iconName="view"
-              showBadge={videoStore?.hasUpcomingCall || false}
-            />
-          ),
+          tabBarIcon: VideoTabIcon,
         }}
       />
       {/* <Tab.Screen */}

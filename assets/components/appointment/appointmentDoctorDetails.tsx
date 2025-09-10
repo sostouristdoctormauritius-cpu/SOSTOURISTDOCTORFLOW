@@ -1,7 +1,18 @@
 import { Text } from "app/components"
 import { colors, typography } from "app/theme"
 import React from "react"
-import { Dimensions, View, ViewStyle } from "react-native"
+import { Dimensions, StyleSheet, View, ViewStyle } from "react-native"
+
+const styles = StyleSheet.create({
+  symptomsLabel: {
+    color: colors.tabBarActiveBackgroundColor,
+    fontFamily: typography.primary.bold,
+  },
+  symptomsText: {
+    color: colors.consultationReasonDescription,
+    fontSize: 14,
+  },
+})
 
 const AppointmentDoctorDetails = ({ symptoms }: { symptoms: string }) => (
   <View style={doctorDetailsContainer}>
@@ -9,11 +20,11 @@ const AppointmentDoctorDetails = ({ symptoms }: { symptoms: string }) => (
     <View style={appointmentDetailsGreenContainer}>
       <Text
         text={`Symptoms: `}
-        style={{ color: colors.tabBarActiveBackgroundColor, fontFamily: typography.primary.bold }}
+        style={styles.symptomsLabel}
       />
       <Text
         text={`${symptoms}`}
-        style={{ color: colors.consultationReasonDescription, fontSize: 14 }}
+        style={styles.symptomsText}
       />
     </View>
   </View>

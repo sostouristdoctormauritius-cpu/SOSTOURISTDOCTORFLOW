@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
         height: 45,
         width: 65,
     },
+    otpLoader: {
+        marginTop: 8,
+    },
     resendButtonText: {
         color: '#000000',
         fontSize: 14,
@@ -210,7 +213,7 @@ export default function OtpVerify() {
                     defaultValue={otp}
                 />
                 {otpLoader ? (
-                    <ActivityIndicator color={'#30B549'} style={{ marginTop: 8 }} />
+                    <ActivityIndicator color={'#30B549'} style={styles.otpLoader} />
                 ) : (
                     <Text
                         onPress={() => {

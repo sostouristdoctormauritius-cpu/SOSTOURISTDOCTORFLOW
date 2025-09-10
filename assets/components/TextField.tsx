@@ -117,16 +117,16 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
     status,
     RightAccessory,
     LeftAccessory,
-    HelperTextProps,
-    LabelTextProps,
+    HelperTextProps: helperTextProps,
+    LabelTextProps: labelTextProps,
     style: $inputStyleOverride,
     containerStyle: $containerStyleOverride,
     inputWrapperStyle: $inputWrapperStyleOverride,
-    ...TextInputProps
+    ...textInputProps
   } = props
   const input = useRef<TextInput>(null)
 
-  const disabled = TextInputProps.editable === false || status === "disabled"
+  const disabled = textInputProps.editable === false || status === "disabled"
 
   const placeholderContent = placeholderTx
     ? translate(placeholderTx, placeholderTxOptions)
@@ -134,12 +134,12 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
 
   const $containerStyles = [$containerStyleOverride]
 
-  const $labelStyles = [$labelStyle, LabelTextProps?.style]
+  const $labelStyles = [$labelStyle, labelTextProps?.style]
 
   const $inputWrapperStyles = [
     $inputWrapperStyle,
     status === "error" && { borderColor: colors.error },
-    TextInputProps.multiline && { minHeight: 112 },
+    textInputProps.multiline && { minHeight: 112 },
     LeftAccessory && { paddingStart: 0 },
     RightAccessory && { paddingEnd: 0 },
     $inputWrapperStyleOverride,
@@ -149,14 +149,14 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
     $inputStyle,
     disabled && { color: colors.textDim },
     isRTL && { textAlign: "right" as TextStyle["textAlign"] },
-    TextInputProps.multiline && { height: "auto" },
+    textInputProps.multiline && { height: "auto" },
     $inputStyleOverride,
   ]
 
   const $helperStyles = [
     $helperStyle,
     status === "error" && { color: colors.error },
-    HelperTextProps?.style,
+    helperTextProps?.style,
   ]
 
   /**
@@ -185,7 +185,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
           text={label}
           tx={labelTx}
           txOptions={labelTxOptions}
-          {...LabelTextProps}
+          {...labelTextProps}
           style={$labelStyles}
         />
       )}
@@ -196,7 +196,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
             style={$leftAccessoryStyle}
             status={status}
             editable={!disabled}
-            multiline={TextInputProps.multiline ?? false}
+            multiline={textInputProps.multiline ?? false}
           />
         )}
 
@@ -206,7 +206,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
           textAlignVertical="top"
           placeholder={placeholderContent}
           placeholderTextColor={colors.textDim}
-          {...TextInputProps}
+          {...textInputProps}
           editable={!disabled}
           style={$inputStyles}
         />
@@ -216,7 +216,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
             style={$rightAccessoryStyle}
             status={status}
             editable={!disabled}
-            multiline={TextInputProps.multiline ?? false}
+            multiline={textInputProps.multiline ?? false}
           />
         )}
       </View>
@@ -227,7 +227,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
           text={helper}
           tx={helperTx}
           txOptions={helperTxOptions}
-          {...HelperTextProps}
+          {...helperTextProps}
           style={$helperStyles}
         />
       )}

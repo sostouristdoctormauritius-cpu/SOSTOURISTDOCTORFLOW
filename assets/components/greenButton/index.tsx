@@ -16,6 +16,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingTop: 10,
   },
+  loadingButton: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  loadingLabel: {
+    opacity: 0.5,
+  },
 })
 
 type GreenButtonProps = {
@@ -47,18 +54,13 @@ const GreenButton = ({
       style={[
         styles.button,
         buttonStyle,
-        isLoading && {
-          backgroundColor: defaultBgColor,
-          alignItems: "center",
-          justifyContent: "center",
-        },
+        isLoading && styles.loadingButton,
+        isLoading && { backgroundColor: defaultBgColor },
       ]}
       labelStyle={[
         styles.labelStyle,
         labelStyle,
-        isLoading && {
-          opacity: 0.5,
-        },
+        isLoading && styles.loadingLabel,
       ]}
       onPress={onPress}
       loading={isLoading}

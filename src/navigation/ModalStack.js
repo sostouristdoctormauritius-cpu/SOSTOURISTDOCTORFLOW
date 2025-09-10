@@ -6,6 +6,11 @@ import AuthenticatedStack from './AuthenticatedStack';
 import DoctorProfileModal from '../screens/DoctorProfileModal';
 import AddSymptomModal from '../screens/AddSymptomModal';
 
+// Import pages
+import LoginPage from '../pages/LoginPage';
+import DashboardPage from '../pages/DashboardPage';
+import ConsultationFlowPage from '../pages/ConsultationFlowPage';
+
 const ModalStack = createStackNavigator();
 
 // Modal screen options
@@ -24,8 +29,6 @@ const modalOptions = {
   cardStyle: { backgroundColor: 'transparent' },
 };
 
-
-
 function ModalStackScreen() {
   return (
     <ModalStack.Navigator screenOptions={modalOptions}>
@@ -40,10 +43,23 @@ function ModalStackScreen() {
         component={AddSymptomModal} 
         options={modalScreenOptions}
       />
+      <ModalStack.Screen 
+        name="LoginPage" 
+        component={LoginPage} 
+        options={{ headerShown: false }}
+      />
+      <ModalStack.Screen 
+        name="DashboardPage" 
+        component={DashboardPage} 
+        options={{ headerShown: false }}
+      />
+      <ModalStack.Screen 
+        name="ConsultationFlowPage" 
+        component={ConsultationFlowPage} 
+        options={{ headerShown: false }}
+      />
     </ModalStack.Navigator>
   );
 }
-
-
 
 export default ModalStackScreen;

@@ -30,12 +30,8 @@ const Symptom = ({ id, title, SymptomIcon, onSymptomPressed }: SymptomProps) => 
         <View
           style={[
             styles.wrapper,
-            isSelected && {
-              borderColor: theme.colors.secondary,
-              borderWidth:  3,
-              padding:0,
-              zIndex: 9999999,
-            },
+            isSelected && styles.selectedWrapper,
+            isSelected && { borderColor: theme.colors.secondary },
           ]}
         >
           <SymptomIcon />
@@ -70,6 +66,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     overflow: "hidden",
     width: SIZE,
+  },
+  selectedWrapper: {
+    borderColor: "#FFF", // This will be overridden in the component
+    borderWidth: 3,
+    padding: 0,
+    zIndex: 9999999,
   },
 })
 

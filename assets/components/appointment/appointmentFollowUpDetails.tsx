@@ -4,7 +4,19 @@ import SlotTimeIcon from "app/components/SVG/SlotTimeIcon"
 import Colors from "app/constants/Colors"
 import { colors, typography } from "app/theme"
 import React from "react"
-import { TextStyle, View, ViewStyle } from "react-native"
+import { StyleSheet, TextStyle, View, ViewStyle } from "react-native"
+
+const styles = StyleSheet.create({
+  appointmentDetailsDateDark: {
+    ...$appointmentDetailsDateLabel,
+    color: Colors.appointmentDetailsDateDark,
+  },
+  appointmentDetailsTime: {
+    ...$appointmentDetailsDateLabel,
+    color: Colors.iconWarningTint,
+    marginBottom: 0,
+  },
+})
 
 const AppointmentFollowUpDetails = () => (
   <View style={followUpContainer}>
@@ -13,10 +25,7 @@ const AppointmentFollowUpDetails = () => (
       <CalendarIcon width={40} height={40} />
       <View style={$appointmentDetailsMiddleSection}>
         <Text
-          style={{
-            ...$appointmentDetailsDateLabel,
-            color: Colors.appointmentDetailsDateDark,
-          }}
+          style={styles.appointmentDetailsDateDark}
           preset="description"
           text="Today 24, December 2023"
         />
@@ -24,11 +33,7 @@ const AppointmentFollowUpDetails = () => (
       <View style={$timeSlotContainer}>
         <SlotTimeIcon style={slotTimeIcon} width={16} height={16} />
         <Text
-          style={{
-            ...$appointmentDetailsDateLabel,
-            color: Colors.iconWarningTint,
-            marginBottom: 0,
-          }}
+          style={styles.appointmentDetailsTime}
           preset="description"
           text="9:00 PM"
         />

@@ -63,7 +63,7 @@ export function useAutoImage(
  * @returns {JSX.Element} The rendered `AutoImage` component.
  */
 export function AutoImage(props: AutoImageProps) {
-  const { maxWidth, maxHeight, ...ImageProps } = props
+  const { maxWidth, maxHeight, ...imageProps } = props
   const source = props.source as ImageURISource
 
   const [width, height] = useAutoImage(
@@ -74,5 +74,5 @@ export function AutoImage(props: AutoImageProps) {
     [maxWidth, maxHeight],
   )
 
-  return <Image {...ImageProps} style={[{ width, height }, props.style]} />
+  return <Image {...imageProps} style={[{ width, height }, props.style]} />
 }

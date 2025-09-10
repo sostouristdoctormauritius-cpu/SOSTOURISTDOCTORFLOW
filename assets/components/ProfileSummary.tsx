@@ -23,34 +23,21 @@ export const ProfileSummary = observer(function ProfileSummary(props: ProfileSum
       <View>
         <Text
           text={profile.name}
-          style={{
-            fontSize: 16,
-            fontFamily: typography.primary.bold,
-          }}
+          style={[$nameText, { fontFamily: typography.primary.bold }]}
         />
-        <View style={{ flexDirection: "row" }}>
-          <Text style={{ marginRight: 12 }}>
+        <View style={$rowContainer}>
+          <Text style={$marginRight}>
             <Text text="Gender: " style={$text} />
             <Text
               text={`${profile.profile.gender}`}
-              style={[
-                $text,
-                {
-                  fontFamily: typography.primary.normal,
-                },
-              ]}
+              style={[$text, $normalFont]}
             />
           </Text>
           <Text>
             <Text text="Age: " style={$text} />
             <Text
               text={`${age(profile.profile.date_of_birth)}`}
-              style={[
-                $text,
-                {
-                  fontFamily: typography.primary.normal,
-                },
-              ]}
+              style={[$text, $normalFont]}
             />
           </Text>
         </View>
@@ -58,12 +45,7 @@ export const ProfileSummary = observer(function ProfileSummary(props: ProfileSum
           <Text text="Spoken Language: " style={$text} />
           <Text
             text={`${profile.profile.device_language}`}
-            style={[
-              $text,
-              {
-                fontFamily: typography.primary.normal,
-              },
-            ]}
+            style={[$text, $normalFont]}
           />
         </Text>
       </View>
@@ -93,6 +75,22 @@ const $text: TextStyle = {
   fontFamily: typography.primary.bold,
   fontSize: 12,
   color: colors.descriptionText,
+}
+
+const $nameText: TextStyle = {
+  fontSize: 16,
+}
+
+const $rowContainer: ViewStyle = {
+  flexDirection: "row",
+}
+
+const $marginRight: ViewStyle = {
+  marginRight: 12,
+}
+
+const $normalFont: TextStyle = {
+  fontFamily: typography.primary.normal,
 }
 
 const avatarContainer: ViewStyle = {

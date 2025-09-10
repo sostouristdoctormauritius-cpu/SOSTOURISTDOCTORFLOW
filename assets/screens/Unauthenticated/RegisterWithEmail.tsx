@@ -26,6 +26,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: relativeWidth(384),
   },
+  errorText: {
+    width: "80%",
+    top: -20,
+    justifyContent: 'center',
+    color: "red",
+    alignItems: "center",
+    fontSize: 15,
+    letterSpacing: 1
+  },
+  greenButton: {
+    height: 50,
+    padding: 0,
+    width: '80%',
+    marginTop: 20
+  },
   image: {
     height: 40,
     marginBottom: 70,
@@ -66,8 +81,8 @@ export default function RegisterWithEmail() {
 
     console.log('emailemail',email);
     emailVerifyMutation.mutate({ email:email }, {
-      onSuccess: (data) => {
-        console.log('emailVerifyMutation Data from server:123', data); // ✅ you get the response here
+      onSuccess: (response) => {
+        console.log('emailVerifyMutation Data from server:123', response); // ✅ you get the response here
       },
       onError: (error) => {
         console.error('emailVerifyMutation Error registering user:', error);
@@ -110,15 +125,7 @@ export default function RegisterWithEmail() {
           name={"email"}
         />
 
-        {errors.email && <Text style={{
-          width: "80%",
-          top: -20,
-          justifyContent: 'center',
-          color: "red",
-          alignItems: "center",
-          fontSize: 15,
-          letterSpacing: 1
-        }}>{errors.email.message}</Text>}
+        {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
         {/* <FormInputController
           control={control}
           rules={minLengthRule}
@@ -151,7 +158,7 @@ export default function RegisterWithEmail() {
       </View>
       <GreenButton
         isSecondary
-        buttonStyle={{ height: 50, padding: 0, width: '80%', marginTop: 20 }}
+        buttonStyle={styles.greenButton}
         onPress={handleSubmit(onPressSignUp)}
         isLoading={emailVerifyMutation.isPending}
         buttonTitle={translate("registerWithEmailScreen.nexttxt", {

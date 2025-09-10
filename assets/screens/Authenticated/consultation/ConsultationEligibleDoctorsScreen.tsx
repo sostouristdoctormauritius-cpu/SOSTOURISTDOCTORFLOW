@@ -109,13 +109,13 @@ export default function ConsultationEligibleDoctorsScreen() {
     >
       {
         getAllDocsMtx.isPending ? (
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <View style={styles.$loadingContainer}>
             <ActivityIndicator size={'large'} color={Colors.buttonPrimaryBackground} />
           </View>
         )
           :
           <>
-            <View style={{ flexDirection: 'row', justifyContent: "space-between", width: "100%" }}>
+            <View style={styles.$headerContainer}>
               <TouchableOpacity onPress={onBackPressed}>
                 <BackButtonIcon width="28" height="28" />
               </TouchableOpacity>
@@ -155,7 +155,7 @@ export default function ConsultationEligibleDoctorsScreen() {
                 estimatedItemSize={10}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ paddingBottom: 90 }}
+                contentContainerStyle={styles.$flashListContentContainer}
                 data={doctors}
               />
               <Button
@@ -197,6 +197,19 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.rowSeparator,
     height: 0.5,
     width: "100%",
+  },
+  $flashListContentContainer: {
+    paddingBottom: 90,
+  },
+  $headerContainer: {
+    flexDirection: 'row',
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  $loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   $screenContentContainerStyle: {
     alignItems: "center",

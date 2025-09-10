@@ -40,7 +40,7 @@ export interface AppointmentListItemProps {
  */
 const AppointmentListItem = observer(function AppointmentListItem(props: AppointmentListItemProps) {
   const {
-    appointmentStatus,
+    appointmentStatus: appointmentStatusProp,
     avatarSource,
     consultationType,
     date,
@@ -54,8 +54,8 @@ const AppointmentListItem = observer(function AppointmentListItem(props: Appoint
     TouchableOpacityProps | ViewProps
   >
 
-  const consultationTypeIcon = (consultationType: string) => {
-    switch (consultationType) {
+  const consultationTypeIcon = (consultationTypeParam: string) => {
+    switch (consultationTypeParam) {
       case ConsultationType.Home:
         return <HomeVisitSVG width={24} height={24} style={margin} />
       case ConsultationType.Video:
@@ -88,7 +88,7 @@ const AppointmentListItem = observer(function AppointmentListItem(props: Appoint
             <Text style={consultationTypeText}>{consultationType}</Text>
           </View>
         </View>
-        <AppointmentStatus appointmentStatus={appointmentStatus} style={appointmentStatusView} />
+        <AppointmentStatus appointmentStatus={appointmentStatusProp} style={appointmentStatusView} />
       </View>
     </Wrapper>
   )

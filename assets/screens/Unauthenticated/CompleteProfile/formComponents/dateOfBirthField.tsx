@@ -2,7 +2,7 @@ import FormInputController from "app/components/formInput"
 import renderField from "app/components/formInput/renderField"
 import { translate } from "app/i18n"
 import React from "react"
-import { View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 
 type FieldProps = {
@@ -15,17 +15,11 @@ const DateOfBirthField = ({ control, selectedDate, onPress }: FieldProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={{
-        height: 64,
-        width: "100%",
-        marginBottom: 20,
-      }}
+      style={styles.container}
     >
       <View
         pointerEvents={"none"}
-        style={{
-          width: "100%",
-        }}
+        style={styles.fieldContainer}
       >
         <FormInputController
           control={control}
@@ -48,5 +42,16 @@ const DateOfBirthField = ({ control, selectedDate, onPress }: FieldProps) => {
     </TouchableOpacity>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: 64,
+    width: "100%",
+    marginBottom: 20,
+  },
+  fieldContainer: {
+    width: "100%",
+  },
+})
 
 export default DateOfBirthField

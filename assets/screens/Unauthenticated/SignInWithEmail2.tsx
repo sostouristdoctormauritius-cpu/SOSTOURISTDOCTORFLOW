@@ -34,31 +34,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     width: relativeWidth(384),
   },
-  flexRow: {
-    flexDirection: "row",
-  },
-  image: {
-    height: 40,
-    marginBottom: 70,
-    marginTop: 15,
-    width: 230,
-  },
-  noAccText: {
-    fontSize: 18,
-  },
-  textForgot: {
-    fontSize: 16,
-    fontWeight: FontWeight.semibold,
-  },
-  textStyle: {
-    marginBottom: 35,
-  },
-  roundedView: {
-    borderColor: "#c8c8c8",
-    borderRadius: 50,
-    borderWidth: 1,
-    overflow: "hidden",
-  },
   errorText: {
     width: "80%",
     top: -20,
@@ -68,28 +43,18 @@ const styles = StyleSheet.create({
     fontSize: 15,
     letterSpacing: 1,
   },
-  radioContainer: {
+  flexRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: 'center'
   },
-  radioOption: {
-    flexDirection: "row",
-    alignItems: 'center',
-    marginHorizontal: 5
+  greenButton: {
+    width: '80%',
+    marginTop: 50,
   },
-  radioImage: {
-    height: 20,
-    width: 20,
-  },
-  radioText: {
-    color: '#000000',
-    fontSize: 12,
-    marginLeft:2,
-    fontWeight: '700',
-  },
-  signUpText: {
-    fontWeight: FontWeight.bold,
+  image: {
+    height: 40,
+    marginBottom: 70,
+    marginTop: 15,
+    width: 230,
   },
   inputBox: {
     backgroundColor: 'transparent',
@@ -101,11 +66,62 @@ const styles = StyleSheet.create({
     height: 45,
     width: 65,
   },
+  noAccText: {
+    fontSize: 18,
+  },
+  radioContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: 'center'
+  },
+  radioContainerWithMargin: {
+    marginTop: 15,
+  },
+  radioContainerWrapper: {
+    width: '78%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  radioImage: {
+    height: 20,
+    width: 20,
+  },
+  radioOption: {
+    flexDirection: "row",
+    alignItems: 'center',
+    marginHorizontal: 5
+  },
+  radioText: {
+    color: '#000000',
+    fontSize: 12,
+    marginLeft:2,
+    fontWeight: '700',
+  },
   resendButtonText: {
     color: '#000000',
     fontSize: 12,
     fontWeight: '700',
     textAlign: 'right',
+  },
+  roundedView: {
+    borderColor: "#c8c8c8",
+    borderRadius: 50,
+    borderWidth: 1,
+    overflow: "hidden",
+  },
+  signUpText: {
+    fontWeight: FontWeight.bold,
+  },
+  textForgot: {
+    fontSize: 16,
+    fontWeight: FontWeight.semibold,
+  },
+  textStyle: {
+    marginBottom: 35,
+  },
+  usernameText: {
+    textAlign: 'center',
+    marginBottom: 15,
   },
 })
 
@@ -281,8 +297,8 @@ export default function SignInWithEmail() {
       />
       <Text tx="signInWithEmailScreen.title" preset="heading" size="xl" style={styles.textStyle} />
       <View style={styles.content}>
-        {route?.params?.type === 'mobile' ? <Text style={{ textAlign: 'center', marginBottom: 15 }}>{translate("signInWithEmailScreen.phoneNumber")} {'\n'} {route?.params?.username}</Text> :
-          <Text style={{ textAlign: 'center', marginBottom: 15 }}>{translate("signInWithEmailScreen.emailAddress")} {'\n'} {route?.params?.username}</Text>}
+        {route?.params?.type === 'mobile' ? <Text style={styles.usernameText}>{translate("signInWithEmailScreen.phoneNumber")} {'\n'} {route?.params?.username}</Text> :
+          <Text style={styles.usernameText}>{translate("signInWithEmailScreen.emailAddress")} {'\n'} {route?.params?.username}</Text>}
 
         {
           isPasswordOrOtp === 'password' ?
@@ -318,7 +334,7 @@ export default function SignInWithEmail() {
             </>
         }
       </View>
-      <View style={{ width: '78%', flexDirection: "row", justifyContent: "space-between",marginTop:isPasswordOrOtp !== 'password'?15:0 }}>
+      <View style={[styles.radioContainerWrapper, isPasswordOrOtp !== 'password' && styles.radioContainerWithMargin]}>
         {renderRadioBtn()}
         {isPasswordOrOtp === 'password' ?
           <Text
@@ -344,7 +360,7 @@ export default function SignInWithEmail() {
       </View>
       <GreenButton
         isSecondary
-        buttonStyle={{width:'80%',marginTop:50}}
+        buttonStyle={styles.greenButton}
         onPress={() => { isPasswordOrOtp === 'password' ? onPressSignIn() : onPressVerfyOtp() }}
         buttonTitle={translate("signInWithEmailScreen.login", { defaultValue: "Sign up" })}
       />

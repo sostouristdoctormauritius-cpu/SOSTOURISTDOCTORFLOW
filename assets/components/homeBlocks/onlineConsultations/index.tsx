@@ -73,6 +73,15 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 14,
   },
+  hidden: {
+    display: 'none',
+  },
+  docTop: {
+    top: 2,
+  },
+  docBottom: {
+    bottom: -15,
+  },
 })
 
 const OnlineConsultation = () => {
@@ -100,7 +109,7 @@ const OnlineConsultation = () => {
 
   return (
     <View style={styles.blockContainer}>
-      <View style={{display: 'none'}}><Text tx="homeScreen.title" size="lg" weight="bold" style={styles.textStyle} /></View>
+      <View style={styles.hidden}><Text tx="homeScreen.title" size="lg" weight="bold" style={styles.textStyle} /></View>
       <View style={styles.content}>
         <TouchableOpacity onPress={onNavigateToVideoConsultation}>
           <ImageBackground source={require("app/images/home/videoBackground.png")} style={styles.bloc}>
@@ -115,7 +124,7 @@ const OnlineConsultation = () => {
                 />
               </View>
             </View>
-            <View style={{display: 'none'}}><AutoImage style={[styles.doc, { top: 2 }]} source={require("app/images/home/docVideo.png")} /></View>
+            <View style={styles.hidden}><AutoImage style={[styles.doc, styles.docTop]} source={require("app/images/home/docVideo.png")} /></View>
           </ImageBackground>
         </TouchableOpacity>
 
@@ -137,9 +146,9 @@ const OnlineConsultation = () => {
                 />
               </View>
             </View>
-            <View style={{display: 'none'}}><AutoImage
+            <View style={styles.hidden}><AutoImage
               resizeMode="cover"
-              style={[styles.doc, { bottom: -15 }]}
+              style={[styles.doc, styles.docBottom]}
               source={require("app/images/home/docChat.png")}
             /></View>
           </ImageBackground>

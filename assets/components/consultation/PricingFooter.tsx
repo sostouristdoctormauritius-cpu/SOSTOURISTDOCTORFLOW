@@ -1,11 +1,18 @@
 import React from "react"
-import { TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
+import { StyleSheet, TextStyle, TouchableOpacity, View, ViewStyle } from "react-native"
 import { Text } from "../Text"
 import Colors from "app/constants/Colors"
 import { ConsultationType } from "app/constants/GlobalTypes"
 import { TxKeyPath, translate } from "app/i18n"
 import { useStores } from "app/models"
 
+const styles = StyleSheet.create({
+  continueButtonText: {
+    color: "white",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+})
 
 const config = {
   [ConsultationType.Chat]: {
@@ -73,11 +80,7 @@ const PricingFooter: React.FC<PricingFooterProps> = ({
         </View>
         
         <TouchableOpacity   onPress={onPress} style={[$buttonSize, disabled && { backgroundColor: Colors.buttonDisabledText }]}>
-          <Text style={{
-            color: "white",
-            fontSize: 14,
-            fontWeight: "bold",
-          }}>{continueLabelTx || translate("common.continue")}</Text>
+          <Text style={styles.continueButtonText}>{continueLabelTx || translate("common.continue")}</Text>
         </TouchableOpacity>
       </View>
     </>

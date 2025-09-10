@@ -43,7 +43,7 @@ const AppointmentCancellationScreen: FC<AppointmentCancellationScreenProps> = ob
             btnStyle={$marginTop48}
             onPress={() => navigation.navigate(SCREENS_VIEW_PDF as never)}
             textContent={translate("appointment.cancellationPolicies")}
-            txtStyle={[$linkText, { fontSize: 16 }]}
+            txtStyle={[$linkText, $fontSize16]}
           />
         </View>
       </Screen>
@@ -82,6 +82,10 @@ const $linkText: TextStyle = {
   fontFamily: typography.primary.bold,
   textDecorationLine: "underline",
   color: colors.descriptionText,
+}
+
+const $fontSize16: TextStyle = {
+  fontSize: 16,
 }
 
 export default AppointmentCancellationScreen
