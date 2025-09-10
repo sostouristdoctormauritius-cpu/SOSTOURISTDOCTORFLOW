@@ -6,7 +6,7 @@ export const DOCTORS = [
     rating: 4.8,
     experience: "10 years",
     fee: 200,
-    image: require('../assets/images/doctor1.png'), // Placeholder
+    image: require('../assets/images/profile.png'), // Placeholder
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const DOCTORS = [
     rating: 4.9,
     experience: "8 years",
     fee: 150,
-    image: require('../assets/images/doctor2.png'), // Placeholder
+    image: require('../assets/images/profile.png'), // Placeholder
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export const DOCTORS = [
     rating: 4.7,
     experience: "12 years",
     fee: 180,
-    image: require('../assets/images/doctor3.png'), // Placeholder
+    image: require('../assets/images/profile.png'), // Placeholder
   },
 ];
 

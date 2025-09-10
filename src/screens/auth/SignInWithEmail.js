@@ -95,6 +95,16 @@ const styles = StyleSheet.create({
     height: 24,
     marginRight: 10,
   },
+  lockIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+  eyeIcon: {
+    width: 24,
+    height: 24,
+    marginLeft: 10,
+  },
   logo: {
     height: 50,
     width: 250,
@@ -108,6 +118,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: "80%",
   },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  linkText: {
+    fontWeight: "bold",
+    color: "blue",
+  },
 })
 
 export default function SignInWithEmail() {
@@ -116,13 +134,13 @@ export default function SignInWithEmail() {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../../assets/images/logo.png")}
+        source={require("../../../assets/images/logo.png")}
       />
       <Text style={styles.textStyle}>Sign In</Text>
       <View style={styles.content}>
         <View style={styles.textInputContainer}>
           <Image 
-            source={require("../../assets/images/envelope.png")} 
+            source={require("../../../assets/images/envelope.png")} 
             style={styles.envelopeIcon} 
           />
           <TextInput
@@ -133,7 +151,7 @@ export default function SignInWithEmail() {
         </View>
         <View style={styles.textInputContainer}>
           <Image 
-            source={require("../../assets/images/lock.png")} 
+            source={require("../../../assets/images/lock.png")} 
             style={styles.lockIcon} 
           />
           <TextInput
@@ -143,7 +161,7 @@ export default function SignInWithEmail() {
           />
           <TouchableOpacity>
             <Image 
-              source={require("../../assets/images/eye-crossed.png")} 
+              source={require("../../../assets/images/eye-crossed.png")}
               style={styles.eyeIcon} 
             />
           </TouchableOpacity>

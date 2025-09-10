@@ -8,19 +8,19 @@ const DATA = [
     id: "1",
     title: "Instant Online Consultation",
     description: "Connect with doctors instantly through secure chat or video calls.",
-    centerImage: require("../../assets/images/instantOnline.png"),
+    centerImage: require("../assets/images/instantOnline.png"),
   },
   {
     id: "2",
     title: "E-Prescription",
     description: "Receive digital prescriptions directly on your phone after consultation.",
-    centerImage: require("../../assets/images/ePrescription.png"),
+    centerImage: require("../assets/images/ePrescription.png"),
   },
   {
     id: "3",
     title: "Home Visit",
     description: "Request a doctor to visit you at your home or preferred location.",
-    centerImage: require("../../assets/images/homeVisit.png"),
+    centerImage: require("../assets/images/homeVisit.png"),
   }
 ];
 

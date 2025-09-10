@@ -29,7 +29,7 @@ export default function DoctorProfileModalScreen({ visible, onClose, doctorName,
           
           <View style={styles.profileContainer}>
             <View style={styles.avatarContainer}>
-              {!profilePicture && <Image style={styles.avatar} source={require("../../assets/images/profile.png")} />}
+              {!profilePicture && <Image style={styles.avatar} source={require("../assets/images/profile.png")} />}
               <Text style={styles.doctorName}>{doctorName || name}</Text>
               <Text style={styles.specialty}>{specialty || specialisation}</Text>
             </View>

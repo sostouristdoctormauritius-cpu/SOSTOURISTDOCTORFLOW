@@ -169,12 +169,12 @@ export default function SignInWithEmail2() {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../../assets/images/logo.png")}
+        source={require("../assets/images/logo.png")}
       />
       <Text style={styles.textStyle}>Sign In</Text>
       <View style={styles.content}>
         <View style={styles.textInputContainer}>
-          <Image source={require("../../assets/images/envelope.png")} style={styles.envelopeIcon} />
+          <Image source={require("../assets/images/envelope.png")} style={styles.envelopeIcon} />
           <TextInput
             placeholder="Email"
             style={styles.textInput}
@@ -182,14 +182,14 @@ export default function SignInWithEmail2() {
           />
         </View>
         <View style={styles.textInputContainer}>
-          <Image source={require("../../assets/images/lock.png")} style={styles.lockIcon} />
+          <Image source={require("../assets/images/lock.png")} style={styles.lockIcon} />
           <TextInput
             placeholder="Password"
             style={styles.textInput}
             secureTextEntry={true}
           />
           <TouchableOpacity>
-            <Image source={require("../../assets/images/eye-crossed.png")} style={styles.eyeIcon} />
+            <Image source={require("../assets/images/eye-crossed.png")} style={styles.eyeIcon} />
           </TouchableOpacity>
         </View>
       </View>

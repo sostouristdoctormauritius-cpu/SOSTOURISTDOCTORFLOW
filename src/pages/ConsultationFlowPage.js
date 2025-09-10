@@ -2,10 +2,6 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import ConsultationSymptomSelectionScreen from '../screens/consultation/ConsultationSymptomSelectionScreen';
-import ConsultationEligibleDoctorsScreen from '../screens/consultation/ConsultationEligibleDoctorsScreen';
-import ConsultationBookAppointmentScreen from '../screens/consultation/ConsultationBookAppointmentScreen';
-import ConsultationPayAppointmentScreen from '../screens/consultation/ConsultationPayAppointmentScreen';
-import ConsultationOrderConfirmationScreen from '../screens/consultation/ConsultationOrderConfirmationScreen';
 
 const styles = StyleSheet.create({
   container: {

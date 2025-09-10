@@ -92,12 +92,12 @@ export default function UpdatePassword() {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../../assets/images/logo.png")}
+        source={require("../assets/images/logo.png")}
       />
       <Text style={styles.textStyle}>Update Password</Text>
       <View style={styles.content}>
         <View style={styles.inputContainer}>
-          <Image source={require("../../assets/images/lock.png")} style={styles.lockIcon} />
+          <Image source={require("../assets/images/lock.png")} style={styles.lockIcon} />
           <TextInput
             placeholder="New Password"
             style={styles.textInput}
@@ -109,12 +109,12 @@ export default function UpdatePassword() {
             style={styles.eyeIconContainer}
             onPress={() => setSecurePassword(!securePassword)}
           >
-            <Image source={require("../../assets/images/eye-crossed.png")} style={styles.eyeIcon} />
+            <Image source={require("../assets/images/eye-crossed.png")} style={styles.eyeIcon} />
           </TouchableOpacity>
         </View>
 
         <View style={styles.inputContainer}>
-          <Image source={require("../../assets/images/lock.png")} style={styles.lockIcon} />
+          <Image source={require("../assets/images/lock.png")} style={styles.lockIcon} />
           <TextInput
             placeholder="Confirm Password"
             style={styles.textInput}
@@ -126,7 +126,7 @@ export default function UpdatePassword() {
             style={styles.eyeIconContainer}
             onPress={() => setSecurePassword1(!securePassword1)}
           >
-            <Image source={require("../../assets/images/eye-crossed.png")} style={styles.eyeIcon} />
+            <Image source={require("../assets/images/eye-crossed.png")} style={styles.eyeIcon} />
           </TouchableOpacity>
         </View>
       </View>

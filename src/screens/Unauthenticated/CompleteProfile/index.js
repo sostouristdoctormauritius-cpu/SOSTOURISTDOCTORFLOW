@@ -79,10 +79,10 @@ export default function CompleteProfile() {
       style={styles.container}
     >
       <View style={styles.profilePicContainer}>
-        <Image source={require("../../../../assets/images/profile.png")} style={styles.profilePic} />
+        <Image source={require("../../../assets/images/profile.png")} style={styles.profilePic} />
         <TouchableOpacity disabled={true} onPress={() => { /* No action */ }}>
           <Image
-            source={require("../../../../assets/images/edit.png")}
+            source={require("../../../assets/images/edit.png")}
             style={styles.editProfilePic}
           />
         </TouchableOpacity>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { Button } from '../components';
+import { Button } from '../components/index';
 
 export default function WelcomeScreen() {
   const navigation = useNavigation();
@@ -10,7 +10,7 @@ export default function WelcomeScreen() {
     <View style={styles.container}>
       <Image
         style={styles.imageFull}
-        source={require("../../assets/images/welcome/welcome-doc.png")}
+        source={require("../assets/images/welcome-doc.png")}
         resizeMode="cover"
       />
       <View style={styles.buttonContainer}>

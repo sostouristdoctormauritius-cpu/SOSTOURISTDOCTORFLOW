@@ -16,33 +16,6 @@ import SplashAnimation from '../screens/SplashAnimation';
 import UpdatePassword from '../screens/auth/UpdatePassword';
 import ViewPdf from '../screens/ViewPdf';
 
-// Main app screens
-import HomeScreen from '../screens/HomeScreen';
-import BillingScreen from '../screens/BillingScreen';
-import ChatChannelListScreen from '../screens/ChatChannelListScreen';
-import ChatLandingScreen from '../screens/ChatLandingScreen';
-import DiscountedOffersScreen from '../screens/DiscountedOffersScreen';
-import EmergencyCallScreen from '../screens/EmergencyCallScreen';
-import HomeVisitScreen from '../screens/HomeVisitScreen';
-import OfferDetailsScreen from '../screens/OfferDetailsScreen';
-import PrescriptionScreen from '../screens/PrescriptionScreen';
-import ThreadScreen from '../screens/ThreadScreen';
-import AppointmentCancellationScreen from '../screens/AppointmentCancellationScreen';
-import AppointmentScreen from '../screens/AppointmentScreen';
-import AddSymptomModal from '../screens/AddSymptomModal';
-import ConsultationBookAppointmentScreen from '../screens/consultation/ConsultationBookAppointmentScreen';
-import ConsultationChatOnboardingScreen from '../screens/consultation/ConsultationChatOnboardingScreen';
-import ConsultationEligibleDoctorsScreen from '../screens/consultation/ConsultationEligibleDoctorsScreen';
-import ConsultationOrderConfirmationScreen from '../screens/consultation/ConsultationOrderConfirmationScreen';
-import ConsultationPayAppointmentScreen from '../screens/consultation/ConsultationPayAppointmentScreen';
-import ConsultationSymptomSelectionScreen from '../screens/consultation/ConsultationSymptomSelectionScreen';
-import DoctorProfileModal from '../screens/DoctorProfileModal';
-import ErrorBoundary from '../screens/ErrorBoundary';
-import ErrorDetails from '../screens/ErrorDetails';
-import VideoCallLobby from '../screens/VideoCallLobby';
-import StreamVideoCallScreen from '../screens/StreamVideoCallScreen';
-import IncomingCallScreen from '../screens/IncomingCallScreen';
-
 // Modal stack
 import ModalStackScreen from './ModalStack';
 
@@ -93,8 +66,7 @@ function AppNavigator() {
       >
         <Stack.Screen name="Auth" component={AuthStack} />
         <Stack.Screen name="Main" component={ModalStackScreen} />
-        <Stack.Screen name="ErrorBoundary" component={ErrorBoundary} />
-        <Stack.Screen name="ErrorDetails" component={ErrorDetails} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

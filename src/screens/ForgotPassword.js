@@ -63,12 +63,12 @@ export default function ForgotPassword() {
     >
       <Image
         style={styles.image}
-        source={require("../../assets/images/logo.png")}
+        source={require("../assets/images/logo.png")}
       />
       <Text style={styles.textStyle}>Forgot Password</Text>
       <View style={styles.content}>
         <View style={styles.textInputContainer}>
-          <Image source={require("../../assets/images/envelope.png")} style={styles.envelopeIcon} />
+          <Image source={require("../assets/images/envelope.png")} style={styles.envelopeIcon} />
           <TextInput
             placeholder="Email"
             style={styles.textInput}

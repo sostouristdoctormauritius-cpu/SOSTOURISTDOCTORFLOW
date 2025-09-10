@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 
-const logo = require("../../assets/images/smallLogo.png");
+const logo = require("../assets/images/smallLogo.png");
 
 export default function LanguageSelection() {
   const navigation = useNavigation()

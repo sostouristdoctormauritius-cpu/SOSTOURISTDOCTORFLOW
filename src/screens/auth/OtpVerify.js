@@ -64,6 +64,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: "80%",
     },
+    buttonText: {
+        color: "white",
+        fontWeight: "bold",
+    },
     headerContainer: {
         width: "100%",
         padding: 10,
@@ -72,6 +76,31 @@ const styles = StyleSheet.create({
     backButton: {
         fontSize: 18,
         color: "#000",
+    },
+    otpDescription: {
+        marginBottom: 30,
+        marginHorizontal: 30,
+        textAlign: "center"
+    },
+    otpContainer: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        width: "80%",
+        marginBottom: 20,
+    },
+    resendContainer: {
+        marginTop: 20,
+        alignItems: "center",
+    },
+    resendText: {
+        color: '#000000',
+        fontSize: 14,
+    },
+    resendLink: {
+        color: "blue",
+        fontWeight: "bold",
+        fontSize: 14,
+        marginTop: 5,
     },
 })
 

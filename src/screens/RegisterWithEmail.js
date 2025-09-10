@@ -72,7 +72,7 @@ export default function RegisterWithEmail() {
   const navigation = useNavigation()
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require("../../assets/images/logo.png")} />
+      <Image style={styles.image} source={require("../assets/images/logo.png")} />
       <Text
         style={styles.textStyle}
       >
@@ -80,7 +80,7 @@ export default function RegisterWithEmail() {
       </Text>
       <View style={styles.content}>
         <View style={styles.textInputContainer}>
-          <Image source={require("../../assets/images/envelope.png")} style={styles.envelopeIcon} />
+          <Image source={require("../assets/images/envelope.png")} style={styles.envelopeIcon} />
           <TextInput
             placeholder="Email"
             style={styles.textInput}
