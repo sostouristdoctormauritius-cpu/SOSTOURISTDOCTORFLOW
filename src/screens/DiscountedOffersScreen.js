@@ -1,90 +1,153 @@
-import React from "react"
-import { FlatList, StyleSheet, View, Text } from "react-native"
+import React from "react";
+import { FlatList, StyleSheet, View, Text, TouchableOpacity, Image, SafeAreaView } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
-const data = [
+const DUMMY_OFFERS = [
   {
-    name: "Book a dental check up",
-    discount: "15",
-    heading: "Dental Check Up",
-    description: "This is a description for dental check up.",
+    id: "1",
+    title: "Comprehensive Dental Check-up",
+    description: "Includes full examination, cleaning, and X-rays.",
+    discount: "15% OFF",
+    originalPrice: "$100",
+    discountedPrice: "$85",
+    image: require('../assets/images/profile.png'),
   },
   {
-    name: "Book a dental check up",
-    discount: "15",
-    heading: "Dental Check Up",
-    description: "This is a description for dental check up.",
+    id: "2",
+    title: "Complete Eye Examination",
+    description: "Detailed eye test with prescription and consultation.",
+    discount: "20% OFF",
+    originalPrice: "$120",
+    discountedPrice: "$96",
+    image: require('../assets/images/profile.png'),
   },
   {
-    name: "Book a dental check up",
-    discount: "15",
-    heading: "Dental Check Up",
-    description: "This is a description for dental check up.",
+    id: "3",
+    title: "Cardiac Health Screening",
+    description: "ECG, blood pressure, and cholesterol tests.",
+    discount: "25% OFF",
+    originalPrice: "$150",
+    discountedPrice: "$112.50",
+    image: require('../assets/images/profile.png'),
   },
-  {
-    name: "Book a dental check up",
-    discount: "15",
-    heading: "Dental Check Up",
-    description: "This is a description for dental check up.",
-  },
-]
+];
 
 const DiscountedOffersScreen = () => {
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item, index }) => (
-          <>
-            <View style={styles.separator} />
-            <View style={styles.discountCard}>
-              <Text style={styles.discountHeading}>{item.heading}</Text>
-              <Text style={styles.discountDescription}>{item.description}</Text>
-              <Text style={styles.discountText}>{item.discount}% Off</Text>
-            </View>
-          </>
-        )}
-        style={styles.list}
-      />
-    </View>
-  )
-}
+  const navigation = useNavigation();
 
-export default DiscountedOffersScreen
+  const renderOfferItem = ({ item }) => (
+    <TouchableOpacity 
+      style={styles.offerCard}
+      onPress={() => navigation.navigate('OfferDetails', { offer: item })}
+    >
+      <Image source={item.image} style={styles.offerImage} />
+      <View style={styles.offerInfo}>
+        <Text style={styles.offerTitle}>{item.title}</Text>
+        <Text style={styles.offerDescription}>{item.description}</Text>
+        <View style={styles.priceContainer}>
+          <Text style={styles.discountedPrice}>{item.discountedPrice}</Text>
+          <Text style={styles.originalPrice}>{item.originalPrice}</Text>
+          <View style={styles.discountBadge}>
+            <Text style={styles.discountText}>{item.discount}</Text>
+          </View>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Special Offers</Text>
+        <View style={{ width: 24 }} />
+      </View>
+
+      <FlatList
+        data={DUMMY_OFFERS}
+        renderItem={renderOfferItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
+      />
+    </SafeAreaView>
+  );
+};
+
+export default DiscountedOffersScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#F7F7F7", // Placeholder for Colors.greyBG
-    flex: 1,
-    paddingHorizontal: 16,
+  container: { flex: 1, backgroundColor: "#F9F9F9" },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
   },
-  list: {
-    backgroundColor: "#F7F7F7", // Placeholder for Colors.greyBG
+  backButton: { fontSize: 24, color: '#333' },
+  headerTitle: { fontSize: 20, fontWeight: "bold", color: '#333' },
+  listContent: { padding: 20 },
+  offerCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
   },
-  separator: {
-    height: 1,
-    backgroundColor: "#e0e0e0",
-    marginVertical: 10,
+  offerImage: {
+    width: '100%',
+    height: 150,
   },
-  discountCard: {
-    backgroundColor: "white",
+  offerInfo: {
     padding: 15,
-    borderRadius: 10,
-    marginBottom: 10,
   },
-  discountHeading: {
+  offerTitle: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#333",
     marginBottom: 5,
   },
-  discountDescription: {
+  offerDescription: {
     fontSize: 14,
     color: "#666",
-    marginBottom: 5,
+    marginBottom: 15,
+  },
+  priceContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  discountedPrice: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#F71E27",
+  },
+  originalPrice: {
+    fontSize: 14,
+    color: "#999",
+    textDecorationLine: "line-through",
+    marginLeft: 10,
+  },
+  discountBadge: {
+    backgroundColor: "#E8F5E9",
+    borderRadius: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginLeft: 'auto',
   },
   discountText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "bold",
-    color: "green",
+    color: "#388E3C",
   },
-})
+});

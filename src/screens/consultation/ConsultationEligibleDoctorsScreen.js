@@ -8,18 +8,40 @@ const DUMMY_DOCTORS = [
     name: "Dr. Alice Smith",
     specialisation: "General Practitioner",
     profilePicture: "", // Placeholder for image URL
+    rating: 4.8,
+    experience: "10 years",
   },
   {
     id: "2",
     name: "Dr. Bob Johnson",
     specialisation: "Pediatrician",
     profilePicture: "",
+    rating: 4.9,
+    experience: "8 years",
   },
   {
     id: "3",
     name: "Dr. Carol White",
     specialisation: "Dermatologist",
     profilePicture: "",
+    rating: 4.7,
+    experience: "12 years",
+  },
+  {
+    id: "4",
+    name: "Dr. David Brown",
+    specialisation: "Cardiologist",
+    profilePicture: "",
+    rating: 4.9,
+    experience: "15 years",
+  },
+  {
+    id: "5",
+    name: "Dr. Emily Davis",
+    specialisation: "Neurologist",
+    profilePicture: "",
+    rating: 4.8,
+    experience: "11 years",
   },
 ]
 
@@ -40,11 +62,18 @@ const ConsultationEligibleDoctorsScreen = ({ consultationType }) => {
         {item.profilePicture ? (
           <Image source={{ uri: item.profilePicture }} style={styles.doctorImage} />
         ) : (
-          <View style={styles.doctorImagePlaceholder} />
+          <Image 
+            source={require('../../assets/images/profile.png')} 
+            style={styles.doctorImage} 
+          />
         )}
-        <View>
+        <View style={styles.doctorDetails}>
           <Text style={styles.doctorName}>{item.name}</Text>
           <Text style={styles.doctorSpecialisation}>{item.specialisation}</Text>
+          <View style={styles.doctorStats}>
+            <Text style={styles.rating}>★ {item.rating}</Text>
+            <Text style={styles.experience}>{item.experience} exp</Text>
+          </View>
         </View>
         <Text style={styles.arrow}>›</Text>
       </View>
@@ -52,43 +81,43 @@ const ConsultationEligibleDoctorsScreen = ({ consultationType }) => {
   );
 
   return (
-    <View
-      style={styles.screenContentContainerStyle}
-    >
+    <View style={styles.container}>
       {
         isLoading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size={'large'} color="blue" />
+            <ActivityIndicator size={'large'} color="#F71E27" />
           </View>
-        )
-          :
-          (
+        ) : (
           <View style={styles.flexContainer}>
-            <View style={styles.headerContainer}>
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Text>{'<'}</Text>
-              </TouchableOpacity>
-              <Text
-                style={styles.titleStyle}
+            <View style={styles.header}>
+              <TouchableOpacity 
+                style={styles.backButton} 
+                onPress={() => navigation.goBack()}
               >
-                {`Eligible Doctors for ${consultationType}`}
+                <Text style={styles.backButtonText}>{"<"}</Text>
+              </TouchableOpacity>
+              <Text style={styles.title}>
+                {`Eligible Doctors`}
               </Text>
-              <View />
+              <View style={styles.placeholder} />
             </View>
 
-            <View>
-              <Text
-                style={styles.descriptionStyle}
-              >
+            <View style={styles.content}>
+              <Text style={styles.consultationType}>
+                {consultationType || "Online Consultation"}
+              </Text>
+              
+              <Text style={styles.description}>
                 Select a doctor from the list below.
               </Text>
 
-              <View style={styles.doctorsContainerStyle}>
+              <View style={styles.doctorsContainer}>
                 <FlatList
                   data={DUMMY_DOCTORS}
                   renderItem={renderDoctorItem}
                   keyExtractor={item => item.id}
                   style={styles.doctorList}
+                  showsVerticalScrollIndicator={false}
                 />
               </View>
             </View>
@@ -101,9 +130,9 @@ const ConsultationEligibleDoctorsScreen = ({ consultationType }) => {
 export default ConsultationEligibleDoctorsScreen
 
 const styles = StyleSheet.create({
-  screenContentContainerStyle: {
+  container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#fff",
   },
   loadingContainer: {
     flex: 1, 
@@ -111,26 +140,53 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   flexContainer: {
-    flex: 1, 
-    width: "100%"
+    flex: 1,
   },
-  headerContainer: {
+  header: {
     flexDirection: "row", 
     justifyContent: "space-between", 
-    width: "100%",
     alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#fff',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
-  titleStyle: {
+  backButton: {
+    padding: 10,
+  },
+  backButtonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  title: {
     fontSize: 18,
     fontWeight: "bold",
+    color: '#333',
   },
-  descriptionStyle: {
-    textAlign: "center",
-    marginVertical: 10,
+  placeholder: {
+    width: 40,
   },
-  doctorsContainerStyle: {
+  content: {
     flex: 1,
-    width: '100%',
+    padding: 20,
+  },
+  consultationType: {
+    fontSize: 16,
+    color: '#F71E27',
+    fontWeight: '600',
+    marginBottom: 5,
+  },
+  description: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 20,
+  },
+  doctorsContainer: {
+    flex: 1,
   },
   doctorList: {
     flex: 1,
@@ -139,6 +195,14 @@ const styles = StyleSheet.create({
     padding: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
+    backgroundColor: '#fafafa',
+    borderRadius: 12,
+    marginBottom: 10,
+    elevation: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
   },
   doctorInfo: {
     flexDirection: 'row',
@@ -146,28 +210,41 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   doctorImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 10,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 15,
   },
-  doctorImagePlaceholder: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: '#eee',
-    marginRight: 10,
+  doctorDetails: {
+    flex: 1,
   },
   doctorName: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 3,
   },
   doctorSpecialisation: {
+    fontSize: 15,
+    color: '#666',
+    marginBottom: 5,
+  },
+  doctorStats: {
+    flexDirection: 'row',
+  },
+  rating: {
+    fontSize: 14,
+    color: '#F71E27',
+    fontWeight: '600',
+    marginRight: 15,
+  },
+  experience: {
     fontSize: 14,
     color: '#666',
   },
   arrow: {
-    fontSize: 20,
+    fontSize: 24,
     color: '#999',
+    fontWeight: 'bold',
   },
 })

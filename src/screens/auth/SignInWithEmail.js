@@ -1,193 +1,153 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
-import { useNavigation } from '@react-navigation/native'
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ScrollView, SafeAreaView } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import { Button } from '../../components';
+
+const SignInWithEmail = () => {
+  const navigation = useNavigation();
+  
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Sign In</Text>
+        <View style={{ width: 24 }} />
+      </View>
+
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.logoContainer}>
+          <Image
+            style={styles.logo}
+            source={require("../../assets/images/logo.png")}
+          />
+          <Text style={styles.welcomeText}>Welcome back! Please sign in to continue.</Text>
+        </View>
+        
+        <View style={styles.formContainer}>
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>Email Address</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Enter your email"
+              keyboardType="email-address"
+            />
+          </View>
+          
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>Password</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Enter your password"
+              secureTextEntry={true}
+            />
+          </View>
+          
+          <TouchableOpacity 
+            style={styles.forgotPasswordContainer}
+            onPress={() => navigation.navigate('ForgotPassword')}
+          >
+            <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+          </TouchableOpacity>
+          
+          <Button 
+            title="Sign In" 
+            onPress={() => navigation.navigate('Home')} 
+          />
+          
+          <View style={styles.orContainer}>
+            <View style={styles.line} />
+            <Text style={styles.orText}>OR SIGN IN WITH</Text>
+            <View style={styles.line} />
+          </View>
+          
+          <View style={styles.socialLoginContainer}>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image 
+                source={require("../../assets/images/google.png")} 
+                style={styles.socialIcon} 
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image 
+                source={require("../../assets/images/fb.png")} 
+                style={styles.socialIcon} 
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image 
+                source={require("../../assets/images/apple.png")} 
+                style={styles.socialIcon} 
+              />
+            </TouchableOpacity>
+          </View>
+          
+          <View style={styles.signupContainer}>
+            <Text style={styles.noAccountText}>Don't have an account?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('RegisterWithEmail')}>
+              <Text style={styles.signupText}>Register</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+export default SignInWithEmail;
 
 const styles = StyleSheet.create({
-  blackColor: {
-    color: "#000000",
+  container: { flex: 1, backgroundColor: '#F9F9F9' },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
   },
-  btnForgot: {
-    marginBottom: 25,
-    marginTop: 21,
-  },
-  container: {
-    alignItems: "center",
-    flex: 1,
-  },
-  content: {
-    alignItems: "center",
-    marginBottom: 32,
-    paddingTop: 10,
-    width: "100%", // Adjusted from relativeWidth
-  },
-  flexRow: {
-    flexDirection: "row",
-    marginTop: 20
-  },
-  image: {
-    height: 40,
-    marginBottom: 70,
-    marginTop: 15,
-    width: 230,
-  },
-  noAccText: {
-    fontSize: 18,
-  },
-  textForgot: {
-    fontSize: 16,
-    fontWeight: "bold", // Simplified from FontWeight.semibold
-  },
-  textStyle: {
-    marginBottom: 35,
-  },
-  roundedView: {
-    borderColor: "#c8c8c8",
-    borderRadius: 50,
-    borderWidth: 1,
-    overflow: "hidden",
-  },
-  errorText: {
-    width: "80%",
-    top: -20,
-    justifyContent: "center",
-    color: "red",
-    alignItems: "center",
-    fontSize: 15,
-    letterSpacing: 1,
-  },
-  radioContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "55%",
-    marginTop: 20,
-  },
-  radioOption: {
-    flexDirection: "row",
-  },
-  radioImage: {
-    height: 20,
-    width: 20,
-  },
-  radioText: {
-    marginLeft: 5,
-  },
-  signUpText: {
-    fontWeight: "bold",
-  },
-  // Styles for RoundedTextInput placeholder
-  textInputContainer: {
-    width: "80%",
-    height: 50,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 25,
-    paddingHorizontal: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-  },
+  backButton: { fontSize: 24, color: '#333' },
+  headerTitle: { fontSize: 20, fontWeight: "bold", color: '#333' },
+  scrollViewContent: { flexGrow: 1, justifyContent: 'center', padding: 20 },
+  logoContainer: { alignItems: 'center', marginBottom: 30 },
+  logo: { width: 100, height: 100, resizeMode: 'contain', marginBottom: 10 },
+  welcomeText: { fontSize: 16, color: '#666', textAlign: 'center' },
+  formContainer: { width: '100%' },
+  inputGroup: { marginBottom: 20 },
+  inputLabel: { fontSize: 16, fontWeight: '600', color: '#333', marginBottom: 8 },
   textInput: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  envelopeIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
-  },
-  lockIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
-  },
-  eyeIcon: {
-    width: 24,
-    height: 24,
-    marginLeft: 10,
-  },
-  logo: {
-    height: 50,
-    width: 250,
-    marginBottom: 70,
-    marginTop: 15,
-  },
-  greenButton: {
-    backgroundColor: "lightgreen", // Placeholder color
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
     padding: 15,
-    alignItems: "center",
-    borderRadius: 5,
-    width: "80%",
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
   },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
+  forgotPasswordContainer: { alignItems: 'flex-end', marginBottom: 20 },
+  forgotPasswordText: { fontSize: 14, fontWeight: "600", color: '#F71E27' },
+  orContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 30,
   },
-  linkText: {
-    fontWeight: "bold",
-    color: "blue",
+  line: { flex: 1, height: 1, backgroundColor: '#E0E0E0' },
+  orText: { marginHorizontal: 10, color: '#999', fontSize: 12, fontWeight: 'bold' },
+  socialLoginContainer: { flexDirection: 'row', justifyContent: 'center', marginBottom: 30 },
+  socialButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 15,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
   },
-})
-
-export default function SignInWithEmail() {
-  const navigation = useNavigation()
-  return (
-    <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={require("../../assets/images/logo.png")}
-      />
-      <Text style={styles.textStyle}>Sign In</Text>
-      <View style={styles.content}>
-        <View style={styles.textInputContainer}>
-          <Image 
-            source={require("../../assets/images/envelope.png")} 
-            style={styles.envelopeIcon} 
-          />
-          <TextInput
-            placeholder="Email"
-            style={styles.textInput}
-            keyboardType="email-address"
-          />
-        </View>
-        <View style={styles.textInputContainer}>
-          <Image 
-            source={require("../../assets/images/lock.png")} 
-            style={styles.lockIcon} 
-          />
-          <TextInput
-            placeholder="Password"
-            style={styles.textInput}
-            secureTextEntry={true}
-          />
-          <TouchableOpacity>
-            <Image 
-              source={require("../../assets/images/eye-crossed.png")}
-              style={styles.eyeIcon} 
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-      
-      <TouchableOpacity
-        style={styles.btnForgot}
-        onPress={() => navigation.navigate('ForgotPassword')}
-      >
-        <Text style={[styles.blackColor, styles.textForgot]}>Forgot Password?</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity
-        style={styles.greenButton}
-        onPress={() => navigation.navigate('Home')}
-      >
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      
-      <View style={styles.flexRow}>
-        <Text style={styles.noAccText}>Don't have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('RegisterWithEmail')}>
-          <Text style={styles.linkText}>Register</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  )
-}
+  socialIcon: { width: 30, height: 30, resizeMode: 'contain' },
+  signupContainer: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
+  noAccountText: { fontSize: 16, color: '#666' },
+  signupText: { fontSize: 16, fontWeight: "bold", color: '#F71E27', marginLeft: 5 },
+});

@@ -1,84 +1,171 @@
-import React from "react"
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native"
-import { useNavigation } from '@react-navigation/native'
+import React, { useState } from "react";
+import { StyleSheet, View, Text, TouchableOpacity, Image, SafeAreaView } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 const StreamVideoCallScreen = () => {
-  const doctorName = "Dr. Smith" // Static for visual recreation
-  const navigation = useNavigation()
+  const doctorName = "Dr. Alice Smith";
+  const navigation = useNavigation();
+  const [isMuted, setIsMuted] = useState(false);
+  const [isVideoOff, setIsVideoOff] = useState(false);
+  const [isSpeakerOn, setIsSpeakerOn] = useState(true);
+  const callDuration = "05:32"; // Mock call duration
 
   return (
-    <View style={styles.container}>
-      {/* Header Placeholder */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>{'<'}</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Video Call with {doctorName}</Text>
-      </View>
-
-      {/* Video Container Placeholder */}
+    <SafeAreaView style={styles.container}>
       <View style={styles.videoContainer}>
-        <Text style={styles.videoText}>Video Call in Progress</Text>
-        <Text style={styles.videoText}>Connecting to {doctorName}...</Text>
+        {/* This would be the remote video stream */}
+        <View style={styles.remoteVideo}>
+          <Image source={require('../assets/images/profile.png')} style={styles.remoteImage} />
+        </View>
+        
+        {/* This would be the local video stream */}
+        <View style={styles.localVideo}>
+          {isVideoOff ? (
+            <View style={styles.videoOffContainer}>
+              <Text style={styles.videoOffText}>Video Off</Text>
+            </View>
+          ) : (
+            <Image source={require('../assets/images/profile.png')} style={styles.localImage} />
+          )}
+        </View>
       </View>
 
-      {/* Call Controls Placeholder */}
+      <View style={styles.header}>
+        <Text style={styles.doctorName}>{doctorName}</Text>
+        <Text style={styles.callDuration}>{callDuration}</Text>
+      </View>
+
       <View style={styles.callControls}>
-        <TouchableOpacity style={styles.controlButton}>
-          <Text style={styles.controlButtonText}>End Call</Text>
+        <TouchableOpacity 
+          style={[styles.controlButton, isMuted && styles.controlButtonActive]}
+          onPress={() => setIsMuted(!isMuted)}
+        >
+          <Text style={styles.controlButtonText}>{isMuted ? 'Unmute' : 'Mute'}</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={[styles.controlButton, isVideoOff && styles.controlButtonActive]}
+          onPress={() => setIsVideoOff(!isVideoOff)}
+        >
+          <Text style={styles.controlButtonText}>{isVideoOff ? 'Video On' : 'Video Off'}</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={[styles.controlButton, !isSpeakerOn && styles.controlButtonActive]}
+          onPress={() => setIsSpeakerOn(!isSpeakerOn)}
+        >
+          <Text style={styles.controlButtonText}>{isSpeakerOn ? 'Speaker Off' : 'Speaker On'}</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={styles.endCallButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.endCallButtonText}>End Call</Text>
         </TouchableOpacity>
       </View>
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default StreamVideoCallScreen
+export default StreamVideoCallScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#eee",
-    backgroundColor: "white",
-  },
-  backButton: {
-    fontSize: 20,
-    marginRight: 10,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
+    backgroundColor: "#FFFFFF",
   },
   videoContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#000",
+    position: 'relative',
   },
-  videoText: {
-    color: "white",
-    fontSize: 20,
-    marginBottom: 10,
+  remoteVideo: {
+    flex: 1,
+    backgroundColor: '#E0E0E0',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  remoteImage: {
+    width: '100%',
+    height: '100%',
+  },
+  localVideo: {
+    position: "absolute",
+    top: 20,
+    right: 20,
+    width: 120,
+    height: 180,
+    borderRadius: 12,
+    backgroundColor: '#333',
+    overflow: 'hidden',
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
+  },
+  localImage: {
+    width: '100%',
+    height: '100%',
+  },
+  videoOffContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
+  },
+  videoOffText: {
+    color: '#FFF',
+  },
+  header: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    right: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    padding: 15,
+    borderRadius: 12,
+  },
+  doctorName: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+  },
+  callDuration: {
+    fontSize: 16,
+    color: "#FFFFFF",
   },
   callControls: {
     flexDirection: "row",
-    justifyContent: "center",
-    padding: 20,
-    backgroundColor: "#f0f0f0",
+    justifyContent: "space-around",
+    alignItems: "center",
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    backgroundColor: "#FFFFFF",
+    borderTopWidth: 1,
+    borderTopColor: '#E0E0E0',
   },
   controlButton: {
-    backgroundColor: "red",
     padding: 15,
-    borderRadius: 50,
+    borderRadius: 8,
+    backgroundColor: '#F0F0F0',
+  },
+  controlButtonActive: {
+    backgroundColor: '#D0D0D0',
   },
   controlButtonText: {
-    color: "white",
-    fontWeight: "bold",
+    fontSize: 14,
+    color: '#333',
   },
-})
+  endCallButton: {
+    paddingVertical: 15,
+    paddingHorizontal: 25,
+    borderRadius: 8,
+    backgroundColor: "#FF3B30",
+  },
+  endCallButtonText: {
+    fontSize: 16,
+    color: "#FFFFFF",
+    fontWeight: 'bold',
+  },
+});

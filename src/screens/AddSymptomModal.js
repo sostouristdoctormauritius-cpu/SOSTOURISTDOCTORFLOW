@@ -1,99 +1,151 @@
-import React from "react"
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from "react-native"
-import { useNavigation } from '@react-navigation/native'
+import React, { useState } from "react";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import { Button } from '../components';
+
+const commonSymptoms = ['Fever', 'Headache', 'Cough', 'Fatigue', 'Nausea', 'Dizziness', 'Sore Throat', 'Shortness of Breath'];
 
 export default function AddSymptomModalScreen() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
+  const [customSymptom, setCustomSymptom] = useState('');
+  const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+
+  const toggleSymptom = (symptom) => {
+    setSelectedSymptoms(prev => 
+      prev.includes(symptom) ? prev.filter(s => s !== symptom) : [...prev, symptom]
+    );
+  };
+
+  const handleAddSymptoms = () => {
+    const allSymptoms = [...selectedSymptoms];
+    if (customSymptom.trim()) {
+      allSymptoms.push(customSymptom.trim());
+    }
+    // In a real app, you would pass this data back to the previous screen
+    console.log("Selected Symptoms:", allSymptoms);
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.topHeaderSeparator} />
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.headerCancelButton}>Cancel</Text>
+        </TouchableOpacity>
+        <Text style={styles.title}>Add Symptoms</Text>
+        <View style={{ width: 50 }} />
+      </View>
 
-      <TouchableOpacity style={styles.topHeaderCancel} onPress={() => navigation.goBack()}>
-        <Text style={styles.headerCancelButton}>Cancel</Text>
-      </TouchableOpacity>
+      <ScrollView contentContainerStyle={styles.content}>
+        <Text style={styles.sectionTitle}>Select Common Symptoms</Text>
+        <View style={styles.suggestionsList}>
+          {commonSymptoms.map((symptom, index) => (
+            <TouchableOpacity 
+              key={index}
+              style={[styles.suggestionItem, selectedSymptoms.includes(symptom) && styles.selectedSuggestionItem]}
+              onPress={() => toggleSymptom(symptom)}
+            >
+              <Text style={[styles.suggestionText, selectedSymptoms.includes(symptom) && styles.selectedSuggestionText]}>{symptom}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
-      <Text
-        style={styles.title}
-      >
-        Add Additional Symptoms
-      </Text>
-
-      <View style={styles.inputFieldContainer}>
+        <Text style={styles.sectionTitle}>Or Add Your Own</Text>
         <TextInput
           style={styles.inputField}
-          placeholder="Enter your symptoms here..."
-          placeholderTextColor="#8ABAA4" // Placeholder for Colors.textInputFieldText
-          autoCorrect={false}
-          spellCheck={false}
-          autoFocus
+          placeholder="e.g., Stomach ache, muscle pain..."
+          placeholderTextColor="#999"
+          value={customSymptom}
+          onChangeText={setCustomSymptom}
         />
-
-        <TouchableOpacity
-          style={styles.sendButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.sendButtonText}>Send</Text>
-        </TouchableOpacity>
+      </ScrollView>
+      
+      <View style={styles.footer}>
+        <Button
+          title="Add Symptoms"
+          onPress={handleAddSymptoms}
+          disabled={selectedSymptoms.length === 0 && !customSymptom.trim()}
+        />
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
-    paddingHorizontal: 29,
-    backgroundColor: "white",
+    backgroundColor: "#F9F9F9",
   },
-  inputField: {
-    color: "#8ABAA4", // Placeholder for Colors.textInputFieldText
-    fontFamily: "interSemiBold", // Placeholder for typography.primary.semiBold
-    fontSize: 16,
-    lineHeight: 19,
-    backgroundColor: "#EDF7F2", // Placeholder for Colors.textInputFieldBackground
-    borderRadius: 23.5,
-    paddingLeft: 22.5,
-    paddingRight: 50,
-    paddingVertical: 4,
-  },
-  inputFieldContainer: {
-    marginTop: 16,
-    width: "100%",
-  },
-  sendButton: {
-    position: "absolute",
-    right: 0,
-    top: -3,
-    backgroundColor: "lightgreen", // Placeholder color
-    padding: 10,
-    borderRadius: 20,
-  },
-  sendButtonText: {
-    color: "white",
-    fontWeight: "bold",
-  },
-  title: {
-    alignSelf: "flex-start",
-    color: "#212121", // Placeholder for Colors.screenTitleText
-    marginTop: 12,
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  topHeaderCancel: {
-    alignSelf: "flex-end",
-    marginTop: -4,
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 20,
+    backgroundColor: "#FFFFFF",
+    borderBottomWidth: 1,
+    borderBottomColor: "#E0E0E0",
   },
   headerCancelButton: {
-    color: "#938F99", // Placeholder for Colors.headerCancelButtonText
+    color: "#F71E27",
     fontSize: 16,
+    fontWeight: "600",
   },
-  topHeaderSeparator: {
-    backgroundColor: "#D9D9D9", // Placeholder for Colors.modalHeaderSwipeIndicator
-    borderRadius: 8,
-    height: 4,
-    marginTop: 16,
-    opacity: 0.7,
-    width: 64,
+  title: {
+    color: "#333",
+    fontSize: 18,
+    fontWeight: "bold",
   },
-})
+  content: {
+    padding: 20,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 15,
+  },
+  suggestionsList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginBottom: 20,
+  },
+  suggestionItem: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+    marginRight: 10,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
+  },
+  selectedSuggestionItem: {
+    backgroundColor: "#F71E27",
+    borderColor: "#F71E27",
+  },
+  suggestionText: {
+    color: "#333",
+    fontSize: 14,
+  },
+  selectedSuggestionText: {
+    color: "#FFFFFF",
+    fontWeight: "600",
+  },
+  inputField: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    padding: 15,
+    fontSize: 16,
+    color: "#333",
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
+    minHeight: 100,
+    textAlignVertical: 'top',
+  },
+  footer: {
+    padding: 20,
+    backgroundColor: "#FFFFFF",
+    borderTopWidth: 1,
+    borderTopColor: "#E0E0E0",
+  },
+});

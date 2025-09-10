@@ -18,6 +18,7 @@ import PrescriptionScreen from '../screens/PrescriptionScreen';
 import ThreadScreen from '../screens/ThreadScreen';
 import AppointmentCancellationScreen from '../screens/AppointmentCancellationScreen';
 import AppointmentScreen from '../screens/AppointmentScreen';
+import AppointmentBookingScreen from '../screens/AppointmentBookingScreen';
 import AddSymptomModal from '../screens/AddSymptomModal';
 import ConsultationBookAppointmentScreen from '../screens/consultation/ConsultationBookAppointmentScreen';
 import ConsultationChatOnboardingScreen from '../screens/consultation/ConsultationChatOnboardingScreen';
@@ -31,6 +32,13 @@ import ErrorDetails from '../screens/ErrorDetails';
 import VideoCallLobby from '../screens/VideoCallLobby';
 import StreamVideoCallScreen from '../screens/StreamVideoCallScreen';
 import IncomingCallScreen from '../screens/IncomingCallScreen';
+import SettingsScreen from '../screens/Settings';
+import ProfileScreen from '../screens/profile/ProfileScreen';
+
+// Payment screens
+import PaymentScreen from '../screens/payment/Payment';
+import CardScreen from '../screens/payment/Card';
+import OrderConfirmationScreen from '../screens/payment/OrderConfirmation';
 
 const Stack = createStackNavigator();
 
@@ -51,6 +59,7 @@ function AuthenticatedStack() {
       <Stack.Screen name="Thread" component={ThreadScreen} options={{ headerShown: false }} />
       <Stack.Screen name="AppointmentCancellation" component={AppointmentCancellationScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Appointment" component={AppointmentScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="AppointmentBooking" component={AppointmentBookingScreen} options={{ headerShown: false }} />
       <Stack.Screen name="AddSymptomModal" component={AddSymptomModal} options={{ headerShown: false }} />
       <Stack.Screen name="ConsultationBookAppointment" component={ConsultationBookAppointmentScreen} options={{ headerShown: false }} />
       <Stack.Screen name="ConsultationChatOnboarding" component={ConsultationChatOnboardingScreen} options={{ headerShown: false }} />
@@ -64,6 +73,13 @@ function AuthenticatedStack() {
       <Stack.Screen name="VideoCallLobby" component={VideoCallLobby} options={{ headerShown: false }} />
       <Stack.Screen name="StreamVideoCallScreen" component={StreamVideoCallScreen} options={{ headerShown: false }} />
       <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Settings" component={SettingsScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+
+      {/* Payment screens */}
+      <Stack.Screen name="Payment" component={PaymentScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Card" component={CardScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="OrderConfirmation" component={OrderConfirmationScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }

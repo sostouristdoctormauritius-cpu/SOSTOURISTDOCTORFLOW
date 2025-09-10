@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: '#F71E27',
+    backgroundColor: '#F71E27', // Consistent red color
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
   buttonText: {
-    color: 'white',
+    color: 'white', // White text for consistency
     fontWeight: 'bold',
     textAlign: 'center',
   },

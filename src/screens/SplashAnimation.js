@@ -1,12 +1,60 @@
-import React from "react"
-import { StyleSheet, View, Text } from "react-native"
+import React, { useEffect } from "react"
+import { StyleSheet, View, Text, Image, Animated, Easing } from "react-native"
 
-const SplashAnimation = () => {
+const SplashAnimation = ({ onSplashComplete }) => {
+  const fadeAnim = new Animated.Value(0)
+  const scaleAnim = new Animated.Value(0.8)
+  
+  useEffect(() => {
+    // Fade in animation
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 1000,
+          easing: Easing.ease,
+          useNativeDriver: true,
+        }),
+        Animated.spring(scaleAnim, {
+          toValue: 1,
+          friction: 5,
+          tension: 50,
+          useNativeDriver: true,
+        })
+      ]),
+      Animated.delay(1500),
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      })
+    ]).start(() => {
+      // Navigate to next screen after animation completes
+      if (onSplashComplete) {
+        onSplashComplete();
+      }
+    });
+  }, [])
+
   return (
-    <View style={styles.animationContainer}>
-      <View style={styles.lottieStyle}>
-        <Text>Splash Animation Placeholder</Text>
-      </View>
+    <View style={styles.container}>
+      <Animated.View 
+        style={[
+          styles.content, 
+          {
+            opacity: fadeAnim,
+            transform: [{ scale: scaleAnim }]
+          }
+        ]}
+      >
+        <Image 
+          source={require('../assets/images/logo.png')} 
+          style={styles.logo} 
+          resizeMode="contain"
+        />
+        <Text style={styles.title}>SOS Doctor</Text>
+        <Text style={styles.subtitle}>Your Health, Our Priority</Text>
+      </Animated.View>
     </View>
   )
 }
@@ -14,17 +62,29 @@ const SplashAnimation = () => {
 export default SplashAnimation
 
 const styles = StyleSheet.create({
-  animationContainer: {
-    alignItems: "center",
-    backgroundColor: "#fff",
+  container: {
     flex: 1,
-    justifyContent: "center",
-  },
-  lottieStyle: {
-    height: 400,
-    width: "90%",
-    backgroundColor: "#f0f0f0", // Placeholder background
+    backgroundColor: "#ffffff",
     justifyContent: "center",
     alignItems: "center",
+  },
+  content: {
+    alignItems: "center",
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    marginBottom: 30,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#333333",
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 18,
+    color: "#666666",
+    textAlign: "center",
   },
 })

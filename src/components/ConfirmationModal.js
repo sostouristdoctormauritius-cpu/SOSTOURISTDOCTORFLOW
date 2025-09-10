@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
     minWidth: 100,
   },
   cancelButton: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#F71E27', // Changed to consistent red color
   },
   confirmButton: {
     backgroundColor: '#F71E27',
   },
   cancelButtonText: {
-    color: '#333',
+    color: 'white', // Changed to white text for consistency
     fontWeight: 'bold',
     textAlign: 'center',
   },

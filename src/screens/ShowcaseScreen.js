@@ -1,78 +1,124 @@
 import React from 'react';
-import { View, Text, Button, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Button } from '../components';
 
-const screens = [
-  'About',
-  'AddSymptomModal',
-  'AppointmentCancellationScreen',
-  'AppointmentScreen',
-  'BillingScreen',
-  'ChatChannelListScreen',
-  'ChatLandingScreen',
-  'EmergencyCallScreen',
-  'ErrorBoundary',
-  'ErrorDetails',
-  'HomeScreen',
-  'HomeVisitScreen',
-  'IncomingCallScreen',
-  'LanguageSelection',
-  'OfferDetailsScreen',
-  'PrescriptionScreen',
-  'SplashAnimation',
-  'StreamVideoCallScreen',
-  'ThreadScreen',
-  'VideoCallLobby',
-  'ViewPdf',
-  'WelcomeScreen',
-  'UnauthenticatedCompleteProfile',
-  'AuthForgotPassword',
-  'AuthOtpVerify',
-  'AuthRegisterWithEmail',
-  'AuthSignInWithEmail',
-  'AuthSignInWithEmail2',
-  'AuthUpdatePassword',
-  'ConsultationBookAppointmentScreen',
-  'ConsultationChatOnboardingScreen',
-  'ConsultationEligibleDoctorsScreen',
-  'ConsultationOrderConfirmationScreen',
-  'ConsultationPayAppointmentScreen',
-  'ConsultationSymptomSelectionScreen',
-  'ProfileCompleteProfile',
-];
+const screenMap = {
+  'WelcomeScreen': 'Welcome',
+  'SignInWithEmail': 'SignInWithEmail',
+  'RegisterWithEmail': 'RegisterWithEmail',
+  'CompleteProfile': 'CompleteProfile', // Assuming this is the unauthenticated one
+  'HomeScreen': 'Home',
+  'DoctorProfileModal': 'DoctorProfileModal',
+  'AppointmentScreen': 'Appointment',
+  'AppointmentBookingScreen': 'AppointmentBooking',
+  'AddSymptomModal': 'AddSymptomModal',
+  'ChatLandingScreen': 'ChatLanding',
+  'IncomingCallScreen': 'IncomingCallScreen',
+  'StreamVideoCallScreen': 'StreamVideoCallScreen',
+  'BillingScreen': 'Billing',
+  'Payment': 'Payment',
+  'Card': 'Card',
+  'OrderConfirmation': 'OrderConfirmation',
+  'DiscountedOffersScreen': 'DiscountedOffers',
+  'Settings': 'Settings',
+  'About': 'About',
+  'LanguageSelection': 'LanguageSelection',
+  'ForgotPassword': 'ForgotPassword',
+  'OtpVerify': 'OtpVerify',
+  'UpdatePassword': 'UpdatePassword',
+  'ViewPdf': 'ViewPdf',
+  'ThreadScreen': 'Thread',
+  'VideoCallLobby': 'VideoCallLobby',
+  'EmergencyCallScreen': 'EmergencyCall',
+  'HomeVisitScreen': 'HomeVisit',
+  'OfferDetailsScreen': 'OfferDetails',
+  'PrescriptionScreen': 'Prescription',
+  'ChatChannelListScreen': 'ChatChannelList',
+  'ErrorBoundary': 'ErrorBoundary',
+  'ErrorDetails': 'ErrorDetails',
+  'SplashAnimation': 'SplashAnimation',
+  'PaymentMethods': 'PaymentMethods',
+};
+
+const screens = Object.keys(screenMap);
 
 const ShowcaseScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Screens Showcase</Text>
-      {screens.map(screenName => (
-        <View key={screenName} style={styles.buttonContainer}>
-          <Button
-            title={screenName}
-            onPress={() => navigation.navigate(screenName)}
-          />
-        </View>
-      ))}
-    </ScrollView>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Screens Showcase</Text>
+        <Text style={styles.subtitle}>Tap any button to view the screen</Text>
+      </View>
+      
+      <ScrollView 
+        style={styles.content}
+        contentContainerStyle={styles.scrollContent}
+      >
+        {screens.map((screenName, index) => (
+          <View key={screenName} style={styles.buttonContainer}>
+            <Button
+              title={`${index + 1}. ${screenName}`}
+              onPress={() => navigation.navigate(screenMap[screenName])}
+              style={styles.button}
+              textStyle={styles.buttonText}
+            />
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
-    paddingHorizontal: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  header: {
+    backgroundColor: '#ffffff',
+    padding: 20,
+    alignItems: 'center',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
+    color: '#333',
+    marginBottom: 5,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+  },
+  content: {
+    flex: 1,
+  },
+  scrollContent: {
+    padding: 20,
+    paddingTop: 10,
   },
   buttonContainer: {
     marginBottom: 10,
+  },
+  button: {
+    backgroundColor: '#ffffff',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  buttonText: {
+    color: '#333',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
 

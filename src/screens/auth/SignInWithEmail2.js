@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flex: 1,
+    backgroundColor: '#ffffff',
+    paddingTop: 40,
   },
   content: {
     alignItems: "center",
@@ -24,19 +26,24 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 40,
-    marginBottom: 70,
-    marginTop: 15,
-    width: 230,
+    marginBottom: 50,
+    marginTop: 20,
+    width: 200,
   },
   noAccText: {
-    fontSize: 18,
+    fontSize: 16,
+    color: '#888888',
   },
   textForgot: {
     fontSize: 16,
     fontWeight: "bold",
+    color: '#F71E27', // Changed from green to consistent red color
   },
   textStyle: {
     marginBottom: 35,
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333333',
   },
   roundedView: {
     borderColor: "#c8c8c8",
@@ -75,6 +82,7 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     fontWeight: "bold",
+    color: '#F71E27', // Changed from green to consistent red color
   },
   inputBox: {
     backgroundColor: 'transparent',
@@ -95,28 +103,33 @@ const styles = StyleSheet.create({
   // Styles for RoundedTextInput placeholder
   textInputContainer: {
     width: "80%",
-    height: 50,
-    borderColor: "gray",
+    height: 55,
+    borderColor: "#DDDDDD",
     borderWidth: 1,
-    borderRadius: 25,
+    borderRadius: 10,
     paddingHorizontal: 15,
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
+    backgroundColor: '#FAFAFA',
   },
   textInput: {
     flex: 1,
     marginLeft: 10,
+    fontSize: 16,
+    color: '#333333',
   },
   lockIcon: {
-    width: 20,
-    height: 20,
-    resizeMode: "contain",
+    width: 24,
+    height: 24,
+    marginRight: 10,
+    tintColor: '#888888',
   },
   eyeIcon: {
-    width: 20,
-    height: 20,
-    resizeMode: "contain",
+    width: 24,
+    height: 24,
+    marginLeft: 10,
+    tintColor: '#888888',
   },
   radioContainerView: {
     width: '78%',
@@ -129,17 +142,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 15
   },
-  greenButton: {
-    backgroundColor: "lightgreen",
-    padding: 15,
+  redButton: {
+    backgroundColor: "#F71E27", // Consistent red color
+    paddingVertical: 15,
+    paddingHorizontal: 40,
     alignItems: "center",
-    borderRadius: 5,
+    borderRadius: 10,
     width: "80%",
-    marginTop: 50,
+    marginTop: 30,
   },
   buttonText: {
     color: "white",
     fontWeight: "bold",
+    fontSize: 18,
   },
   otpInputContainer: {
     flexDirection: "row",
@@ -156,9 +171,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   envelopeIcon: {
-    width: 20,
-    height: 20,
-    resizeMode: "contain",
+    width: 24,
+    height: 24,
+    marginRight: 10,
+    tintColor: '#888888',
   },
 })
 
@@ -177,6 +193,7 @@ export default function SignInWithEmail2() {
           <Image source={require("../../assets/images/envelope.png")} style={styles.envelopeIcon} />
           <TextInput
             placeholder="Email"
+            placeholderTextColor="#888888"
             style={styles.textInput}
             keyboardType="email-address"
           />
@@ -185,6 +202,7 @@ export default function SignInWithEmail2() {
           <Image source={require("../../assets/images/lock.png")} style={styles.lockIcon} />
           <TextInput
             placeholder="Password"
+            placeholderTextColor="#888888"
             style={styles.textInput}
             secureTextEntry={true}
           />
@@ -200,7 +218,7 @@ export default function SignInWithEmail2() {
         <Text style={[styles.blackColor, styles.textForgot]}>Forgot Password?</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.greenButton}
+        style={styles.redButton}
         onPress={() => navigation.navigate('Home')}
       >
         <Text style={styles.buttonText}>Login</Text>
@@ -214,4 +232,3 @@ export default function SignInWithEmail2() {
     </View>
   )
 }
-

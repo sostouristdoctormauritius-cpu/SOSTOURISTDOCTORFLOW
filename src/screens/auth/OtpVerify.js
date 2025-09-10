@@ -1,107 +1,121 @@
-import React, { useRef } from "react";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import React, { useRef, useState } from "react";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { Button } from '../../components';
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: "center",
-        flex: 1,
-    },
-    content: {
-        alignItems: "center",
-        marginBottom: 32,
-        paddingTop: 10,
-        width: "100%",
-    },
-    image: {
-        height: 40,
-        marginBottom: 70,
-        marginTop: 15,
-        width: 230,
-    },
-    inputBox: {
-        backgroundColor: 'transparent',
-        borderBottomWidth: 1.2,
-        borderRadius: 10,
-        borderWidth: 1,
-        color: '#000000',
-        fontSize: 14,
-        height: 45,
-        width: 65,
-    },
-    resendButtonText: {
-        color: '#000000',
-        fontSize: 14,
-        marginTop: 8,
-        textAlign: 'right',
-    },
-    textStyle: {
-        marginBottom: 20,
-    },
-    textStyledes: {
-        marginBottom: 50,
-        marginHorizontal: 30,
-        textAlign: "center"
-    },
-    otpInputContainer: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        width: "80%",
-        marginBottom: 20,
-    },
-    otpInput: {
-        width: 50,
-        height: 50,
-        borderWidth: 1,
-        borderColor: "gray",
-        textAlign: "center",
-        fontSize: 20,
-    },
-    greenButton: {
-        backgroundColor: "lightgreen", // Placeholder color
-        padding: 15,
-        alignItems: "center",
-        borderRadius: 5,
-        width: "80%",
-    },
-    buttonText: {
-        color: "white",
-        fontWeight: "bold",
-    },
-    headerContainer: {
-        width: "100%",
-        padding: 10,
-        alignItems: "flex-start",
-    },
-    backButton: {
-        fontSize: 18,
-        color: "#000",
-    },
-    otpDescription: {
-        marginBottom: 30,
-        marginHorizontal: 30,
-        textAlign: "center"
-    },
-    otpContainer: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        width: "80%",
-        marginBottom: 20,
-    },
-    resendContainer: {
-        marginTop: 20,
-        alignItems: "center",
-    },
-    resendText: {
-        color: '#000000',
-        fontSize: 14,
-    },
-    resendLink: {
-        color: "blue",
-        fontWeight: "bold",
-        fontSize: 14,
-        marginTop: 5,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 40,
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    resizeMode: 'contain',
+    marginBottom: 10,
+  },
+  appName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333333',
+    marginBottom: 5,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333333',
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666666',
+    textAlign: 'center',
+    marginBottom: 30,
+    lineHeight: 22,
+    marginHorizontal: 30,
+  },
+  formContainer: {
+    width: '85%',
+  },
+  otpContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    marginBottom: 30,
+  },
+  otpInput: {
+    width: 60,
+    height: 60,
+    borderWidth: 2,
+    borderColor: "#DDDDDD",
+    backgroundColor: '#FAFAFA',
+    borderRadius: 12,
+    textAlign: "center",
+    fontSize: 24,
+    color: '#333333',
+    fontWeight: 'bold',
+  },
+  activeOtpInput: {
+    borderColor: "#F71E27",
+    borderWidth: 2,
+  },
+  timerContainer: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  timerText: {
+    fontSize: 16,
+    color: '#666666',
+  },
+  resendContainer: {
+    alignItems: "center",
+  },
+  resendText: {
+    color: '#666666',
+    fontSize: 16,
+  },
+  resendLink: {
+    color: "#F71E27",
+    fontWeight: "600",
+    fontSize: 16,
+    marginTop: 10,
+  },
+  infoContainer: {
+    backgroundColor: '#FFF8E1',
+    borderRadius: 12,
+    padding: 20,
+    marginVertical: 20,
+  },
+  infoText: {
+    fontSize: 14,
+    color: '#999',
+    textAlign: 'center',
+    lineHeight: 20,
+  },
+  backButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  backButton: {
+    padding: 10,
+  },
+  backButtonText: {
+    fontSize: 16,
+    color: '#F71E27',
+    fontWeight: '600',
+  },
 })
 
 export default function OtpVerify() {
@@ -110,78 +124,117 @@ export default function OtpVerify() {
   const thirdInput = useRef(null)
   const fourthInput = useRef(null)
   const navigation = useNavigation()
+  const [otp, setOtp] = useState(['', '', '', ''])
+  
+  const handleOtpChange = (text, index) => {
+    const newOtp = [...otp];
+    newOtp[index] = text;
+    setOtp(newOtp);
+    
+    // Move to next input if text is entered
+    if (text && index < 3) {
+      switch(index) {
+        case 0: secondInput.current.focus(); break;
+        case 1: thirdInput.current.focus(); break;
+        case 2: fourthInput.current.focus(); break;
+      }
+    }
+    
+    // Move to previous input if text is deleted
+    if (!text && index > 0) {
+      switch(index) {
+        case 1: firstInput.current.focus(); break;
+        case 2: secondInput.current.focus(); break;
+        case 3: thirdInput.current.focus(); break;
+      }
+    }
+  }
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={require("../../assets/images/logo.png")}
-      />
-      <Text style={styles.textStyle}>OTP Verification</Text>
-      <View style={styles.content}>
-        <Text style={styles.otpDescription}>
-          Enter the OTP sent to your mobile number
-        </Text>
-        <View style={styles.otpContainer}>
-          <TextInput
-            style={styles.otpInput}
-            keyboardType="numeric"
-            maxLength={1}
-            ref={firstInput}
-            onChangeText={(text) => {
-              if (text) {
-                secondInput.current.focus()
-              }
-            }}
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.logoContainer}>
+          <Image
+            style={styles.logo}
+            source={require("../../assets/images/logo.png")}
           />
-          <TextInput
-            style={styles.otpInput}
-            keyboardType="numeric"
-            maxLength={1}
-            ref={secondInput}
-            onChangeText={(text) => {
-              if (text) {
-                thirdInput.current.focus()
-              } else {
-                firstInput.current.focus()
-              }
-            }}
-          />
-          <TextInput
-            style={styles.otpInput}
-            keyboardType="numeric"
-            maxLength={1}
-            ref={thirdInput}
-            onChangeText={(text) => {
-              if (text) {
-                fourthInput.current.focus()
-              } else {
-                secondInput.current.focus()
-              }
-            }}
-          />
-          <TextInput
-            style={styles.otpInput}
-            keyboardType="numeric"
-            maxLength={1}
-            ref={fourthInput}
-            onChangeText={(text) => {
-              if (!text) {
-                thirdInput.current.focus()
-              }
-            }}
-          />
+          <Text style={styles.appName}>SOS Doctor</Text>
         </View>
-      </View>
-      <TouchableOpacity style={styles.greenButton} onPress={() => navigation.navigate('HomeScreen')}>
-        <Text style={styles.buttonText}>Verify</Text>
-      </TouchableOpacity>
-      <View style={styles.resendContainer}>
-        <Text style={styles.resendText}>Didn't receive OTP?</Text>
-        <TouchableOpacity>
-          <Text style={styles.resendLink}>Resend OTP</Text>
-        </TouchableOpacity>
-      </View>
+        
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>OTP Verification</Text>
+          <Text style={styles.subtitle}>
+            Enter the 4-digit code sent to your mobile number
+          </Text>
+          
+          <View style={styles.otpContainer}>
+            <TextInput
+              style={[styles.otpInput, otp[0] !== '' && styles.activeOtpInput]}
+              keyboardType="numeric"
+              maxLength={1}
+              ref={firstInput}
+              value={otp[0]}
+              onChangeText={(text) => handleOtpChange(text, 0)}
+            />
+            <TextInput
+              style={[styles.otpInput, otp[1] !== '' && styles.activeOtpInput]}
+              keyboardType="numeric"
+              maxLength={1}
+              ref={secondInput}
+              value={otp[1]}
+              onChangeText={(text) => handleOtpChange(text, 1)}
+            />
+            <TextInput
+              style={[styles.otpInput, otp[2] !== '' && styles.activeOtpInput]}
+              keyboardType="numeric"
+              maxLength={1}
+              ref={thirdInput}
+              value={otp[2]}
+              onChangeText={(text) => handleOtpChange(text, 2)}
+            />
+            <TextInput
+              style={[styles.otpInput, otp[3] !== '' && styles.activeOtpInput]}
+              keyboardType="numeric"
+              maxLength={1}
+              ref={fourthInput}
+              value={otp[3]}
+              onChangeText={(text) => handleOtpChange(text, 3)}
+            />
+          </View>
+          
+          <View style={styles.timerContainer}>
+            <Text style={styles.timerText}>Resend code in 02:59</Text>
+          </View>
+          
+          <Button
+            title="Verify OTP"
+            onPress={() => navigation.navigate('UpdatePassword')}
+            disabled={otp.some(digit => digit === '')}
+          />
+          
+          <View style={styles.resendContainer}>
+            <Text style={styles.resendText}>Didn't receive OTP?</Text>
+            <TouchableOpacity>
+              <Text style={styles.resendLink}>Resend OTP</Text>
+            </TouchableOpacity>
+          </View>
+          
+          <View style={styles.infoContainer}>
+            <Text style={styles.infoText}>
+              If you're having trouble receiving the OTP, please check your spam folder or contact support.
+            </Text>
+          </View>
+          
+          <View style={styles.backButtonContainer}>
+            <TouchableOpacity 
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}
+            >
+              <Text style={styles.backButtonText}>Back to Login</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   )
 }

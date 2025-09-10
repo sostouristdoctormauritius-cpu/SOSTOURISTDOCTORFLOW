@@ -1,91 +1,53 @@
 import React from "react";
-import { ScrollView, StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
+import { ScrollView, StyleSheet, View, Text, TouchableOpacity, Image, SafeAreaView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import PropTypes from 'prop-types';
-
-const DATA = [
-  {
-    id: "1",
-    title: "Instant Online Consultation",
-    description: "Connect with doctors instantly through secure chat or video calls.",
-    centerImage: require("../assets/images/instantOnline.png"),
-  },
-  {
-    id: "2",
-    title: "E-Prescription",
-    description: "Receive digital prescriptions directly on your phone after consultation.",
-    centerImage: require("../assets/images/ePrescription.png"),
-  },
-  {
-    id: "3",
-    title: "Home Visit",
-    description: "Request a doctor to visit you at your home or preferred location.",
-    centerImage: require("../assets/images/homeVisit.png"),
-  }
-];
 
 const AboutScreen = () => {
   const navigation = useNavigation();
-  const [scrollIndex, setScrollIndex] = React.useState(0);
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        onScroll={(event) => {
-          const offsetX = event.nativeEvent.contentOffset.x;
-          const page = Math.round(offsetX / event.nativeEvent.layoutMeasurement.width);
-          setScrollIndex(page);
-        }}
-        scrollEventThrottle={16}
-      >
-        {DATA.map((slide) => (
-          <View key={slide.id} style={styles.slideContainer}>
-            <Image source={slide.centerImage} style={styles.slideImage} />
-            <Text style={styles.slideTitle}>{slide.title}</Text>
-            <Text style={styles.slideDescription}>{slide.description}</Text>
-          </View>
-        ))}
-      </ScrollView>
-      <View style={styles.indicatorContainer}>
-        {DATA.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.indicator,
-              scrollIndex === index && styles.activeIndicator,
-            ]}
-          />
-        ))}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>About Us</Text>
+        <View style={{ width: 24 }} />
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          if (scrollIndex < DATA.length - 1) {
-            setScrollIndex(scrollIndex + 1);
-          } else {
-            navigation.navigate('RegisterWithEmail');
-          }
-        }}
-      >
-        <Text style={styles.labelStyle}>Next</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.btnSkip}
-        onPress={() => navigation.navigate('SignInWithEmail')}
-      >
-        <Text style={styles.skipLabel}>Skip for now</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+      
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Our Mission</Text>
+          <Text style={styles.sectionText}>
+            At SOS Doctor, our mission is to provide accessible, high-quality healthcare services to everyone, everywhere. We believe that healthcare should be convenient, affordable, and personalized.
+          </Text>
+        </View>
 
-AboutScreen.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Our Vision</Text>
+          <Text style={styles.sectionText}>
+            To be the leading digital healthcare platform, empowering individuals to take control of their health and well-being with confidence and ease.
+          </Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Contact Us</Text>
+          <Text style={styles.sectionText}>Email: support@sosdoctor.com</Text>
+          <Text style={styles.sectionText}>Phone: +1 (123) 456-7890</Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Legal</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
+            <Text style={styles.linkText}>Privacy Policy</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('TermsAndConditions')}>
+            <Text style={styles.linkText}>Terms & Conditions</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 export default AboutScreen;
@@ -93,70 +55,48 @@ export default AboutScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    backgroundColor: "#F9F9F9",
   },
-  slideContainer: {
-    width: 300,
-    alignItems: "center",
-    justifyContent: "center",
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+  },
+  backButton: {
+    fontSize: 24,
+    color: '#333',
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: '#333',
+  },
+  scrollViewContent: {
     padding: 20,
   },
-  slideImage: {
-    width: 200,
-    height: 200,
-    resizeMode: "contain",
-    marginBottom: 20,
+  section: {
+    marginBottom: 30,
   },
-  slideTitle: {
-    fontSize: 22,
+  sectionTitle: {
+    fontSize: 20,
     fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 10,
+    color: "#333",
+    marginBottom: 15,
   },
-  slideDescription: {
+  sectionText: {
     fontSize: 16,
-    textAlign: "center",
     color: "#666",
-    marginBottom: 20,
-  },
-  indicatorContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    lineHeight: 24,
     marginBottom: 10,
   },
-  indicator: {
-    backgroundColor: "#CCE9DC",
-    borderRadius: 6,
-    height: 12,
-    width: 12,
-    marginLeft: 12,
-  },
-  activeIndicator: {
-    backgroundColor: "blue",
-  },
-  button: {
-    width: "90%",
-    backgroundColor: "lightgreen",
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  labelStyle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    paddingTop: 10,
-    color: "white",
-  },
-  btnSkip: {
-    marginTop: 10,
-  },
-  skipLabel: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "blue",
+  linkText: {
+    fontSize: 16,
+    color: "#F71E27",
+    textDecorationLine: 'underline',
+    marginBottom: 5,
   },
 });

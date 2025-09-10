@@ -1,6 +1,7 @@
-import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, TextInput } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { Button } from '../../components';
 
 const DUMMY_SYMPTOMS = [
   "Fever",
@@ -9,51 +10,82 @@ const DUMMY_SYMPTOMS = [
   "Sore Throat",
   "Fatigue",
   "Nausea",
+  "Back Pain",
+  "Joint Pain",
+  "Stomach Ache",
+  "Dizziness",
+  "Skin Rash",
+  "Eye Irritation"
 ];
 
 const ConsultationSymptomSelectionScreen = () => {
-  
   const navigation = useNavigation();
+  const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+  const [additionalSymptom, setAdditionalSymptom] = useState('');
+
+  const toggleSymptom = (symptom) => {
+    if (selectedSymptoms.includes(symptom)) {
+      setSelectedSymptoms(selectedSymptoms.filter(s => s !== symptom));
+    } else {
+      setSelectedSymptoms([...selectedSymptoms, symptom]);
+    }
+  };
 
   const openAddSymptomModal = () => {
     navigation.navigate('AddSymptomModal');
   };
 
   return (
-    <View style={styles.$screenContentContainerStyle}>
-      <TouchableOpacity style={styles.$backButtonStyle} onPress={() => navigation.goBack()}>
-        <Text>{'<'}</Text>
-      </TouchableOpacity>
-      <Text style={styles.$titleStyle}>
-        What are your symptoms?
-      </Text>
-      <View style={styles.symptomsContainer}>
-        {DUMMY_SYMPTOMS.map((symptom, index) => (
-          <TouchableOpacity key={index} style={styles.symptomButton} disabled={true}>
-            <Text style={styles.symptomText}>{symptom}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <Text style={styles.$additionalSymptomTitleStyle}>
-        Additional Symptom
-      </Text>
-      <TouchableOpacity 
-        style={styles.$additionalSymptomNoteStyle} 
-        onPress={openAddSymptomModal}
-      >
-        <Text style={styles.additionalSymptomPlaceholder}>
-          Enter your symptoms here...
-        </Text>
-      </TouchableOpacity>
-
-      {/* PricingFooter Placeholder */}
-      <View style={styles.pricingFooter}>
-        <TouchableOpacity 
-          style={styles.continueButton} 
-          onPress={() => navigation.navigate("ConsultationBookAppointment")}
-        >
-          <Text style={styles.continueButtonText}>Continue</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Text style={styles.backButtonText}>{"<"}</Text>
         </TouchableOpacity>
+        <Text style={styles.title}>
+          What are your symptoms?
+        </Text>
+        <View style={styles.placeholder} />
+      </View>
+      
+      <ScrollView style={styles.content}>
+        <Text style={styles.sectionTitle}>Common Symptoms</Text>
+        <View style={styles.symptomsContainer}>
+          {DUMMY_SYMPTOMS.map((symptom, index) => (
+            <TouchableOpacity 
+              key={index} 
+              style={[
+                styles.symptomButton, 
+                selectedSymptoms.includes(symptom) && styles.selectedSymptomButton
+              ]}
+              onPress={() => toggleSymptom(symptom)}
+            >
+              <Text style={[
+                styles.symptomText,
+                selectedSymptoms.includes(symptom) && styles.selectedSymptomText
+              ]}>
+                {symptom}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        
+        <Text style={styles.sectionTitle}>Additional Symptom</Text>
+        <View style={styles.additionalSymptomContainer}>
+          <TextInput
+            style={styles.additionalSymptomInput}
+            placeholder="Enter your symptoms here..."
+            value={additionalSymptom}
+            onChangeText={setAdditionalSymptom}
+            multiline
+          />
+        </View>
+      </ScrollView>
+      
+      <View style={styles.footer}>
+        <Button 
+          title="Continue" 
+          onPress={() => navigation.navigate("ConsultationBookAppointment")}
+        />
       </View>
     </View>
   );
@@ -62,76 +94,93 @@ const ConsultationSymptomSelectionScreen = () => {
 export default ConsultationSymptomSelectionScreen;
 
 const styles = StyleSheet.create({
-  $screenContentContainerStyle: {
+  container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 20,
-    paddingTop: 20,
   },
-  $backButtonStyle: {
-    alignSelf: 'flex-start',
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#fff',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+  },
+  backButton: {
     padding: 10,
   },
-  $titleStyle: {
-    fontSize: 24,
+  backButtonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  title: {
+    fontSize: 18,
     fontWeight: "bold",
-    textAlign: "center",
-    marginVertical: 20,
+    color: '#333',
+  },
+  placeholder: {
+    width: 40,
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 15,
+    color: '#333',
   },
   symptomsContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "center",
-    marginVertical: 20,
+    justifyContent: "flex-start",
   },
   symptomButton: {
-    backgroundColor: "#e0e0e0",
-    borderRadius: 20,
-    paddingVertical: 10,
+    backgroundColor: "#f0f0f0",
+    borderRadius: 25,
+    paddingVertical: 12,
     paddingHorizontal: 20,
     margin: 5,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  selectedSymptomButton: {
+    backgroundColor: "#F71E27",
+    borderColor: "#F71E27",
   },
   symptomText: {
     fontSize: 14,
     color: "#333",
   },
-  $additionalSymptomTitleStyle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginTop: 30,
-    marginBottom: 10,
+  selectedSymptomText: {
+    color: "#fff",
   },
-  $additionalSymptomNoteStyle: {
+  additionalSymptomContainer: {
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10,
+    borderColor: "#e0e0e0",
+    borderRadius: 12,
     padding: 15,
-    minHeight: 60,
-    justifyContent: "center",
+    minHeight: 100,
+    justifyContent: "flex-start",
+    backgroundColor: '#fafafa',
+    marginBottom: 20,
   },
-  additionalSymptomPlaceholder: {
-    color: "#999",
+  additionalSymptomInput: {
     fontSize: 16,
+    color: '#333',
+    textAlignVertical: 'top',
   },
-  pricingFooter: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
+  footer: {
     padding: 20,
     backgroundColor: "#fff",
     borderTopWidth: 1,
     borderTopColor: "#eee",
-  },
-  continueButton: {
-    backgroundColor: "#F71E27",
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  continueButtonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
   },
 });

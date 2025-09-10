@@ -1,10 +1,10 @@
-import React, { useState } from "react"
-import { ActivityIndicator, FlatList, StyleSheet, View, Text, TouchableOpacity } from "react-native"
-import { useNavigation } from '@react-navigation/native'
+import React, { useState } from "react";
+import { FlatList, StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 const AppointmentStatus = {
-  PENDING: "pending",
-  COMPLETE: "complete",
+  UPCOMING: "upcoming",
+  COMPLETED: "completed",
   CANCELLED: "cancelled",
 };
 
@@ -12,170 +12,301 @@ const DUMMY_APPOINTMENTS = [
   {
     id: "1",
     doctorName: "Dr. John Doe",
-    appointmentStatus: AppointmentStatus.PENDING,
-    consultationType: "Voice Call",
-    date: "2025-09-10",
+    speciality: "Cardiologist",
+    status: AppointmentStatus.UPCOMING,
+    type: "Voice Call",
+    date: "25 May 2023",
     time: "10:00 AM",
+    avatar: require('../assets/images/profile.png'),
   },
   {
     id: "2",
     doctorName: "Dr. Jane Smith",
-    appointmentStatus: AppointmentStatus.COMPLETE,
-    consultationType: "Video Call",
-    date: "2025-09-09",
+    speciality: "Dermatologist",
+    status: AppointmentStatus.UPCOMING,
+    type: "Video Call",
+    date: "26 May 2023",
     time: "02:00 PM",
+    avatar: require('../assets/images/profile.png'),
   },
   {
     id: "3",
     doctorName: "Dr. Bob Johnson",
-    appointmentStatus: AppointmentStatus.CANCELLED,
-    consultationType: "Home Visit",
-    date: "2025-09-08",
+    speciality: "Pediatrician",
+    status: AppointmentStatus.COMPLETED,
+    type: "Chat",
+    date: "20 May 2023",
     time: "11:00 AM",
+    avatar: require('../assets/images/profile.png'),
   },
-]
+  {
+    id: "4",
+    doctorName: "Dr. Alice Brown",
+    speciality: "Neurologist",
+    status: AppointmentStatus.CANCELLED,
+    type: "Home Visit",
+    date: "18 May 2023",
+    time: "03:30 PM",
+    avatar: require('../assets/images/profile.png'),
+  },
+];
 
 const AppointmentScreen = () => {
-  const isFetching = false // Static for visual recreation
-  const [apptState, setApptState] = useState(AppointmentStatus.PENDING) // Static for visual recreation
-  const navigation = useNavigation()
+  const [activeTab, setActiveTab] = useState(AppointmentStatus.UPCOMING);
+  const navigation = useNavigation();
 
-  if (isFetching) {
+  const filteredAppointments = DUMMY_APPOINTMENTS.filter(appt => appt.status === activeTab);
+
+  const getStatusStyles = (status) => {
+    switch (status) {
+      case AppointmentStatus.UPCOMING:
+        return { badge: styles.upcomingBadge, text: styles.upcomingText };
+      case AppointmentStatus.COMPLETED:
+        return { badge: styles.completedBadge, text: styles.completedText };
+      case AppointmentStatus.CANCELLED:
+        return { badge: styles.cancelledBadge, text: styles.cancelledText };
+      default:
+        return {};
+    }
+  };
+
+  const renderAppointmentItem = ({ item }) => {
+    const statusStyles = getStatusStyles(item.status);
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#30B549" />
+      <View style={styles.appointmentCard}>
+        <View style={styles.cardHeader}>
+          <Image source={item.avatar} style={styles.doctorImage} />
+          <View style={styles.doctorInfo}>
+            <Text style={styles.doctorName}>{item.doctorName}</Text>
+            <Text style={styles.doctorSpeciality}>{item.speciality}</Text>
+          </View>
+          <View style={[styles.statusBadge, statusStyles.badge]}>
+            <Text style={[styles.statusText, statusStyles.text]}>{item.status}</Text>
+          </View>
+        </View>
+        <View style={styles.cardBody}>
+          <View style={styles.detailRow}>
+            <Text style={styles.detailLabel}>Date & Time</Text>
+            <Text style={styles.detailValue}>{item.date} at {item.time}</Text>
+          </View>
+          <View style={styles.detailRow}>
+            <Text style={styles.detailLabel}>Consultation Type</Text>
+            <Text style={styles.detailValue}>{item.type}</Text>
+          </View>
+        </View>
+        <View style={styles.cardFooter}>
+          {item.status === AppointmentStatus.UPCOMING && (
+            <TouchableOpacity style={[styles.actionButton, styles.cancelButton]} onPress={() => navigation.navigate('AppointmentCancellation')}>
+              <Text style={[styles.actionButtonText, styles.cancelButtonText]}>Cancel Appointment</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity style={[styles.actionButton, styles.detailsButton]}>
+            <Text style={[styles.actionButtonText, styles.detailsButtonText]}>View Details</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    )
-  }
+    );
+  };
 
   return (
-    <View style={styles.root}>
-      {/* AppointmentTabView Placeholder */}
-      <View style={styles.tabView}>
-        <TouchableOpacity style={styles.tabButton} onPress={() => setApptState(AppointmentStatus.PENDING)}>
-          <Text style={styles.tabButtonText}>Pending</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={require('../assets/images/down_arrow.png')} style={styles.backIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.tabButton} onPress={() => setApptState(AppointmentStatus.COMPLETE)}>
-          <Text style={styles.tabButtonText}>Completed</Text>
-        </TouchableOpacity>
+        <Text style={styles.headerTitle}>My Appointments</Text>
+        <View style={{ width: 24 }} />
       </View>
 
-      {/* RescheduleDisclaimer Placeholder */}
-      {apptState === AppointmentStatus.PENDING && (
-        <View style={styles.disclaimerContainer}>
-          <Text style={styles.disclaimerText}>Reschedule Disclaimer: Click here for more info.</Text>
-        </View>
-      )}
+      <View style={styles.tabContainer}>
+        {Object.values(AppointmentStatus).map(status => (
+          <TouchableOpacity 
+            key={status}
+            style={[styles.tabButton, activeTab === status && styles.activeTabButton]}
+            onPress={() => setActiveTab(status)}
+          >
+            <Text style={[styles.tabButtonText, activeTab === status && styles.activeTabButtonText]}>
+              {status.charAt(0).toUpperCase() + status.slice(1)}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
 
       <FlatList
-        data={DUMMY_APPOINTMENTS.filter(appt => appt.appointmentStatus === apptState)}
+        data={filteredAppointments}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.appointmentListItem}>
-            <Text style={styles.doctorName}>{item.doctorName}</Text>
-            <Text>{item.consultationType}</Text>
-            <Text>{item.date} at {item.time}</Text>
-            <Text style={styles.appointmentStatus}>{item.appointmentStatus}</Text>
-            <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('AppointmentCancellation')}>
-              <Text style={styles.detailsButtonText}>View Details</Text>
-            </TouchableOpacity>
+        renderItem={renderAppointmentItem}
+        contentContainerStyle={styles.listContainer}
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>No appointments in this category.</Text>
           </View>
-        )}
+        }
       />
     </View>
   );
-}
+};
 
-export default AppointmentScreen
+export default AppointmentScreen;
 
 const styles = StyleSheet.create({
-  root: {
+  container: {
     flex: 1,
-    paddingTop: 30,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#F9F9F9',
   },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 20,
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
   },
-  tabView: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginBottom: 20,
+  backIcon: {
+    width: 24,
+    height: 24,
+    transform: [{ rotate: '90deg' }]
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 10,
   },
   tabButton: {
-    padding: 10,
-    borderBottomWidth: 2,
-    borderBottomColor: "transparent",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+  },
+  activeTabButton: {
+    backgroundColor: '#F71E27',
   },
   tabButtonText: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#666',
   },
-  disclaimerContainer: {
-    backgroundColor: "#ffe0b2",
-    padding: 10,
-    marginHorizontal: 10,
-    borderRadius: 5,
-    marginBottom: 10,
+  activeTabButtonText: {
+    color: '#FFFFFF',
   },
-  disclaimerText: {
-    color: "#e65100",
+  listContainer: {
+    padding: 20,
   },
-  appointmentListItem: {
-    backgroundColor: "white",
-    padding: 15,
-    marginHorizontal: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: "#eee",
+  appointmentCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  cardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  doctorImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 15,
+  },
+  doctorInfo: {
+    flex: 1,
   },
   doctorName: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
+    color: '#333',
   },
-  appointmentStatus: {
-    marginTop: 5,
-    fontWeight: "bold",
-    color: "blue",
+  doctorSpeciality: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 4,
   },
-  detailsButton: {
-    backgroundColor: "lightgray",
-    padding: 8,
-    borderRadius: 5,
-    marginTop: 10,
-    alignSelf: "flex-end",
+  statusBadge: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 15,
   },
-  detailsButtonText: {
+  statusText: {
     fontSize: 12,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
   },
-  appointmentDetailsModal: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    backgroundColor: "white",
-    padding: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    elevation: 5,
+  upcomingBadge: { backgroundColor: '#FFF8E1' },
+  upcomingText: { color: '#FFA000' },
+  completedBadge: { backgroundColor: '#E8F5E9' },
+  completedText: { color: '#388E3C' },
+  cancelledBadge: { backgroundColor: '#FFEBEE' },
+  cancelledText: { color: '#D32F2F' },
+  cardBody: {
+    borderTopWidth: 1,
+    borderTopColor: '#E0E0E0',
+    paddingTop: 15,
   },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
+  detailRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 10,
   },
-  modalButton: {
-    backgroundColor: "lightgreen",
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-    alignItems: "center",
+  detailLabel: {
+    fontSize: 14,
+    color: '#666',
   },
-  modalButtonText: {
-    color: "white",
-    fontWeight: "bold",
+  detailValue: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
   },
-})
+  cardFooter: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    borderTopWidth: 1,
+    borderTopColor: '#E0E0E0',
+    paddingTop: 15,
+    marginTop: 5,
+  },
+  actionButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginLeft: 10,
+  },
+  detailsButton: {
+    backgroundColor: '#F71E27',
+  },
+  detailsButtonText: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
+  cancelButton: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#F71E27',
+  },
+  cancelButtonText: {
+    color: '#F71E27',
+    fontWeight: '600',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 50,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: '#999',
+  },
+});

@@ -1,87 +1,102 @@
-import React from "react";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
-import { useNavigation } from '@react-navigation/native'
+import React, { useState } from "react";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ScrollView, SafeAreaView } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import { Button } from '../../components';
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flex: 1,
-  },
-  content: {
-    alignItems: "center",
-    marginBottom: 32,
-    paddingTop: 10,
-    width: "100%",
-  },
-  image: {
-    height: 40,
-    marginBottom: 70,
-    marginTop: 15,
-    width: 230,
-  },
-  textStyle: {
-    marginBottom: 35,
-  },
-  textInputContainer: {
-    width: "80%",
-    height: 50,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 25,
-    paddingHorizontal: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  textInput: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  envelopeIcon: {
-    width: 20,
-    height: 20,
-    resizeMode: "contain",
-  },
-  greenButton: {
-    backgroundColor: "lightgreen",
-    padding: 15,
-    alignItems: "center",
-    borderRadius: 5,
-    width: "80%",
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-  },
-})
-
-export default function ForgotPassword() {
-  const navigation = useNavigation()
+const ForgotPassword = () => {
+  const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  
   return (
-    <View
-      style={styles.container}
-    >
-      <Image
-        style={styles.image}
-        source={require("../../assets/images/logo.png")}
-      />
-      <Text style={styles.textStyle}>Forgot Password</Text>
-      <View style={styles.content}>
-        <View style={styles.textInputContainer}>
-          <Image source={require("../../assets/images/envelope.png")} style={styles.envelopeIcon} />
-          <TextInput
-            placeholder="Email"
-            style={styles.textInput}
-            keyboardType="email-address"
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.backButton}>←</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Forgot Password</Text>
+        <View style={{ width: 24 }} />
+      </View>
+
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.logoContainer}>
+          <Image
+            style={styles.logo}
+            source={require("../../assets/images/logo.png")}
           />
         </View>
-      </View>
-      <TouchableOpacity
-        style={styles.greenButton}
-        onPress={() => navigation.navigate('OtpVerify')}
-      >
-        <Text style={styles.buttonText}>Reset</Text>
-      </TouchableOpacity>
-    </View>
-  )
+        
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>Reset Your Password</Text>
+          <Text style={styles.subtitle}>
+            Enter your email address and we'll send you a link to reset your password.
+          </Text>
+          
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>Email Address</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Enter your email"
+              keyboardType="email-address"
+              value={email}
+              onChangeText={setEmail}
+            />
+          </View>
+          
+          <Button
+            title="Send Reset Link"
+            onPress={() => navigation.navigate('OtpVerify')}
+          />
+          
+          <TouchableOpacity 
+            style={styles.backToLoginButton}
+            onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.backToLoginText}>Back to Login</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
+
+export default ForgotPassword;
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#F9F9F9' },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+  },
+  backButton: { fontSize: 24, color: '#333' },
+  headerTitle: { fontSize: 20, fontWeight: "bold", color: '#333' },
+  scrollViewContent: { flexGrow: 1, justifyContent: 'center', padding: 20 },
+  logoContainer: { alignItems: 'center', marginBottom: 30 },
+  logo: { width: 100, height: 100, resizeMode: 'contain', marginBottom: 10 },
+  formContainer: { width: '100%' },
+  title: { fontSize: 24, fontWeight: 'bold', color: '#333', marginBottom: 10, textAlign: 'center' },
+  subtitle: { fontSize: 16, color: '#666', textAlign: 'center', marginBottom: 30, lineHeight: 24 },
+  inputGroup: { marginBottom: 20 },
+  inputLabel: { fontSize: 16, fontWeight: '600', color: '#333', marginBottom: 8 },
+  textInput: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 15,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  backToLoginButton: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  backToLoginText: {
+    color: '#F71E27',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});

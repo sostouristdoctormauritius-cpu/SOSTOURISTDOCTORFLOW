@@ -1,92 +1,113 @@
-import React from "react"
+import React from "react";
 import {
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-} from "react-native"
-import { useNavigation } from '@react-navigation/native'
+  Image,
+} from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 const IncomingCallScreen = () => {
-  const callerName = "SOS Tourist Doctor" // Static for visual recreation
-  const doctorName = "Dr. John Doe" // Static for visual recreation
-  const navigation = useNavigation()
+  const callerName = "Dr. Alice Smith";
+  const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={styles.incomingCallContainer}>
-      <View style={styles.callerInfoContainer}>
-        <Text style={styles.callerName}>{callerName}</Text>
-        <Text style={styles.callStatus}>
-          {doctorName ? `Dr. ${doctorName}` : "SOS Tourist Doctor"}
-        </Text>
-        <Text style={styles.callStatus}>Incoming video call...</Text>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.contentContainer}>
+        <View style={styles.callerInfoContainer}>
+          <View style={styles.avatarContainer}>
+            <Image 
+              source={require('../assets/images/profile.png')} 
+              style={styles.avatar} 
+            />
+          </View>
+          <Text style={styles.callerName}>{callerName}</Text>
+          <Text style={styles.callStatus}>Incoming Video Call...</Text>
+        </View>
 
-      <View style={styles.actionsContainer}>
-        <TouchableOpacity
-          style={[styles.actionButton, styles.declineButton]}
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.icon}>📞</Text> {/* Placeholder for PhoneOff icon */}
-        </TouchableOpacity>
+        <View style={styles.actionsContainer}>
+          <TouchableOpacity
+            style={[styles.actionButton, styles.declineButton]}
+            onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.actionButtonText}>Decline</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[styles.actionButton, styles.acceptButton]}
-          onPress={() => navigation.navigate('StreamVideoCallScreen')}
-        >
-          <Text style={styles.icon}>📞</Text> {/* Placeholder for PhoneIcon */}
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.actionButton, styles.acceptButton]}
+            onPress={() => navigation.navigate('StreamVideoCallScreen')}
+          >
+            <Text style={styles.actionButtonText}>Accept</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default IncomingCallScreen
+export default IncomingCallScreen;
 
 const styles = StyleSheet.create({
-  acceptButton: {
-    backgroundColor: "#34C759",
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
   },
-  actionButton: {
+  contentContainer: {
+    flex: 1,
+    justifyContent: "space-around",
+    padding: 20,
+    alignItems: 'center',
+  },
+  callerInfoContainer: {
     alignItems: "center",
-    borderRadius: 32,
-    height: 64,
+  },
+  avatarContainer: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    backgroundColor: "#F0F0F0",
     justifyContent: "center",
-    width: 64,
+    alignItems: "center",
+    marginBottom: 30,
+  },
+  avatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+  },
+  callerName: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 10,
+  },
+  callStatus: {
+    fontSize: 18,
+    color: "#666",
   },
   actionsContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginBottom: 40,
+    width: '100%',
   },
-  callStatus: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    marginBottom: 12,
-    opacity: 0.8,
-  },
-  callerInfoContainer: {
+  actionButton: {
+    width: '45%',
+    paddingVertical: 18,
+    borderRadius: 12,
+    justifyContent: "center",
     alignItems: "center",
-    marginTop: 200, // Placeholder for Dimensions.get("window").height / 2 - 100
-  },
-  callerName: {
-    color: "#FFFFFF",
-    fontSize: 28,
-    fontWeight: "bold",
-    marginVertical: 12,
   },
   declineButton: {
     backgroundColor: "#FF3B30",
   },
-  incomingCallContainer: {
-    backgroundColor: "rgba(0,0,0,0.9)",
-    flex: 1,
-    justifyContent: "space-between",
-    padding: 20,
+  acceptButton: {
+    backgroundColor: "#34C759",
   },
-  icon: {
-    fontSize: 32,
+  actionButtonText: {
+    fontSize: 18,
     color: "white",
+    fontWeight: 'bold',
   },
-})
+});
