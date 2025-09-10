@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Image } from "react-native"
+import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native"
 import { useNavigation } from '@react-navigation/native'
 import { Button } from '../components'
 

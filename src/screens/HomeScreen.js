@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Dimensions,
   StyleSheet,
   View,
   ScrollView,
@@ -9,8 +8,6 @@ import {
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { Greeting, QuickActions, Services, UpcomingAppointment } from '../components';
-
-const { width } = Dimensions.get("window");
 
 export default function HomeScreen() {
   const navigation = useNavigation();

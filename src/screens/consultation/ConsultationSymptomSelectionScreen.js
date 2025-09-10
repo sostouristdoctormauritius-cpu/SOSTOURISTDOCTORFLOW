@@ -31,9 +31,6 @@ const ConsultationSymptomSelectionScreen = () => {
     }
   };
 
-  const openAddSymptomModal = () => {
-    navigation.navigate('AddSymptomModal');
-  };
 
   return (
     <View style={styles.container}>

@@ -62,7 +62,7 @@ const DiscountedOffersScreen = () => {
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Special Offers</Text>
-        <View style={{ width: 24 }} />
+        <View style={styles.headerSpacer} />
       </View>
 
       <FlatList
@@ -91,6 +91,9 @@ const styles = StyleSheet.create({
   },
   backButton: { fontSize: 24, color: '#333' },
   headerTitle: { fontSize: 20, fontWeight: "bold", color: '#333' },
+  headerSpacer: {
+    width: 24,
+  },
   listContent: { padding: 20 },
   offerCard: {
     backgroundColor: "#FFFFFF",

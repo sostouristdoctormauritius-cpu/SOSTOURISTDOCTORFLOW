@@ -115,7 +115,7 @@ const AppointmentScreen = () => {
           <Image source={require('../assets/images/down_arrow.png')} style={styles.backIcon} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>My Appointments</Text>
-        <View style={{ width: 24 }} />
+        <View style={styles.headerSpacer} />
       </View>
 
       <View style={styles.tabContainer}>
@@ -172,6 +172,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#333',
+  },
+  headerSpacer: {
+    width: 24,
   },
   tabContainer: {
     flexDirection: 'row',

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, SafeAreaView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { Button } from '../../components';
+import ErrorModal from '../../components/ErrorModal';
 
 // Mock data for available time slots
 const availableTimes = {
@@ -12,6 +14,7 @@ const availableTimes = {
 const AppointmentBookingScreen = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
   const navigation = useNavigation();
 
   const handleDateSelect = (date) => {
@@ -28,8 +31,8 @@ const AppointmentBookingScreen = () => {
       // Navigate to a confirmation screen
       navigation.navigate('OrderConfirmation', { date: selectedDate, time: selectedTime });
     } else {
-      // Show an alert or message to select date and time
-      alert('Please select a date and time for your appointment.');
+      // Show an error modal to select date and time
+      setErrorModalVisible(true);
     }
   };
 
@@ -37,13 +40,13 @@ const AppointmentBookingScreen = () => {
   const dates = Object.keys(availableTimes);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Book Appointment</Text>
-        <View style={{ width: 24 }} />
+        <View style={styles.headerSpacer} />
       </View>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <Text style={styles.sectionTitle}>Select a Date</Text>
@@ -77,11 +80,17 @@ const AppointmentBookingScreen = () => {
         )}
       </ScrollView>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.bookButton} onPress={handleBooking}>
+        <Button onPress={handleBooking}>
           <Text style={styles.bookButtonText}>Book Now</Text>
-        </TouchableOpacity>
+        </Button>
       </View>
-    </View>
+      <ErrorModal 
+        visible={errorModalVisible}
+        onClose={() => setErrorModalVisible(false)}
+        title="Appointment Booking"
+        message="Please select a date and time for your appointment."
+      />
+    </SafeAreaView>
   );
 };
 
@@ -104,6 +113,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#333',
+  },
+  headerSpacer: {
+    width: 24,
   },
   contentContainer: {
     padding: 20,

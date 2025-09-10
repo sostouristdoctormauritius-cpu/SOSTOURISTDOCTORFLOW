@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, StyleSheet, View, Text, TouchableOpacity, Image, SafeAreaView } from "react-native";
+import { ScrollView, StyleSheet, View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 
 const AboutScreen = () => {
@@ -12,7 +12,7 @@ const AboutScreen = () => {
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>About Us</Text>
-        <View style={{ width: 24 }} />
+        <View style={styles.headerSpacer} />
       </View>
       
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -74,6 +74,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: '#333',
+  },
+  headerSpacer: {
+    width: 24,
   },
   scrollViewContent: {
     padding: 20,

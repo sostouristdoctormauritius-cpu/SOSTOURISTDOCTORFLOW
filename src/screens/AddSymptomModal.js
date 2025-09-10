@@ -31,7 +31,7 @@ export default function AddSymptomModalScreen() {
       <View style={styles.header}>
         <CloseButton onPress={() => navigation.goBack()} />
         <Text style={styles.title}>Add Symptoms</Text>
-        <View style={{ width: 50 }} />
+        <View style={styles.headerSpacer} />
       </View>
 
       <ScrollView contentContainerStyle={styles.content}>
@@ -92,6 +92,9 @@ const styles = StyleSheet.create({
     color: "#333",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  headerSpacer: {
+    width: 50,
   },
   content: {
     padding: 20,

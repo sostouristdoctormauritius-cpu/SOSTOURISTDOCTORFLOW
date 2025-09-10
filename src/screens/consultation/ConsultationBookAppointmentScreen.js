@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native'
 import { Button } from '../../components'
 
 const ConsultationBookAppointmentScreen = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date()) // Static for visual recreation
   const [isSlotMorning, setIsSlotMorning] = useState(true) // Static for visual recreation
   const [appointmentTime, setAppointmentTime] = useState("") // Static for visual recreation
   const navigation = useNavigation()
@@ -49,23 +48,23 @@ const ConsultationBookAppointmentScreen = () => {
                   styles.dateItem,
                   index === 0 && styles.selectedDateItem
                 ]}
-                onPress={() => setSelectedDate(index)}
+                onPress={() => {}}
               >
                 <Text style={[
                   styles.dateDay,
-                  index === 0 && styles.selectedDateDay
+                  index === 0 ? styles.selectedDateDay : {}
                 ]}>
                   {date.day}
                 </Text>
                 <Text style={[
                   styles.dateNumber,
-                  index === 0 && styles.selectedDateNumber
+                  index === 0 ? styles.selectedDateNumber : {}
                 ]}>
                   {date.date}
                 </Text>
                 <Text style={[
                   styles.dateMonth,
-                  index === 0 && styles.selectedDateMonth
+                  index === 0 ? styles.selectedDateMonth : {}
                 ]}>
                   {date.month}
                 </Text>

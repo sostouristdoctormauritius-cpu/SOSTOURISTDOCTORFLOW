@@ -28,7 +28,7 @@ const Header = ({
           <Text style={styles.rightButtonText}>⋮</Text>
         </TouchableOpacity>
       ) : (
-        <View style={{ width: 24 }} />
+        <View style={styles.placeholder} />
       )}
     </View>
   );
@@ -73,6 +73,9 @@ const styles = StyleSheet.create({
   },
   rightButtonText: {
     fontSize: 24,
+  },
+  placeholder: {
+    width: 24,
   },
 });
 

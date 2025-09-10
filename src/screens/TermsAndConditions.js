@@ -12,7 +12,7 @@ const TermsAndConditionsScreen = () => {
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Terms & Conditions</Text>
-        <View style={{ width: 24 }} />
+        <View style={styles.headerSpacer} />
       </View>
       
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -137,6 +137,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: '#333',
+  },
+  headerSpacer: {
+    width: 24,
   },
   scrollViewContent: {
     padding: 20,

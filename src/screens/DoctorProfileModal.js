@@ -1,5 +1,5 @@
 import React from "react";
-boardsimport { StyleSheet, View, Text, Image, Modal, ScrollView } from "react-native";
+import { StyleSheet, View, Text, Image, Modal, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { Button, CloseButton } from '../components';
 

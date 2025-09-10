@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ScrollView, SafeAreaView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { Button, Header } from '../../components';

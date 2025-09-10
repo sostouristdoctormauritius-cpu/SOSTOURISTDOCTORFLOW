@@ -1,16 +1,10 @@
-import React, { useEffect, useRef, useCallback } from "react"
+import React, { useEffect, useRef } from "react"
 import { StyleSheet, View, Text, Image, Animated, Easing } from "react-native"
 
 const SplashAnimation = ({ onSplashComplete }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current
   const scaleAnim = useRef(new Animated.Value(0.8)).current
   
-  const handleSplashComplete = useCallback(() => {
-    if (onSplashComplete) {
-      onSplashComplete();
-    }
-  }, [onSplashComplete]);
-
   useEffect(() => {
     // Fade in animation
     Animated.sequence([
@@ -36,9 +30,11 @@ const SplashAnimation = ({ onSplashComplete }) => {
       })
     ]).start(() => {
       // Navigate to next screen after animation completes
-      handleSplashComplete();
+      if (onSplashComplete) {
+        onSplashComplete();
+      }
     });
-  }, [fadeAnim, scaleAnim, handleSplashComplete])
+  }, [fadeAnim, scaleAnim, onSplashComplete])
 
   return (
     <View style={styles.container}>
