@@ -1,6 +1,7 @@
-import React from "react"
-import { FlatList, StyleSheet, View, Text, TouchableOpacity, Image } from "react-native"
-import { useNavigation } from '@react-navigation/native'
+import React from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, SafeAreaView, Linking } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Header } from '../components';
 
 const DUMMY_CONTACTS = [
   {
@@ -35,64 +36,51 @@ const DUMMY_CONTACTS = [
 
 const EmergencyCallScreen = () => {
   const navigation = useNavigation()
-  
-  const handleCallPress = (contact) => {
-    // In a real app, this would initiate a phone call
-    console.log("Calling", contact.phone)
-  }
-
-  const renderContactItem = ({ item }) => (
-    <TouchableOpacity 
-      style={[styles.contactCard, { borderLeftColor: item.color }]}
-      onPress={() => handleCallPress(item)}
-    >
-      <View style={styles.contactInfo}>
-        <Image source={item.icon} style={[styles.contactIcon, { backgroundColor: item.color }]} />
-        <View style={styles.contactText}>
-          <Text style={styles.contactName}>{item.name}</Text>
-          <Text style={styles.contactPhone}>{item.phone}</Text>
-        </View>
-      </View>
-      <View style={[styles.callButton, { backgroundColor: item.color }]}>
-        <Text style={styles.callButtonText}>CALL</Text>
-      </View>
-    </TouchableOpacity>
-  )
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.backButton} 
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.backButtonText}>{"<"}</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Emergency Contacts</Text>
-        <View style={styles.placeholder} />
-      </View>
-      
+    <SafeAreaView style={styles.container}>
+      <Header 
+        title="Emergency Contacts" 
+        onBackPress={() => navigation.goBack()}
+      />
+
       <View style={styles.content}>
         <Text style={styles.description}>
-          In case of emergency, please contact the appropriate service immediately.
+          In case of a medical emergency, please contact the appropriate emergency services immediately.
         </Text>
         
-        <FlatList
-          data={DUMMY_CONTACTS}
-          renderItem={renderContactItem}
-          keyExtractor={(item) => item.id.toString()}
-          style={styles.list}
-          showsVerticalScrollIndicator={false}
-        />
+        <ScrollView style={styles.list}>
+          {DUMMY_CONTACTS.map(contact => (
+            <View 
+              key={contact.id} 
+              style={[styles.contactCard, { borderLeftColor: contact.color }]}
+            >
+              <View style={styles.contactInfo}>
+                <Image source={contact.icon} style={styles.contactIcon} />
+                <View style={styles.contactText}>
+                  <Text style={styles.contactName}>{contact.name}</Text>
+                  <Text style={styles.contactPhone}>{contact.phone}</Text>
+                </View>
+              </View>
+              <TouchableOpacity 
+                style={[styles.callButton, { backgroundColor: contact.color }]}
+                onPress={() => Linking.openURL(`tel:${contact.phone}`)}
+              >
+                <Text style={styles.callButtonText}>Call</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
         
         <View style={styles.warningContainer}>
-          <Text style={styles.warningTitle}>⚠️ Important Notice</Text>
+          <Text style={styles.warningTitle}>⚠️ Important</Text>
           <Text style={styles.warningText}>
-            For medical emergencies, please also contact SOS Doctor Helpline for immediate medical assistance.
+            These emergency contacts are for immediate medical assistance. 
+            For non-emergency medical inquiries, please use the app's consultation feature.
           </Text>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 

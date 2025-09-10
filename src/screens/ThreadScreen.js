@@ -1,6 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native"
 import { useNavigation } from '@react-navigation/native'
+import { Header } from '../components'
 
 const ThreadScreen = () => {
   const navigation = useNavigation()
@@ -17,29 +18,10 @@ const ThreadScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.backButton} 
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.backButtonText}>{"<"}</Text>
-        </TouchableOpacity>
-        
-        <View style={styles.doctorInfo}>
-          <Image 
-            source={require('../assets/images/profile.png')} 
-            style={styles.doctorImage} 
-          />
-          <View>
-            <Text style={styles.doctorName}>Dr. Alice Smith</Text>
-            <Text style={styles.doctorStatus}>Online</Text>
-          </View>
-        </View>
-        
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionButtonText}>⋮</Text>
-        </TouchableOpacity>
-      </View>
+      <Header 
+        title="Dr. Alice Smith" 
+        onBackPress={() => navigation.goBack()}
+      />
       
       <ScrollView 
         style={styles.messagesContainer}
@@ -220,49 +202,5 @@ const styles = StyleSheet.create({
   },
   doctorMessageTime: {
     color: "#999999",
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 10,
-    backgroundColor: "#fff",
-    borderTopWidth: 1,
-    borderTopColor: "#eee",
-  },
-  attachButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "#f0f0f0",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 10,
-  },
-  attachButtonText: {
-    fontSize: 20,
-    color: "#666",
-  },
-  inputWrapper: {
-    flex: 1,
-    backgroundColor: "#fafafa",
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 12,
-    justifyContent: "center",
-  },
-  inputPlaceholder: {
-    fontSize: 16,
-    color: "#999",
-  },
-  sendButton: {
-    backgroundColor: "#F71E27",
-    borderRadius: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    marginLeft: 10,
-  },
-  sendButtonText: {
-    color: "#ffffff",
-    fontWeight: "bold",
   },
 })

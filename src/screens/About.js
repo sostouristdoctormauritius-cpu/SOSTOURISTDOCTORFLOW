@@ -1,21 +1,19 @@
 import React from "react";
 import { ScrollView, StyleSheet, View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { Header } from '../components';
 
 const AboutScreen = () => {
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>About Us</Text>
-        <View style={styles.headerSpacer} />
-      </View>
+      <Header 
+        title="About Us" 
+        onBackPress={() => navigation.goBack()} 
+      />
       
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Our Mission</Text>
           <Text style={styles.sectionText}>
@@ -57,28 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F9F9F9",
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-  },
-  backButton: {
-    fontSize: 24,
-    color: '#333',
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: '#333',
-  },
-  headerSpacer: {
-    width: 24,
-  },
-  scrollViewContent: {
+  contentContainer: {
     padding: 20,
   },
   section: {

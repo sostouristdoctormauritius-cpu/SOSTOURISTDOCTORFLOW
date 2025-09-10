@@ -81,7 +81,7 @@ The Header component is located in `src/components/Header.js` and supports the f
 2. **Maintainability** - Single component to update for header changes
 3. **User Experience** - Familiar navigation patterns across the app
 4. **Accessibility** - Consistent placement of navigation elements
-5. **Branding** - Logo properly displayed on main screens
+5. **Branding** - Logo properly displayed on main screens with consistent sizing
 
 ## Screens Updated
 
@@ -95,6 +95,12 @@ The following screens have been updated to use the standardized header:
 - CompleteProfile
 - Payment
 - Card
+- About
+- BillingScreen
+- PrescriptionScreen
+- HomeVisitScreen
+- ThreadScreen
+- EmergencyCallScreen
 - And other screens that were previously updated
 
 ## Future Considerations
@@ -102,3 +108,5 @@ The following screens have been updated to use the standardized header:
 1. All new screens should use the standardized Header component
 2. Custom header implementations should be replaced with the standardized component
 3. Any header style changes should be made in the Header component to maintain consistency
+4. The Header component now has a fixed height of 90 for consistency across all screens
+5. Logo sizing is controlled with maxWidth and height properties for proper display

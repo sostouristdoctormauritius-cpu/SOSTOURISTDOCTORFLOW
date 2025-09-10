@@ -37,9 +37,6 @@ const SettingsScreen = () => {
       <Header 
         title="Settings" 
         onBackPress={() => navigation.goBack()} 
-        containerStyle={styles.headerContainer}
-        titleStyle={styles.headerTitle}
-        backIconStyle={styles.backButton}
       />
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -51,27 +48,17 @@ const SettingsScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F9F9F9' },
-  headerContainer: { 
-    backgroundColor: '#F9F9F9',
-    elevation: 0, // 去除Android上的阴影
-    borderBottomWidth: 0, // 去除底部边框
-  },
-  backButton: { fontSize: 24, color: '#333' },
-  headerTitle: { fontSize: 20, fontWeight: 'bold', color: '#333' },
   contentContainer: { padding: 20 },
   optionRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 20,
-    marginBottom: 15,
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
   },
   optionText: { fontSize: 16, color: '#333' },
-  arrow: { fontSize: 20, color: '#CCC' },
+  arrow: { fontSize: 24, color: '#999' },
 });
 
 export default SettingsScreen;

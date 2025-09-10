@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ScrollView } from "react-native"
-import { useNavigation } from '@react-navigation/native'
-import { Button } from '../components'
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Button } from '../components';
 
 const HomeVisitScreen = () => {
   const navigation = useNavigation()
@@ -126,34 +126,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: 'rgba(255,255,255,0.9)',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 10,
-  },
-  backButton: {
-    padding: 10,
-  },
-  backButtonText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: '#333',
-  },
-  placeholder: {
-    width: 40,
   },
   mapContainer: {
     flex: 1,

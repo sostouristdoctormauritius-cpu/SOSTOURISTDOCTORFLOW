@@ -1,6 +1,7 @@
 import React from "react";
-import { SectionList, StyleSheet, View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import { SectionList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Header } from '../components';
 
 const DUMMY_BILLING_DATA = [
   {
@@ -43,15 +44,11 @@ const BillingScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Billing</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('PaymentMethods')}>
-          <Text style={styles.paymentMethodsButton}>💳</Text>
-        </TouchableOpacity>
-      </View>
+      <Header 
+        title="Billing" 
+        onBackPress={() => navigation.goBack()}
+        onRightPress={() => navigation.navigate('PaymentMethods')}
+      />
 
       <SectionList
         sections={DUMMY_BILLING_DATA}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+correctdimport { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from '../components';
 
@@ -49,6 +49,12 @@ const ShowcaseScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+        <TouchableOpacity 
+          style={styles.welcomeButton}
+          onPress={() => navigation.navigate('Welcome')}
+        >
+          <Text style={styles.welcomeButtonText}>WelcomeScreen</Text>
+        </TouchableOpacity>
         <Text style={styles.title}>Screens Showcase</Text>
         <Text style={styles.subtitle}>Tap any button to view the screen</Text>
       </View>
@@ -57,16 +63,18 @@ const ShowcaseScreen = () => {
         style={styles.content}
         contentContainerStyle={styles.scrollContent}
       >
-        {screens.map((screenName, index) => (
-          <View key={screenName} style={styles.buttonContainer}>
-            <Button
-              title={`${index + 1}. ${screenName}`}
-              onPress={() => navigation.navigate(screenMap[screenName])}
-              style={styles.button}
-              textStyle={styles.buttonText}
-            />
-          </View>
-        ))}
+        <View style={styles.buttonGrid}>
+          {screens.filter(screenName => screenName !== 'WelcomeScreen').map((screenName, index) => (
+            <View key={screenName} style={styles.buttonContainer}>
+              <Button
+                title={`${index + 1}. ${screenName}`}
+                onPress={() => navigation.navigate(screenMap[screenName])}
+                style={styles.button}
+                textStyle={styles.buttonText}
+              />
+            </View>
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
@@ -87,6 +95,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
   },
+  welcomeButton: {
+    backgroundColor: '#F71E27',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    marginBottom: 10,
+  },
+  welcomeButtonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -103,21 +123,28 @@ const styles = StyleSheet.create({
   scrollContent: {
     padding: 10,
   },
+  buttonGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
   buttonContainer: {
-    marginBottom: 5,
+    width: '32%', // 3 buttons per row with some space
+    marginBottom: 10,
   },
   button: {
     backgroundColor: '#ffffff',
     paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingHorizontal: 5,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: '#e0e0e0',
   },
   buttonText: {
     color: '#333',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '600',
+    textAlign: 'center',
   },
 });
 

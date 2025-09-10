@@ -1,6 +1,7 @@
-import React from "react"
-import { ActivityIndicator, SectionList, StyleSheet, View, Text, TouchableOpacity, Image } from "react-native"
-import { useNavigation } from '@react-navigation/native'
+import React from 'react';
+import { SectionList, StyleSheet, Text, TouchableOpacity, View, Image, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Header } from '../components';
 
 const DUMMY_PRESCRIPTIONS = [
   {
@@ -87,16 +88,10 @@ const PrescriptionScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.backButton} 
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.backButtonText}>{"<"}</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>My Prescriptions</Text>
-        <View style={styles.placeholder} />
-      </View>
+      <Header 
+        title="My Prescriptions" 
+        onBackPress={() => navigation.goBack()}
+      />
       
       <SectionList
         sections={DUMMY_PRESCRIPTIONS}

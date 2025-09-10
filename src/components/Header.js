@@ -55,10 +55,12 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
+    height: 90, // Fixed height for consistency
   },
   backButton: {
     flexDirection: 'row',
     alignItems: 'center',
+    minWidth: 50, // Ensure minimum width for touch target
   },
   backButtonText: {
     fontSize: 18,
@@ -78,17 +80,18 @@ const styles = StyleSheet.create({
   },
   logo: {
     flex: 1,
-    height: 40,
+    height: 50,
+    maxWidth: 200,
   },
   rightButton: {
-    width: 24,
+    minWidth: 50, // Ensure minimum width for touch target
     alignItems: 'flex-end',
   },
   rightButtonText: {
     fontSize: 24,
   },
   placeholder: {
-    width: 24,
+    minWidth: 50, // Match the width of buttons for proper centering
   },
 });
 
