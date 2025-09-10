@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler/jestSetup';
 
+// Mocking React Native Reanimated
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock');
 
@@ -10,6 +11,7 @@ jest.mock('react-native-reanimated', () => {
   return Reanimated;
 });
 
+// Mocking InteractionManager
 jest.mock('react-native/Libraries/Interaction/InteractionManager', () => ({
   runAfterInteractions: jest.fn(),
   createInteractionHandle: jest.fn(),
