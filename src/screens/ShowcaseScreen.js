@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#ffffff',
-    padding: 20,
+    padding: 10,
     alignItems: 'center',
     elevation: 2,
     shadowColor: '#000',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 5,
+    marginBottom: 2,
   },
   subtitle: {
     fontSize: 16,
@@ -101,16 +101,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    padding: 20,
-    paddingTop: 10,
+    padding: 10,
   },
   buttonContainer: {
-    marginBottom: 10,
+    marginBottom: 5,
   },
   button: {
     backgroundColor: '#ffffff',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: '#e0e0e0',

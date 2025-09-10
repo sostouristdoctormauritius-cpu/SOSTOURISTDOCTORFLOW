@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Header } from '../../components';
 
 const CardScreen = () => {
   const navigation = useNavigation();
@@ -23,45 +24,56 @@ const CardScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Add New Card</Text>
-        <View style={{ width: 24 }} />
-      </View>
 
       <View style={styles.formContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Card Number"
-          keyboardType="numeric"
-          value={card.number}
-          onChangeText={(val) => handleInputChange('number', val)}
-        />
-        <View style={styles.row}>
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Card Number</Text>
           <TextInput
-            style={[styles.input, styles.expiryInput]}
-            placeholder="MM/YY"
-            keyboardType="numeric"
-            value={card.expiry}
-            onChangeText={(val) => handleInputChange('expiry', val)}
-          />
-          <TextInput
-            style={[styles.input, styles.cvvInput]}
-            placeholder="CVV"
-            keyboardType="numeric"
-            secureTextEntry
-            value={card.cvv}
-            onChangeText={(val) => handleInputChange('cvv', val)}
+            style={styles.input}
+            placeholder="1234 5678 9012 3456"
+            value={card.number}
+            onChangeText={(value) => handleInputChange('number', value)}
+            keyboardType="number-pad"
           />
         </View>
-        <TextInput
-          style={styles.input}
-          placeholder="Cardholder Name"
-          value={card.name}
-          onChangeText={(val) => handleInputChange('name', val)}
-        />
+
+        <View style={styles.row}>
+          <View style={[styles.inputGroup, styles.halfWidth]}>
+            <Text style={styles.label}>Expiry Date</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="MM/YY"
+              value={card.expiry}
+              onChangeText={(value) => handleInputChange('expiry', value)}
+            />
+          </View>
+
+          <View style={[styles.inputGroup, styles.halfWidth]}>
+            <Text style={styles.label}>CVV</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="123"
+              value={card.cvv}
+              onChangeText={(value) => handleInputChange('cvv', value)}
+              keyboardType="number-pad"
+              secureTextEntry
+            />
+          </View>
+        </View>
+
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Name on Card</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Full Name"
+            value={card.name}
+            onChangeText={(value) => handleInputChange('name', value)}
+          />
+        </View>
+
+        <TouchableOpacity style={styles.addButton} onPress={handleAddCard}>
+          <Text style={styles.addButtonText}>Add Card</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.footer}>

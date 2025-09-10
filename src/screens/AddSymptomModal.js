@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { Button } from '../components';
+import { Button, CloseButton } from '../components';
 
 const commonSymptoms = ['Fever', 'Headache', 'Cough', 'Fatigue', 'Nausea', 'Dizziness', 'Sore Throat', 'Shortness of Breath'];
 
@@ -29,9 +29,7 @@ export default function AddSymptomModalScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.headerCancelButton}>Cancel</Text>
-        </TouchableOpacity>
+        <CloseButton onPress={() => navigation.goBack()} />
         <Text style={styles.title}>Add Symptoms</Text>
         <View style={{ width: 50 }} />
       </View>
@@ -40,33 +38,38 @@ export default function AddSymptomModalScreen() {
         <Text style={styles.sectionTitle}>Select Common Symptoms</Text>
         <View style={styles.suggestionsList}>
           {commonSymptoms.map((symptom, index) => (
-            <TouchableOpacity 
+            <TouchableOpacity
               key={index}
-              style={[styles.suggestionItem, selectedSymptoms.includes(symptom) && styles.selectedSuggestionItem]}
+              style={[
+                styles.suggestionItem,
+                selectedSymptoms.includes(symptom) && styles.selectedSuggestionItem
+              ]}
               onPress={() => toggleSymptom(symptom)}
             >
-              <Text style={[styles.suggestionText, selectedSymptoms.includes(symptom) && styles.selectedSuggestionText]}>{symptom}</Text>
+              <Text style={[
+                styles.suggestionText,
+                selectedSymptoms.includes(symptom) && styles.selectedSuggestionText
+              ]}>
+                {symptom}
+              </Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        <Text style={styles.sectionTitle}>Or Add Your Own</Text>
+        <Text style={styles.sectionTitle}>Add Custom Symptom</Text>
         <TextInput
-          style={styles.inputField}
-          placeholder="e.g., Stomach ache, muscle pain..."
-          placeholderTextColor="#999"
+          style={styles.customSymptomInput}
+          placeholder="Enter custom symptom"
           value={customSymptom}
           onChangeText={setCustomSymptom}
         />
-      </ScrollView>
-      
-      <View style={styles.footer}>
+
         <Button
           title="Add Symptoms"
           onPress={handleAddSymptoms}
           disabled={selectedSymptoms.length === 0 && !customSymptom.trim()}
         />
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -84,11 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderBottomWidth: 1,
     borderBottomColor: "#E0E0E0",
-  },
-  headerCancelButton: {
-    color: "#F71E27",
-    fontSize: 16,
-    fontWeight: "600",
   },
   title: {
     color: "#333",
@@ -131,7 +129,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontWeight: "600",
   },
-  inputField: {
+  customSymptomInput: {
     backgroundColor: "#FFFFFF",
     borderRadius: 12,
     padding: 15,
@@ -141,11 +139,6 @@ const styles = StyleSheet.create({
     borderColor: "#E0E0E0",
     minHeight: 100,
     textAlignVertical: 'top',
-  },
-  footer: {
-    padding: 20,
-    backgroundColor: "#FFFFFF",
-    borderTopWidth: 1,
-    borderTopColor: "#E0E0E0",
+    marginBottom: 30,
   },
 });

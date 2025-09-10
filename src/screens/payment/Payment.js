@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Header } from '../../components';
 
 const PaymentScreen = () => {
   const navigation = useNavigation();
@@ -20,13 +21,10 @@ const PaymentScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Payment</Text>
-        <View style={{ width: 24 }} />
-      </View>
+      <Header 
+        title="Payment" 
+        onBackPress={() => navigation.goBack()} 
+      />
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.summaryContainer}>

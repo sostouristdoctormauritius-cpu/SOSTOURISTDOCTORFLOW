@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Switch } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Header } from '../components';
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
@@ -33,13 +34,10 @@ const SettingsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Settings</Text>
-        <View style={{ width: 24 }} />
-      </View>
+      <Header 
+        title="Settings" 
+        onBackPress={() => navigation.goBack()} 
+      />
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
         {settingsOptions.map(renderOption)}
@@ -50,15 +48,6 @@ const SettingsScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F9F9F9' },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-  },
   backButton: { fontSize: 24, color: '#333' },
   headerTitle: { fontSize: 20, fontWeight: 'bold', color: '#333' },
   contentContainer: { padding: 20 },

@@ -108,7 +108,7 @@ const OfferDetailsScreen = () => {
       <View style={styles.footer}>
         <Button
           title="Book Appointment"
-          onPress={() => navigation.navigate('ConsultationBookAppointment')}
+          onPress={() => navigation.navigate('AppointmentBooking')}
         />
       </View>
     </View>

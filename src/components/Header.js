@@ -1,15 +1,35 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Header = ({ title, onBackPress, style }) => {
+const Header = ({ 
+  title, 
+  onBackPress, 
+  style, 
+  rightComponent,
+  showBackButton = true,
+  backButtonTitle = '',
+  onRightPress
+}) => {
   return (
     <View style={[styles.header, style]}>
-      {onBackPress && (
+      {showBackButton && onBackPress && (
         <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-          <Text style={styles.backButtonText}>{"<"}</Text>
+          <Text style={styles.backButtonText}>←</Text>
+          {backButtonTitle ? <Text style={styles.backButtonTitle}>{backButtonTitle}</Text> : null}
         </TouchableOpacity>
       )}
+      
       <Text style={styles.title}>{title}</Text>
+      
+      {rightComponent ? (
+        rightComponent
+      ) : onRightPress ? (
+        <TouchableOpacity onPress={onRightPress} style={styles.rightButton}>
+          <Text style={styles.rightButtonText}>⋮</Text>
+        </TouchableOpacity>
+      ) : (
+        <View style={{ width: 24 }} />
+      )}
     </View>
   );
 };
@@ -18,6 +38,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     padding: 16,
     backgroundColor: '#fff',
     elevation: 2,
@@ -27,16 +48,31 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   backButton: {
-    marginRight: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   backButtonText: {
     fontSize: 18,
     fontWeight: 'bold',
   },
+  backButtonTitle: {
+    fontSize: 16,
+    marginLeft: 8,
+  },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#000',
+    flex: 1,
+    textAlign: 'center',
+    marginHorizontal: 16,
+  },
+  rightButton: {
+    width: 24,
+    alignItems: 'flex-end',
+  },
+  rightButtonText: {
+    fontSize: 24,
   },
 });
 

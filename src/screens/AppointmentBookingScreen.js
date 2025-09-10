@@ -26,7 +26,7 @@ const AppointmentBookingScreen = () => {
   const handleBooking = () => {
     if (selectedDate && selectedTime) {
       // Navigate to a confirmation screen
-      navigation.navigate('Confirmation', { date: selectedDate, time: selectedTime });
+      navigation.navigate('OrderConfirmation', { date: selectedDate, time: selectedTime });
     } else {
       // Show an alert or message to select date and time
       alert('Please select a date and time for your appointment.');

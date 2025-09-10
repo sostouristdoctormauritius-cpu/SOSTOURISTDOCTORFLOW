@@ -1,27 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { Button } from './Button';
 
 const ErrorModal = ({ visible, onClose, title, message }) => {
+  if (!visible) return null;
+
   return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={visible}
-      onRequestClose={onClose}
-    >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalTitle}>{title || 'Error'}</Text>
-          <Text style={styles.modalText}>{message || 'An error occurred'}</Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={onClose}
-          >
-            <Text style={styles.buttonText}>OK</Text>
-          </TouchableOpacity>
-        </View>
+    <View style={styles.centeredView}>
+      <View style={styles.modalView}>
+        <Text style={styles.modalTitle}>{title || 'Error'}</Text>
+        <Text style={styles.modalText}>{message || 'An error occurred'}</Text>
+        <Button
+          title="OK"
+          onPress={onClose}
+          style={styles.button}
+        />
       </View>
-    </Modal>
+    </View>
   );
 };
 
@@ -46,6 +41,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    width: '80%',
   },
   modalTitle: {
     fontSize: 20,
@@ -54,20 +50,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalText: {
+    fontSize: 16,
     marginBottom: 20,
     textAlign: 'center',
-    fontSize: 16,
   },
   button: {
-    backgroundColor: '#F71E27', // Consistent red color
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-  },
-  buttonText: {
-    color: 'white', // White text for consistency
-    fontWeight: 'bold',
-    textAlign: 'center',
+    width: '100%',
   },
 });
 

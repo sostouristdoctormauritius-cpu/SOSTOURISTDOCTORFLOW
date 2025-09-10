@@ -1,20 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, Modal, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
 const LoadingModal = ({ visible, message }) => {
+  if (!visible) return null;
+
   return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={visible}
-    >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <ActivityIndicator size="large" color="#F71E27" />
-          {message && <Text style={styles.messageText}>{message}</Text>}
-        </View>
+    <View style={styles.centeredView}>
+      <View style={styles.modalView}>
+        <ActivityIndicator size="large" color="#F71E27" />
+        {message && <Text style={styles.messageText}>{message}</Text>}
       </View>
-    </Modal>
+    </View>
   );
 };
 
@@ -43,6 +39,8 @@ const styles = StyleSheet.create({
   messageText: {
     marginLeft: 15,
     fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
   },
 });
 

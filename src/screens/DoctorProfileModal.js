@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Text, Image, TouchableOpacity, Modal, ScrollView } from "react-native";
+boardsimport { StyleSheet, View, Text, Image, Modal, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { Button } from '../components';
+import { Button, CloseButton } from '../components';
 
 export default function DoctorProfileModalScreen({ visible, onClose, doctor }) {
   const navigation = useNavigation();
@@ -33,9 +33,7 @@ export default function DoctorProfileModalScreen({ visible, onClose, doctor }) {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View style={styles.header}>
-            <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-              <Text style={styles.closeButtonText}>✕</Text>
-            </TouchableOpacity>
+            <CloseButton onPress={onClose} />
           </View>
           
           <ScrollView showsVerticalScrollIndicator={false}>

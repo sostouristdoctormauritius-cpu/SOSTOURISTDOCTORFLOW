@@ -11,6 +11,7 @@ import AppointmentScreen from '../screens/AppointmentScreen';
 import BillingScreen from '../screens/BillingScreen';
 import ChatChannelListScreen from '../screens/ChatChannelListScreen';
 import ChatLandingScreen from '../screens/ChatLandingScreen';
+import DiscountedOffersScreen from '../screens/DiscountedOffersScreen';
 import EmergencyCallScreen from '../screens/EmergencyCallScreen';
 import ErrorBoundary from '../screens/ErrorBoundary';
 import ErrorDetails from '../screens/ErrorDetails';
@@ -20,11 +21,13 @@ import IncomingCallScreen from '../screens/IncomingCallScreen';
 import LanguageSelection from '../screens/LanguageSelection';
 import OfferDetailsScreen from '../screens/OfferDetailsScreen';
 import PrescriptionScreen from '../screens/PrescriptionScreen';
+import Settings from '../screens/Settings';
 import SplashAnimation from '../screens/SplashAnimation';
 import StreamVideoCallScreen from '../screens/StreamVideoCallScreen';
 import ThreadScreen from '../screens/ThreadScreen';
 import VideoCallLobby from '../screens/VideoCallLobby';
 import ViewPdf from '../screens/ViewPdf';
+import Payment from '../screens/payment/Payment';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import UnauthenticatedCompleteProfile from '../screens/Unauthenticated/CompleteProfile';
 import AuthForgotPassword from '../screens/auth/ForgotPassword';
@@ -40,9 +43,16 @@ import ConsultationOrderConfirmationScreen from '../screens/consultation/Consult
 import ConsultationPayAppointmentScreen from '../screens/consultation/ConsultationPayAppointmentScreen';
 import ConsultationSymptomSelectionScreen from '../screens/consultation/ConsultationSymptomSelectionScreen';
 import ProfileCompleteProfile from '../screens/profile/CompleteProfile';
+import ProfileScreen from '../screens/profile/ProfileScreen';
+import ConsultationFlowPage from '../pages/ConsultationFlowPage';
+import PrivacyPolicyScreen from '../screens/PrivacyPolicy';
+import TermsAndConditionsScreen from '../screens/TermsAndConditions';
+import DoctorProfileModal from '../screens/DoctorProfileModal';
+import Card from '../screens/payment/Card';
 
 // Modal stack
 import ModalStackScreen from './ModalStack';
+import PaymentMethods from '../screens/payment/PaymentMethods';
 
 const Stack = createStackNavigator();
 
@@ -52,40 +62,50 @@ function AuthStack() {
       <Stack.Screen name="Showcase" component={ShowcaseScreen} />
       <Stack.Screen name="About" component={About} />
       <Stack.Screen name="AddSymptomModal" component={AddSymptomModal} />
-      <Stack.Screen name="AppointmentCancellationScreen" component={AppointmentCancellationScreen} />
-      <Stack.Screen name="AppointmentScreen" component={AppointmentScreen} />
-      <Stack.Screen name="BillingScreen" component={BillingScreen} />
-      <Stack.Screen name="ChatChannelListScreen" component={ChatChannelListScreen} />
-      <Stack.Screen name="ChatLandingScreen" component={ChatLandingScreen} />
-      <Stack.Screen name="EmergencyCallScreen" component={EmergencyCallScreen} />
+      <Stack.Screen name="AppointmentCancellation" component={AppointmentCancellationScreen} />
+      <Stack.Screen name="Appointment" component={AppointmentScreen} />
+      <Stack.Screen name="Billing" component={BillingScreen} />
+      <Stack.Screen name="Card" component={Card} />
+      <Stack.Screen name="ChatChannelList" component={ChatChannelListScreen} />
+      <Stack.Screen name="ChatLanding" component={ChatLandingScreen} />
+      <Stack.Screen name="DiscountedOffers" component={DiscountedOffersScreen} />
+      <Stack.Screen name="EmergencyCall" component={EmergencyCallScreen} />
       <Stack.Screen name="ErrorBoundary" component={ErrorBoundary} />
       <Stack.Screen name="ErrorDetails" component={ErrorDetails} />
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="HomeVisitScreen" component={HomeVisitScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="HomeVisit" component={HomeVisitScreen} />
       <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
       <Stack.Screen name="LanguageSelection" component={LanguageSelection} />
-      <Stack.Screen name="OfferDetailsScreen" component={OfferDetailsScreen} />
-      <Stack.Screen name="PrescriptionScreen" component={PrescriptionScreen} />
+      <Stack.Screen name="OfferDetails" component={OfferDetailsScreen} />
+      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="Prescription" component={PrescriptionScreen} />
+      <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="SplashAnimation" component={SplashAnimation} />
       <Stack.Screen name="StreamVideoCallScreen" component={StreamVideoCallScreen} />
-      <Stack.Screen name="ThreadScreen" component={ThreadScreen} />
+      <Stack.Screen name="Thread" component={ThreadScreen} />
       <Stack.Screen name="VideoCallLobby" component={VideoCallLobby} />
       <Stack.Screen name="ViewPdf" component={ViewPdf} />
-      <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-      <Stack.Screen name="UnauthenticatedCompleteProfile" component={UnauthenticatedCompleteProfile} />
-      <Stack.Screen name="AuthForgotPassword" component={AuthForgotPassword} />
-      <Stack.Screen name="AuthOtpVerify" component={AuthOtpVerify} />
-      <Stack.Screen name="AuthRegisterWithEmail" component={AuthRegisterWithEmail} />
-      <Stack.Screen name="AuthSignInWithEmail" component={AuthSignInWithEmail} />
-      <Stack.Screen name="AuthSignInWithEmail2" component={AuthSignInWithEmail2} />
-      <Stack.Screen name="AuthUpdatePassword" component={AuthUpdatePassword} />
-      <Stack.Screen name="ConsultationBookAppointmentScreen" component={ConsultationBookAppointmentScreen} />
-      <Stack.Screen name="ConsultationChatOnboardingScreen" component={ConsultationChatOnboardingScreen} />
-      <Stack.Screen name="ConsultationEligibleDoctorsScreen" component={ConsultationEligibleDoctorsScreen} />
-      <Stack.Screen name="ConsultationOrderConfirmationScreen" component={ConsultationOrderConfirmationScreen} />
-      <Stack.Screen name="ConsultationPayAppointmentScreen" component={ConsultationPayAppointmentScreen} />
-      <Stack.Screen name="ConsultationSymptomSelectionScreen" component={ConsultationSymptomSelectionScreen} />
+      <Stack.Screen name="Welcome" component={WelcomeScreen} />
+      <Stack.Screen name="CompleteProfile" component={UnauthenticatedCompleteProfile} />
+      <Stack.Screen name="ForgotPassword" component={AuthForgotPassword} />
+      <Stack.Screen name="OtpVerify" component={AuthOtpVerify} />
+      <Stack.Screen name="RegisterWithEmail" component={AuthRegisterWithEmail} />
+      <Stack.Screen name="SignInWithEmail" component={AuthSignInWithEmail} />
+      <Stack.Screen name="SignInWithEmail2" component={AuthSignInWithEmail2} />
+      <Stack.Screen name="UpdatePassword" component={AuthUpdatePassword} />
+      <Stack.Screen name="AppointmentBooking" component={ConsultationBookAppointmentScreen} />
+      <Stack.Screen name="ConsultationChatOnboarding" component={ConsultationChatOnboardingScreen} />
+      <Stack.Screen name="ConsultationEligibleDoctors" component={ConsultationEligibleDoctorsScreen} />
+      <Stack.Screen name="OrderConfirmation" component={ConsultationOrderConfirmationScreen} />
+      <Stack.Screen name="ConsultationPayAppointment" component={ConsultationPayAppointmentScreen} />
+      <Stack.Screen name="ConsultationSymptomSelection" component={ConsultationSymptomSelectionScreen} />
       <Stack.Screen name="ProfileCompleteProfile" component={ProfileCompleteProfile} />
+      <Stack.Screen name="PaymentMethods" component={PaymentMethods} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="ConsultationFlowPage" component={ConsultationFlowPage} />
+      <Stack.Screen name="DoctorProfileModal" component={DoctorProfileModal} />
+      <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
+      <Stack.Screen name="TermsAndConditions" component={TermsAndConditionsScreen} />
     </Stack.Navigator>
   );
 }

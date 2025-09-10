@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ScrollView, SafeAreaView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { Button } from '../../components';
+import { Button, Header } from '../../components';
 
 const ForgotPassword = () => {
   const navigation = useNavigation();
@@ -9,13 +9,10 @@ const ForgotPassword = () => {
   
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Forgot Password</Text>
-        <View style={{ width: 24 }} />
-      </View>
+      <Header 
+        title="Forgot Password" 
+        onBackPress={() => navigation.goBack()} 
+      />
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.logoContainer}>
@@ -34,11 +31,12 @@ const ForgotPassword = () => {
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>Email Address</Text>
             <TextInput
-              style={styles.textInput}
+              style={styles.input}
               placeholder="Enter your email"
-              keyboardType="email-address"
               value={email}
               onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
             />
           </View>
           
@@ -82,7 +80,7 @@ const styles = StyleSheet.create({
   subtitle: { fontSize: 16, color: '#666', textAlign: 'center', marginBottom: 30, lineHeight: 24 },
   inputGroup: { marginBottom: 20 },
   inputLabel: { fontSize: 16, fontWeight: '600', color: '#333', marginBottom: 8 },
-  textInput: {
+  input: {
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     padding: 15,

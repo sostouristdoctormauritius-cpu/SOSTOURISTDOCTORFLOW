@@ -1,20 +1,17 @@
 import React from "react";
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ScrollView, SafeAreaView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { Button } from '../../components';
+import { Button, Header } from '../../components';
 
 const SignInWithEmail = () => {
   const navigation = useNavigation();
   
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Sign In</Text>
-        <View style={{ width: 24 }} />
-      </View>
+      <Header 
+        title="Sign In" 
+        onBackPress={() => navigation.goBack()} 
+      />
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.logoContainer}>
@@ -54,100 +51,129 @@ const SignInWithEmail = () => {
           <Button 
             title="Sign In" 
             onPress={() => navigation.navigate('Home')} 
+            style={styles.signInButton}
           />
-          
-          <View style={styles.orContainer}>
-            <View style={styles.line} />
-            <Text style={styles.orText}>OR SIGN IN WITH</Text>
-            <View style={styles.line} />
+
+          <View style={styles.divider}>
+            <View style={styles.dividerLine} />
+            <Text style={styles.dividerText}>or</Text>
+            <View style={styles.dividerLine} />
           </View>
-          
+
           <View style={styles.socialLoginContainer}>
             <TouchableOpacity style={styles.socialButton}>
-              <Image 
-                source={require("../../assets/images/google.png")} 
-                style={styles.socialIcon} 
-              />
+              <Image source={require("../../assets/images/fb.png")} style={styles.socialIcon} />
+              <Text style={styles.socialButtonText}>Facebook</Text>
             </TouchableOpacity>
+            
             <TouchableOpacity style={styles.socialButton}>
-              <Image 
-                source={require("../../assets/images/fb.png")} 
-                style={styles.socialIcon} 
-              />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.socialButton}>
-              <Image 
-                source={require("../../assets/images/apple.png")} 
-                style={styles.socialIcon} 
-              />
-            </TouchableOpacity>
-          </View>
-          
-          <View style={styles.signupContainer}>
-            <Text style={styles.noAccountText}>Don't have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('RegisterWithEmail')}>
-              <Text style={styles.signupText}>Register</Text>
+              <Image source={require("../../assets/images/google.png")} style={styles.socialIcon} />
+              <Text style={styles.socialButtonText}>Google</Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
-}
-
-export default SignInWithEmail;
+};
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F9F9F9' },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: "center",
     padding: 20,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
   },
-  backButton: { fontSize: 24, color: '#333' },
-  headerTitle: { fontSize: 20, fontWeight: "bold", color: '#333' },
-  scrollViewContent: { flexGrow: 1, justifyContent: 'center', padding: 20 },
-  logoContainer: { alignItems: 'center', marginBottom: 30 },
-  logo: { width: 100, height: 100, resizeMode: 'contain', marginBottom: 10 },
-  welcomeText: { fontSize: 16, color: '#666', textAlign: 'center' },
-  formContainer: { width: '100%' },
-  inputGroup: { marginBottom: 20 },
-  inputLabel: { fontSize: 16, fontWeight: '600', color: '#333', marginBottom: 8 },
-  textInput: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 15,
+  logoContainer: {
+    alignItems: "center",
+    marginBottom: 30,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    resizeMode: "contain",
+    marginBottom: 20,
+  },
+  welcomeText: {
     fontSize: 16,
+    color: "#666",
+    textAlign: "center",
+  },
+  formContainer: {
+    width: "100%",
+  },
+  inputGroup: {
+    marginBottom: 20,
+  },
+  inputLabel: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 8,
+  },
+  input: {
     borderWidth: 1,
-    borderColor: '#E0E0E0',
+    borderColor: "#ddd",
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    backgroundColor: "#f9f9f9",
   },
-  forgotPasswordContainer: { alignItems: 'flex-end', marginBottom: 20 },
-  forgotPasswordText: { fontSize: 14, fontWeight: "600", color: '#F71E27' },
-  orContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 30,
+  forgotPasswordContainer: {
+    alignItems: "flex-end",
+    marginBottom: 20,
   },
-  line: { flex: 1, height: 1, backgroundColor: '#E0E0E0' },
-  orText: { marginHorizontal: 10, color: '#999', fontSize: 12, fontWeight: 'bold' },
-  socialLoginContainer: { flexDirection: 'row', justifyContent: 'center', marginBottom: 30 },
+  forgotPasswordText: {
+    color: "#F71E27",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  signInButton: {
+    marginVertical: 10,
+  },
+  divider: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#eee",
+  },
+  dividerText: {
+    paddingHorizontal: 10,
+    color: "#666",
+    fontSize: 14,
+  },
+  socialLoginContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   socialButton: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 15,
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
-    borderColor: '#E0E0E0',
+    borderColor: "#ddd",
+    borderRadius: 8,
+    padding: 12,
+    marginHorizontal: 5,
   },
-  socialIcon: { width: 30, height: 30, resizeMode: 'contain' },
-  signupContainer: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
-  noAccountText: { fontSize: 16, color: '#666' },
-  signupText: { fontSize: 16, fontWeight: "bold", color: '#F71E27', marginLeft: 5 },
+  socialIcon: {
+    width: 20,
+    height: 20,
+    marginRight: 8,
+  },
+  socialButtonText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#333",
+  },
 });
+
+export default SignInWithEmail;

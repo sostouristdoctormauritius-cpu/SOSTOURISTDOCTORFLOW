@@ -1,37 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { Button } from './Button';
 
 const ConfirmationModal = ({ visible, onClose, onConfirm, title, message, confirmText, cancelText }) => {
+  if (!visible) return null;
+
   return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={visible}
-      onRequestClose={onClose}
-    >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalTitle}>{title || 'Confirm'}</Text>
-          <Text style={styles.modalText}>{message || 'Are you sure?'}</Text>
+    <View style={styles.centeredView}>
+      <View style={styles.modalView}>
+        <Text style={styles.modalTitle}>{title || 'Confirm'}</Text>
+        <Text style={styles.modalText}>{message || 'Are you sure?'}</Text>
+        
+        <View style={styles.buttonContainer}>
+          <Button
+            title={cancelText || 'Cancel'}
+            onPress={onClose}
+            variant="outline"
+            style={styles.button}
+          />
           
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={[styles.button, styles.cancelButton]}
-              onPress={onClose}
-            >
-              <Text style={styles.cancelButtonText}>{cancelText || 'Cancel'}</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity
-              style={[styles.button, styles.confirmButton]}
-              onPress={onConfirm}
-            >
-              <Text style={styles.confirmButtonText}>{confirmText || 'Confirm'}</Text>
-            </TouchableOpacity>
-          </View>
+          <Button
+            title={confirmText || 'Confirm'}
+            onPress={onConfirm}
+            style={styles.button}
+          />
         </View>
       </View>
-    </Modal>
+    </View>
   );
 };
 
@@ -56,6 +51,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    width: '80%',
   },
   modalTitle: {
     fontSize: 20,
@@ -64,9 +60,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalText: {
+    fontSize: 16,
     marginBottom: 20,
     textAlign: 'center',
-    fontSize: 16,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -74,26 +70,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   button: {
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    minWidth: 100,
-  },
-  cancelButton: {
-    backgroundColor: '#F71E27', // Changed to consistent red color
-  },
-  confirmButton: {
-    backgroundColor: '#F71E27',
-  },
-  cancelButtonText: {
-    color: 'white', // Changed to white text for consistency
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  confirmButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    flex: 1,
+    marginHorizontal: 5,
   },
 });
 
